@@ -1,0 +1,143 @@
+body {
+    color: white;
+}
+
+.flow-element {
+    height: auto;
+    width: calc(100% - 20px);
+}
+
+.new_page_con {
+    background-color: rgb(45, 48, 73);
+    border: 1px solid #ddd;
+    position: absolute;
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80vh;
+    width: 90vw;
+    z-index: 9999;
+    /* 保证悬浮元素在其他元素之上 */
+    overflow: auto;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 500vw;
+    background-color: rgb(0 0 0 / 76%);
+    z-index: 9999;
+    display: none;
+}
+
+.new_close {
+    font-family: 'Orbitron';
+    font-weight: bolder;
+    line-height: 0px;
+    font-size: x-large;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #DCB6FF;
+    padding: 10px 0;
+}
+
+.new_title_input {
+    color: white;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: bolder;
+    outline: 0;
+    background-color: rgb(138 150 225 / 28%);
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.new_time_label {
+    display: inline-block;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background-color: rgb(138 150 225 / 28%);
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#new_date,
+#new_time {
+    color: white;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background-color: rgb(138 150 225 / 28%);
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.new_dis_input {
+    margin-top: 10px;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background-color: rgb(138 150 225 / 28%);
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.Get_Setting_button,
+.new_GoToTest {
+    font-weight: bolder;
+    font-size: large;
+    font-family: 'Orbitron';
+    text-transform: uppercase;
+    outline: 0;
+    background: rgb(138 150 225 / 28%);
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.new_GoToTest {
+    width: 80%;
+    border-radius: 10px;
+}
+
+.new_task_button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #DCB6FF;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}

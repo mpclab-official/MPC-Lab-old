@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+/* Reset some default styles and set basic styling */
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 63px;
+    font-family: 'Orbitron';
+    color: white;
+    background-color: black;
+}
+
+/* Define the top navigation bar styles */
+.top-bar {
+    top: 0;
+    z-index: 10000;
+    width: 100%;
+    position: fixed;
+    background-color: #202226;
+    color: #8A96E1;
+    padding: 1px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    margin-left: 1%;
+    height: 60px;
+    width: auto;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #8A96E1;
+}
+
+.types {
+    top: 3px;
+    margin-bottom: -20px;
+    text-align: center;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    position: relative;
+    z-index: 9999;
+}
+
+.type {
+    font-size: x-large;
+    overflow-x: hidden;
+    text-shadow: 4px 3px 1px rgba(0, 0, 0, 0.5);
+    max-height: 100%;
+    line-height: 50px;
+    border-radius: 10px;
+    margin-right: 1%;
+    margin-left: 1%;
+    width: 200px;
+    height: 50px;
+    background-color: #8a96e1;
+    border-right: 1px solid;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+/* 隐藏滚动条但允许滚动内容（适用于WebKit内核浏览器） */
+.types::-webkit-scrollbar {
+    width: 0;
+    /* 隐藏垂直滚动条 */
+}
+
+.types::-webkit-scrollbar-thumb {
+    background: transparent;
+    /* 隐藏滚动条拖动块 */
+}
+
+/* Style for the Flow Element Container (center the flow elements with 3% side margins) */
+.container {
+    text-align: center;
+    /* Center-align the flow elements container */
+    margin: 0 3%;
+    /* Add 3% side margins to the container */
+    box-sizing: border-box;
+    /* Include margin in container width */
+}
+
+/* Style for the Flow Element */
+.flow-element,
+.adsbygoogle {
+    background-color: rgb(138 150 225 / 28%);
+    display: inline-block;
+    margin: 10px;
+    /* Add margin to create spacing between elements */
+    text-align: center;
+    border-radius: 10px;
+    /* Add rounded corners */
+    box-shadow: 6px 6px 6px rgb(255 255 255 / 70%);
+    /* Add a subtle shadow */
+    height: 350px;
+    width: calc(25% - 20px);
+    /* Ensure one element per row on mobile */
+    box-sizing: border-box;
+    /* Include padding in element width */
+    min-height: 0;
+    /* Ensure minimum height is not greater than width */
+    transition: transform 0.6s, background-color 0.6s, box-shadow 0.6s;
+}
+
+.flow-element>h2 {
+    text-shadow: 8px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
+ins.adsbygoogle {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Style for the Flow Element that occupies a full row */
+.full-line {
+    background-color: rgb(138, 150, 225, 0.28);
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+    border-radius: 10px;
+    box-sizing: border-box;
+    min-height: 0;
+}
+
+/* Hover effect for the Flow Element */
+.flow-element:hover {
+    transform: scale(1.05);
+    /* Slightly scale up the element */
+    background-color: rgba(138, 150, 225, 0.5);
+    /* Slightly darken the background */
+    transition: transform 0.2s, background-color 0.2s;
+    /* Add a smooth transition effect */
+    box-shadow: 6px 6px 20px rgb(255 255 255 / 100%);
+    border: 1px solid #ddd;
+}
+
+/* Style for the Flow Element Image */
+.flow-element img {
+    max-width: 50%;
+    max-height: 50%;
+    height: auto;
+    border-radius: 15%;
+    /* Make the image circular */
+    margin-top: 2%;
+    /* Add a white border to the image */
+    box-shadow: 10px 10px 10px black;
+    /* Add a shadow to the image */
+}
+
+/* Style for the Flow Element Title */
+.flow-element h2 {
+    font-size: x-large;
+    margin-top: 10px;
+    color: #DCB6FF;
+}
+
+/* hot logo */
+.hot-tag {
+    vertical-align: super;
+    /* Make it a superscript */
+    font-size: small;
+    /* Adjust font size as needed */
+    border-radius: 5px;
+    color: red;
+    /* Set color to red */
+}
+
+/* Style for the Flow Element Description */
+.flow-element p {
+    font-size: medium;
+    color: #666;
+    margin-top: 10px;
+    margin-left: 8px;
+    margin-right: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
+/* Style for the Flow Element Button */
+.flow-element button {
+    background-color: #DCB6FF;
+    font-weight: bolder;
+    font-size: x-large;
+    color: #fff;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px 20px;
+    width: 80%;
+    display: inline-block;
+}
+
+/* Define the mobile bottom navigation styles */
+.mobile-bar {
+    z-index: 1;
+    background-color: #333;
+    color: #fff;
+    font-size: x-large;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: none;
+}
+
+.footer-home-button {
+    background-color: #DCB6FF;
+    color: #fff;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px 20px;
+    width: 17%;
+    display: inline-block;
+}
+
+.footer-button {
+    background-color: #3d436761;
+    color: #fff;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 25%;
+    padding: 10px 20px;
+    width: 17%;
+    display: inline-block;
+}
+
+.fish-container {
+    z-index: -1;
+    position: fixed;
+    bottom: -4px;
+    height: 110px;
+    width: 100%;
+}
+
+main {
+    margin-bottom: 80px;
+}
+
+/* Media Query for iPad and Larger Devices */
+@media (min-width: 768px) {
+    body {
+        zoom: 100%;
+    }
+
+    .container {
+        margin: 0 auto;
+        /* Center the container on larger screens */
+        max-width: 1200px;
+        /* Limit the container width on larger screens */
+    }
+}
+
+/*PC*/
+@media (min-width: 1000px) {
+    main {
+        height: 90vh;
+        transform: scale(0.5);
+        transform-origin: top;
+    }
+
+    .top-bar {
+        font-size: small !important;
+    }
+
+    .logo {
+        height: 40px;
+    }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/ico" href="../favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/loading_motion.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" media="(min-width: 1000px)" href="../static/css/desktop.css">
+    <link rel="stylesheet" media="(min-width: 616px) and (max-width: 999px)" href="../static/css/tablet.css">
+    <link rel="stylesheet" media="(max-width: 615px)" href="../static/css/mobile.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- 引入 KaTeX CSS 文件 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+    <!-- 引入 KaTeX JS 文件 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+    <!-- 引入 KaTeX Auto-Render JS 文件，以启用自动渲染 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js"></script>
+    <script type="text/javascript" src="../static/js/APP.js"></script>
+    <script type="text/javascript" src="../app/index.js"></script>
+    <script type="text/javascript" src="../static/js/loading_motion.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script type="text/javascript" src="../static/js/server.js"></script>
+    <script type="text/javascript" src="../static/js/user.js"></script>
+    <script type="text/javascript" src="../static/js/Analytics.js"></script>
+    <script type="text/javascript" src="../static/js/AsSense.js"></script>
+    <script src="./main.js"></script>
+    <script src="./Anti-cheating.js"></script>
+    <title>MPC Testing</title>
+</head>
+
+<body>
+    <!-- Loading Animation -->
+    <div class="loader">
+        <div class="loading-animation"></div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+        <div class="logo"><img src="../static/img/logo.png" class="logo"></div>
+        <nav>
+            <ul>
+                <li><a href="https://app.mathscichem.com">Home</a></li>
+                <li><a href="../search/">Search</a></li>
+                <li><a href="#" onclick="login_b();" id="username">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="test" id="test">
+            <div class="test-top-bar">
+                <div id="test-on">
+                    0 of 0
+                </div>
+                <div id="test-time">
+                    00:00:00
+                </div>
+            </div>
+            <div class="test-qustions">
+                <div id="test-qustions"></div>
+                <br><input type="text" id="test-input">
+            </div>
+            <div class="test-bottom-bar">
+                <button id="next_button">Next</button>
+            </div>
+        </div>
+        <div class="flow-element full-line pre-test" id="pre_test">
+        </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <footer class="mobile-bar">
+        <div class="footer-button" onclick="window.location='../search/'">Search</div>
+        <div class="footer-button" onclick="window.location='../'">Home</div>
+        <div class="footer-button" onclick="login_b();">My</div>
+    </footer>
+</body>
+
+</html>

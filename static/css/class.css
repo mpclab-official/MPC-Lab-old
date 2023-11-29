@@ -1,0 +1,128 @@
+.types {
+    top: 3px;
+    margin-bottom: -20px;
+    text-align: center;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    position: relative;
+    z-index: 9999;
+}
+
+.type_title {
+    float: left;
+    overflow-x: hidden;
+    max-height: 100%;
+    line-height: 50px;
+    margin-left: 5%;
+    height: 50px;
+    white-space: nowrap;
+    margin-top: 1%;
+}
+
+.type_join {
+    margin-right: 5%;
+    float: right;
+    margin: auto;
+    font-size: x-large;
+    overflow-x: hidden;
+    max-height: 100%;
+    line-height: 50px;
+    border-radius: 10px;
+    width: auto;
+    height: 50px;
+    background-color: #8a96e1;
+    border-right: 1px solid;
+    white-space: nowrap;
+    display: inline-block;
+    margin-right: 3%;
+    margin-top: 1%;
+    padding: 0 10px 0 10px;
+}
+
+.flow-element {
+    padding: 30px;
+    margin-top: 10px;
+    height: auto;
+    width: calc(100% - 20px);
+    margin: 10px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 30px;
+}
+
+.flow-element>h2 {
+    font-size: xx-large;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 垂直居中 */
+    justify-content: center;
+    /* 垂直居中 */
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #000000a8;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+input,
+textarea {
+    font-size: large;
+    font-family: 'Orbitron';
+    color: white;
+    height: 40px;
+    background-color: transparent;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #202226;
+    border-radius: 4px;
+    width: 100%;
+}
+
+textarea {
+    height: 100px;
+    /* 设置合适的高度 */
+}
+
+button {
+    font-size: large;
+    font-family: 'Orbitron';
+    margin-bottom: 10%;
+    width: 70%;
+    padding: 10px;
+    background-color: #8a96e1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+@media (max-width: 615px) {
+    .types {
+        display: grid;
+        background-color: #202226;
+    }
+
+    .type_title {
+        margin-left: 0%;
+    }
+
+    .type_join {
+        margin: 0 auto;
+        float: none;
+    }
+}

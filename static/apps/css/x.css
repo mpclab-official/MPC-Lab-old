@@ -1,0 +1,153 @@
+body {
+    background-color: black;
+    color: #ffffff;
+}
+
+hr {
+    width: 100%;
+}
+
+button {
+    font-family: 'Orbitron';
+    font-size: xx-large;
+    margin: 10px;
+    border-radius: 10px;
+    height: auto;
+    display: inline-block;
+    width: calc(100% - 20px);
+    color: white;
+    font-weight: bold;
+    background-color: #DCB6FF;
+}
+
+.new_solution,
+.bd_new_step,
+.new_start,
+.new_check,
+.new_graph,
+.resetDiv {
+    background-color: rgb(138 150 225 / 28%);
+    word-wrap: break-word;
+    border: 1px solid #ddd;
+    display: inline-block;
+    margin: 10px;
+    /* Add margin to create spacing between elements */
+    text-align: center;
+    border-radius: 10px;
+    /* Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    /* Add a subtle shadow */
+    width: calc(100% - 20px);
+    /* Ensure one element per row on mobile */
+    box-sizing: border-box;
+    /* Include padding in element width */
+    min-height: 0;
+    /* Ensure minimum height is not greater than width */
+}
+
+.new_step {
+    font-size: large;
+    padding: 30px;
+}
+
+.Answer::before {
+    content: "Answer: ";
+}
+
+.new_start {
+    color: rgb(200, 200, 200);
+    font-size: large;
+    font-style: oblique;
+}
+
+.new_check {}
+
+.new_check_label {
+    margin: 0 auto;
+    margin-top: 10px;
+    font-size: xx-large;
+    width: 80%;
+    display: block;
+}
+
+.new_check_check {
+    transform: scale(2.0);
+    background-color: rgba(255, 255, 255, 0.249);
+    margin-bottom: 2%;
+    text-align: center;
+    color: white;
+    height: 25px;
+    border-radius: 10px;
+}
+
+/* 切换开关外部容器 */
+.toggle-switch {
+    display: inline-block;
+}
+
+/* 切换开关样式 */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* 滑块样式 */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+/* 滑块圆角 */
+.slider.round {
+    border-radius: 34px;
+}
+
+/* 滑块位置（开启时） */
+.slider.round:before {
+    border-radius: 50%;
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+/* 切换开关处于开启状态时的背景颜色 */
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+/* 滑块处于开启状态时的位置 */
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+td {
+    width: 50vw;
+}
+
+h3 {
+    font-weight: bolder;
+    margin-top: 6%;
+}
