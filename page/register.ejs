@@ -1,0 +1,35 @@
+<% let currentPage = 'register' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body style="background-image: url('<%=background_image %>')" data-language="<%= language_code %>">
+    <%- include('../partial/page-includes.ejs') %>
+    <main>
+        <div class="auth-box">
+            <a href="../" class="back-to-home"><%=lan_back_to_home %></a>
+            <div class="auth-img-box">
+                <img src="<%=logo_s %>">
+            </div>
+            <form id="registerForm" action="/<%=language_code %>/register" method="post">
+                <h1><%=lan_register %></h1>
+                <span><%=lan_email %></span>
+                <input type="email" name="email" data-lan_auth_register_empty_email="<%=lan_auth_register_empty_email %>">
+                <span><%=lan_verification_code %></span>
+                <input class="verification-code" type="text" name="verification_code">
+                <button type="button" class="get-verification-code" onclick="submitVerificationCode()"><%=lan_get_verification_code %></button>
+                <span><%=lan_username %></span>
+                <input name="username">
+                <span><%=lan_password %></span>
+                <input type="password" name="password">
+                <button type="button" onclick="submitRegisterForm()"><%=lan_register %></button>
+                <p><%=lan_already_have_an_account %> <a href="./login"><%=lan_login %></a></p>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

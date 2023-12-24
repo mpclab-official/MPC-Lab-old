@@ -1,0 +1,25 @@
+:root {
+    --main-bg-color: rgb(243, 246, 249);
+    --level2-bg-color: rgb(255, 255, 255);
+    --header-bg-color: rgb(255, 255, 255);
+    --footer-bg-color: rgb(33, 35, 38);
+    --mobile_navigation-bg-color: rgb(51, 51, 51);
+    --card-bg-color: rgb(38, 42, 63);
+    --tag-bg-color: rgb(138, 150, 225);
+    --button-bg-color: rgb(0, 82, 217);
+    --button-text-color: rgb(255, 255, 255);
+    --main-text-color: rgb(255, 255, 255);
+    --h1-text-color: rgb(0, 0, 0);
+    --h2-text-color: rgb(30, 30, 30);
+    --h3-text-color: rgb(0, 0, 0);
+    --h4-text-color: rgb(0, 0, 0);
+    --h5-text-color: rgb(0, 0, 0);
+    --h6-text-color: rgb(0, 0, 0);
+    --p-text-color: rgb(0, 0, 0);
+    --hr-color: rgb(51, 51, 51);
+    --shadow-color: rgb(155, 155, 155);
+    --scrollbar-color: rgb(145, 145, 145);
+    --scrollbar-hover-color: rgb(83, 83, 83);
+    --scrollbar-active-color: rgb(106, 106, 106);
+    --scrollbar-track-color: rgb(225, 225, 225);
+}

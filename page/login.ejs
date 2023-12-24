@@ -1,0 +1,31 @@
+<% let currentPage = 'login' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body style="background-image: url('<%=background_image %>')" data-language="<%= language_code %>">
+    <%- include('../partial/page-includes.ejs') %>
+    <main>
+        <div class="auth-box">
+            <a href="../" class="back-to-home"><%=lan_back_to_home %></a>
+            <div class="auth-img-box">
+                <img src="<%=logo_s %>">
+            </div>
+            <form id="loginForm" action="/<%=language_code %>/login" method="post">
+                <h1><%=lan_login %></h1>
+                <span><%=lan_username_or_email %></span>
+                <input name="username">
+                <span><%=lan_password %></span>
+                <input type="password" name="password">
+                <button type="button" onclick="submitLoginForm()"><%=lan_login %></button>
+                <p><%=lan_dont_have_an_account %> <a href="./register"><%=lan_register %></a></p>
+                <p><%=lan_auth_forget_the_password %> <a href="./forget-password"><%=lan_auth_reset_password %></a></p>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

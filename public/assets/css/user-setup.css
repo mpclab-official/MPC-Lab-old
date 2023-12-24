@@ -1,0 +1,80 @@
+.user-setup {
+    width: 100%;
+    height: 100%;
+}
+
+.user-setup>.user-setup-inner {
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.user-setup>.user-setup-inner>div {
+    display: none;
+}
+
+.user-setup>.user-setup-inner>div>h1 {
+    width: 100%;
+    margin-top: 0;
+    text-align: center;
+}
+
+.user-setup>.user-setup-inner>div>p {
+    width: 100%;
+    text-align: center;
+}
+
+.user-setup>.user-setup-inner>div>input {
+    height: 40px;
+    width: 90%;
+    font-size: large;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.user-setup>.user-setup-inner>div>textarea {
+    height: 80px;
+    width: 90%;
+    font-size: large;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.user-setup>.user-setup-inner>div>select {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 1px solid var(--select-border);
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1.1;
+}
+
+.user-setup>.user-setup-inner>div>button {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: large;
+}
+
+.fade-in-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}

@@ -1,0 +1,68 @@
+<% let currentPage = 'user-setup' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body data-language="<%= language_code %>">
+    <%- include('../partial/page-includes.ejs') %>
+    <div class="user-setup">
+        <div class="user-setup-inner">
+            <div id="user-name" class="fade-in-out">
+                <h1><%=lan_user_setup_user_name_title %></h1>
+                <p><%=lan_user_setup_user_name_words %></p>
+                <input name="name" minlength="1" maxlength="20">
+                <button><%=lan_next %></button>
+            </div>
+            <div id="user-gender" class="fade-in-out">
+                <h1><%=lan_user_setup_user_gender %></h1>
+                <p><%=lan_user_setup_user_gender_words %></p>
+                <select name="gender">
+                    <option value=""><%=lan_user_setup_user_gender_n %></option>
+                    <option value="m"><%=lan_user_setup_user_gender_m %></option>
+                    <option value="f"><%=lan_user_setup_user_gender_f %></option>
+                </select>
+                <button><%=lan_next %></button>
+            </div>
+            <div id="user-language" class="fade-in-out">
+                <h1><%=lan_user_setup_user_language %></h1>
+                <p><%=lan_user_setup_user_language_words %></p>
+                <select name="language">
+                    <option value="en"><%=lan_user_setup_user_language_en %></option>
+                    <option value="zh"><%=lan_user_setup_user_language_zh %></option>
+                    <option value="es"><%=lan_user_setup_user_language_es %></option>
+                </select>
+                <button><%=lan_next %></button>
+            </div>
+            <div id="user-educated" class="fade-in-out">
+                <h1><%=lan_user_setup_user_educated %></h1>
+                <p><%=lan_user_setup_user_educated_words %></p>
+                <select name="educated">
+                    <option value="k"><%=lan_user_setup_user_educated_k %></option>
+                    <option value="e"><%=lan_user_setup_user_educated_e %></option>
+                    <option value="j"><%=lan_user_setup_user_educated_j %></option>
+                    <option value="h"><%=lan_user_setup_user_educated_h %></option>
+                    <option value="c"><%=lan_user_setup_user_educated_c %></option>
+                    <option value="m"><%=lan_user_setup_user_educated_m %></option>
+                </select>
+                <button><%=lan_next %></button>
+            </div>
+            <div id="user-age" class="fade-in-out">
+                <h1><%=lan_user_setup_user_age %></h1>
+                <p><%=lan_user_setup_user_age_words %></p>
+                <input type="date" name="age">
+                <button><%=lan_next %></button>
+            </div>
+            <div id="user-bio" class="fade-in-out">
+                <h1><%=lan_user_setup_user_bio %></h1>
+                <p><%=lan_user_setup_user_bio_words %></p>
+                <textarea name="bio" maxlength="50"></textarea>
+                <button><%=lan_next %></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

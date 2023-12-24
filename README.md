@@ -1,12 +1,94 @@
-# MathPhysChemLab
+# MPC Lab Development Documentation
 
-### URL
-- https://mathscichem.com
-- https://app.mathscichem.com
+This is the development documentation for MPC Lab, including user guides, versions, configurations, and other information...
 
-## Developer
-- __Tony Kan__, 
-- __Devin Liang__
+## Developers
+    
+- Tony Kan
+    - [GitHub](https://github.com/tonyblog)
 
-## Intro
-What we develop is a website, or a powerful Web-APP, about mathematics, physics and chemistry. It can help students learn mathematics, physics, and chemistry, and can also help teachers teach. The main function of my website is a powerful question generator, covering mathematics, physics and chemistry from elementary school to college entry. 90% of the question types are randomly generated and not drawn from the question bank. About 1,000 parameters can be provided to teachers for selection. Generator models have thousands of parameters. More targeted. On average, tens of thousands of questions can be generated per second. After generation, it supports one-click assignment and one-click generation of PDF. The website also has many tools related to mathematics and physics, such as matrix calculators, n-dimensional equation calculators, acceleration calculators, celestial body motion models/simulators, etc. The website can support registering users, creating classes, inviting students to join, assigning homework, etc. There is also an exam system that can detect students' cheating behaviors, such as exiting full screen, switching windows, etc. The entire project has more than 30,000 lines of code, and the development time is one and a half months. As a team of two, I personally develop for an average of more than 9 hours a day, and the total number of submissions exceeds 2,000. Our vision is to improve the relevance of mathematics, physics and chemistry education, stimulate students' interest, and improve the country's talents in this area.
+- Devin Liang
+    - [GitHub](https://github.com/244196806qq)
+
+## Usage
+
+### Installation
+
+1. Install Node.js development environment.
+
+2. Clone this repository using GIT or download it directly.
+```
+git clone https://github.com/mpclab-official/MPC-Lab.git
+```
+
+### Start the server
+
+Start the server and connect to the database.
+```
+node server
+```
+
+Stop the connection to the server and database with `^C`.
+
+### Auth Management Module
+
+Start the Auth management module and connect to the Auth database.
+```
+node auth
+```
+
+Stop the connection to the Auth module and Auth database with `^C`.
+
+## Configuration
+
+The configuration information is located in the `config.js` configuration file.
+
+- name - The name of the project
+- favicon - Website favicon
+- logo - Website logo
+- logo_s - Website small logo
+- background_image - Website background image
+- version - Version number
+- hostname - Server IP
+- port - Port number
+- startDelay - Startup delay
+- openTestPage - Open the test page in the default browser
+- languages - Language configuration, please add language packs in the `languages` folder of the project
+- log - Server log configuration
+    - requestsLog - Client request log
+        - logging - Whether to log client requests
+        - typ - Log type
+        - onlyError - Only log error requests (4**, 5**)
+        - maxFiles - Maximum number of rotating files
+        - encoding - Encoding format
+        - folderName - Log folder name
+        - fileName - Main log file name
+- db - Database configuration
+    - auth - Location of the auth database
+    - user - Location of the user database
+- session - Session configuration
+    - secret - Session secret key
+
+## Versions
+
+### V2.0.0-dev
+
+- The first version of MPC Lab's second generation, still under development.
+
+- Refactored the project using Node.js and Express.js to implement the basic frontend and backend framework.
+
+- Supports user login, registration, password reset, and email verification code sending.
+
+- Basic page layout and styling framework.
+
+### V1.0.0-dev
+
+- The initial development/testing version of MPC Lab, still under development.
+
+- Built-in rich mathematical and scientific calculation and learning tools.
+
+- Built-in hundreds of mathematical and scientific question generators with thousands of parameters.
+
+- Supports student and teacher account registration, classroom creation, exam and assignment assignments, etc.
+
+- Includes a celestial physics simulator using Unity.

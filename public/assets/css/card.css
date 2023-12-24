@@ -1,0 +1,32 @@
+.card {
+    width: auto;
+    height: auto;
+    padding: 3%;
+    box-shadow: 7px 7px 8px var(--shadow-color);
+}
+
+.small-card {
+    padding: 1%;
+}
+
+.large-card {
+    padding: 6%;
+}
+
+.card-title {
+    width: 100%;
+    font-weight: bolder;
+}
+
+.avatar {
+    height: auto;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.avatar>img {
+    background-color: black;
+    border-radius: 50%;
+    height: 3em;
+}

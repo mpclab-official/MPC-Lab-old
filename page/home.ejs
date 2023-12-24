@@ -1,0 +1,39 @@
+<% let currentPage = 'home' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body>
+    <%- include('../partial/page-includes.ejs') %>
+    <%- include('../partial/header.ejs', { language_code }) %>
+    <main>
+        <div class="page-main-content">
+            <div class="left-side-block" id="leftScroll">
+                <div class="block-inner-content">
+                    <% if(userData.userName && userData.UID){ %>
+                    <div class="card text-left small-card">
+                        <table>
+                            <tr>
+                                <td><div class="avatar"><img src="/assets/svg/-logo-light-s.svg"></div></td>
+                                <td><h3 class="card-title">Welcome Back <%=userData.userName %></h3><p>User-ID: <%=userData.UID %></p></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            <div class="right-side-block" id="rightScroll">
+                <div class="block-inner-content">
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/mobile-navigation-bar.ejs') %>
+</body>
+
+</html>
