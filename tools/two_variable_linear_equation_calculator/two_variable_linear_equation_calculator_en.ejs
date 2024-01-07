@@ -1,0 +1,76 @@
+<h1>Please enter coefficients:</h1>
+
+<p class="latex-expression">\(a_1x + b_1y = c_1\)</p>
+<p class="latex-expression">\(a_2x + b_2y = c_2\)</p>
+
+<input id="a1" placeholder="a1" style="width: 40%;">
+<input id="a2" placeholder="a2" style="width: 40%;">
+<input id="b1" placeholder="b1" style="width: 40%;">
+<input id="b2" placeholder="b2" style="width: 40%;">
+<input id="c1" placeholder="c1" style="width: 40%;">
+<input id="c2" placeholder="c2" style="width: 40%;">
+
+<br><button onclick="sendData();">Calculate</button>
+
+<hr id="hr" style="display: none;">
+
+<span id="code_-1" class="errorMessage">Please input numbers</span>
+
+<h2 id="p_or_t"></h2>
+<h2 id="y" class="latex-expression"></h2>
+<h2 id="y_fixed" class="latex-expression"></h2>
+<h2 id="x" class="latex-expression"></h2>
+<h2 id="x_fixed" class="latex-expression"></h2>
+
+<script>
+    function sendData() {
+        document.getElementById("code_-1").style.display = "none";
+        document.getElementById("p_or_t").innerHTML = "";
+        document.getElementById("y").innerHTML = "";
+        document.getElementById("x").innerHTML = "";
+        document.getElementById("y_fixed").innerHTML = "";
+        document.getElementById("x_fixed").innerHTML = "";
+
+        fetch(`/${languageCode}/tools/two_variable_linear_equation_calculator`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                a1: document.getElementById("a1").value,
+                a2: document.getElementById("a2").value,
+                b1: document.getElementById("b1").value,
+                b2: document.getElementById("b2").value,
+                c1: document.getElementById("c1").value,
+                c2: document.getElementById("c2").value
+            }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('failed');
+                }
+                return response.json();
+            })
+            .then(json => {
+                document.getElementById("hr").style.display = "block";
+                if (json.code == 0) {
+                    document.getElementById("y").innerHTML = `\\(y = ${json.solution.y}\\)`;
+                    document.getElementById("x").innerHTML = `\\(x = ${json.solution.x}\\)`;
+                    document.getElementById("y_fixed").innerHTML = `\\(y ≈ ${json.solution.y.toFixed(2)}\\)`;
+                    document.getElementById("x_fixed").innerHTML = `\\(x ≈ ${json.solution.x.toFixed(2)}\\)`;
+                } else if (json.code == 1) {
+                    document.getElementById("p_or_t").innerHTML = "Infinite solutions";
+                } else if (json.code == 2) {
+                    document.getElementById("p_or_t").innerHTML = "Parallel Equations";
+                }
+                else if (json.code == -1) {
+                    document.getElementById("code_-1").style.display = "block";
+                }
+                renderMathInElement(document.body);
+            })
+            .catch(error => {
+                // Handle errors, display error messages, etc.
+                console.error('Error:', error.message);
+            });
+    }
+</script>

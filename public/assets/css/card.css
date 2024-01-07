@@ -1,32 +1,23 @@
 .card {
     width: auto;
     height: auto;
-    padding: 3%;
+    padding: 1%;
+    border-radius: 3px;
+    background-color: var(--card-bg-color);
     box-shadow: 7px 7px 8px var(--shadow-color);
 }
 
 .small-card {
+    margin: 1.5em;
     padding: 1%;
 }
 
 .large-card {
-    padding: 6%;
+    margin-bottom: 1em;
+    padding: 1%;
 }
 
 .card-title {
     width: 100%;
     font-weight: bolder;
-}
-
-.avatar {
-    height: auto;
-    width: auto;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.avatar>img {
-    background-color: black;
-    border-radius: 50%;
-    height: 3em;
 }

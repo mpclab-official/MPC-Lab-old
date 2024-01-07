@@ -1,4 +1,4 @@
-const config = require('./config.js');
+const config = require(`./config.js`);
 const Auth = require(`${config.db.auth}/auth.js`);
 
 const rl = require('readline').createInterface({

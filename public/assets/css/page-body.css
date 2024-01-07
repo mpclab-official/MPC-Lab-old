@@ -4,7 +4,7 @@ main {
     width: 100%;
 }
 
-main>.page-main-content{
+main>.page-main-content {
     display: flex;
     margin: 0 auto;
     max-width: 1860px;
@@ -12,23 +12,40 @@ main>.page-main-content{
     min-height: 100%;
 }
 
-main>.page-main-content>.right-side-block{
+main>.page-main-content>.row-block {
+    height: auto;
+    width: 100%;
+}
+
+main>.page-main-content>.right-side-block {
     height: 100%;
     width: 30%;
 }
 
-main>.page-main-content>.left-side-block{
+main>.page-main-content>.left-side-block {
     height: 100%;
     width: 70%;
 }
 
+main>.page-main-content>.row-block>.block-inner-content,
 main>.page-main-content>.left-side-block>.block-inner-content,
-main>.page-main-content>.right-side-block>.block-inner-content{
+main>.page-main-content>.right-side-block>.block-inner-content {
     margin: 0 auto;
     margin-top: 1vw;
     margin-bottom: 1vw;
-    border-radius: 3px;
     height: auto;
-    background-color: var(--level2-bg-color);
     width: calc(100% - 2vw);
+}
+
+@media screen and (max-width: 1000px) {
+
+    main>.page-main-content {
+        display: inline-block;
+    }
+
+    main>.page-main-content>.right-side-block,
+    main>.page-main-content>.left-side-block {
+        width: 100%;
+    }
+
 }

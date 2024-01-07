@@ -8,17 +8,17 @@
 
 <body>
     <%- include('../partial/page-includes.ejs') %>
-    <%- include('../partial/header.ejs', { language_code }) %>
+    <%- include('../partial/header.ejs', { language_code, userData }) %>
     <main>
         <div class="page-main-content">
             <div class="left-side-block" id="leftScroll">
                 <div class="block-inner-content">
                     <% if(userData.userName && userData.UID){ %>
-                    <div class="card text-left small-card">
+                    <div class="card large-card">
                         <table>
                             <tr>
-                                <td><div class="avatar"><img src="/assets/svg/-logo-light-s.svg"></div></td>
-                                <td><h3 class="card-title">Welcome Back <%=userData.userName %></h3><p>User-ID: <%=userData.UID %></p></td>
+                                <td><div class="avatar"><img src="/users-avatar/<%=userData.avatarUrl %>"></div></td>
+                                <td><h3 class="card-title"><%=lan_welcome_back %> <%=userData.userName %></h3><p><%=lan_user_id %>: <%=userData.UID %></p></td>
                             </tr>
                         </table>
                     </div>
@@ -27,7 +27,7 @@
             </div>
             <div class="right-side-block" id="rightScroll">
                 <div class="block-inner-content">
-                    
+
                 </div>
             </div>
         </div>

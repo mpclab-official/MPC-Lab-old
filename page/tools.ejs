@@ -8,8 +8,130 @@
 
 <body>
     <%- include('../partial/page-includes.ejs') %>
-    <%- include('../partial/header.ejs', { language_code }) %>
-    <!--Page Body-->
+    <%- include('../partial/header.ejs', { language_code, userData }) %>
+    <main>
+        <div class="page-main-content" style="flex-direction: column;">
+            <div class="row-block tags-block">
+                <div class="block-inner-content">
+                    <div class="card">
+                        <div class="tags">
+                            <% 
+                            let tags = [];
+                            for(let i=0;i<Tools.length;i++){
+                                for(let j=0;j<Tools[i].tags.length;j++){
+                                    if(!tags.includes(Tools[i].tags[j][language_code])){
+                                        tags.push(Tools[i].tags[j][language_code]);
+                                    }
+                                }
+                            }  
+                            %>
+                            <% if(inTags){ %>
+                                <span class="back-to-tags" onclick="window.location='/<%=language_code %>/tools'">All</span>
+                            <% } %>
+                            <% for(let i=0;i<tags.length;i++){ %>
+                                <span class="tag" onclick="window.location='/<%=language_code %>/tools?tag=<%=tags[i] %>'"><%=tags[i] %></span>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-block tags-block">
+                <div>
+                    <div class="tools">
+                        <% for(let i = 0;i<Tools.length;i++){ %>
+                            <% if(Tools[i].hot && Tools[i].new){ %>
+                            <% Tools[i].display = true %>
+                            <div class="card tool-card" onclick="window.location='./tools/<%=Tools[i].url %>'">
+                                <table>
+                                    <tr>
+                                        <td rowspan="2">
+                                            <img src="/assets/img/tools/<%=Tools[i].img %>">
+                                        </td>
+                                        <td>
+                                            <h1><%=Tools[i].name[language_code] %><sup class="hot-tag">&nbsp;HOT New</sup></h1>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><%=Tools[i].description[language_code] %></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <% } %>
+                        <% } %>
+                        <% for(let i = 0;i<Tools.length;i++){ %>
+                            <% if(Tools[i].hot && !Tools[i].display){ %>
+                            <div class="card tool-card" onclick="window.location='./tools/<%=Tools[i].url %>'">
+                                <table>
+                                    <tr>
+                                        <td rowspan="2">
+                                            <img src="/assets/img/tools/<%=Tools[i].img %>">
+                                        </td>
+                                        <td>
+                                            <h1><%=Tools[i].name[language_code] %><sup class="hot-tag">&nbsp;HOT</sup></h1>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><%=Tools[i].description[language_code] %></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <% } %>
+                        <% } %>
+                        <% for(let i = 0;i<Tools.length;i++){ %>
+                            <% if(Tools[i].new && !Tools[i].display){ %>
+                            <div class="card tool-card" onclick="window.location='./tools/<%=Tools[i].url %>'">
+                                <table>
+                                    <tr>
+                                        <td rowspan="2">
+                                            <img src="/assets/img/tools/<%=Tools[i].img %>">
+                                        </td>
+                                        <td>
+                                            <h1><%=Tools[i].name[language_code] %><sup class="hot-tag">&nbsp;New</sup></h1>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><%=Tools[i].description[language_code] %></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <% } %>
+                        <% } %>
+                        <% for(let i = 0;i<Tools.length;i++){ %>
+                            <% if(!Tools[i].hot && !Tools[i].new && !Tools[i].display){ %>
+                            <div class="card tool-card" onclick="window.location='./tools/<%=Tools[i].url %>'">
+                                <table>
+                                    <tr>
+                                        <td rowspan="2">
+                                            <img src="/assets/img/tools/<%=Tools[i].img %>">
+                                        </td>
+                                        <td>
+                                            <h1><%=Tools[i].name[language_code] %></h1>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><%=Tools[i].description[language_code] %></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
     <%- include('../partial/footer.ejs') %>
     <%- include('../partial/mobile-navigation-bar.ejs') %>
 </body>

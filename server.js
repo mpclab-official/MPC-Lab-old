@@ -5,11 +5,12 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
-const routes = require('./routes');
-const config = require('./config.js');
+const routes = require('./routes/routes.js');
+const config = require(`${__dirname}/config.js`);
 const startLog = require('./log/recorder.js');
 const Auth = require(`${config.db.auth}/auth.js`);
 const User = require(`${config.db.user}/user.js`);
+const Articles = require(`${config.db.articles}/articles.js`);
 
 // Create express application
 const app = express();
@@ -22,8 +23,8 @@ app.use(session({
 }));
 
 // Use body-parser middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // Function to start the server
 function startServer() {
@@ -43,7 +44,7 @@ function startServer() {
   startTable.Web_Requests_Logs = startLog(app);
 
   // Serve static files
-  app.use(express.static(path.join(__dirname, '/public')));
+  app.use(express.static(path.join(config.path, '/public')));
 
   // Set view engine to ejs and use routes
   app.use('/', routes);
@@ -59,9 +60,13 @@ function startServer() {
 
   // Close database connections when the application exits
   process.on('exit', () => {
-    Auth.close();
-    User.close();
-    console.log('Closing database connection.');
+    console.log('Closing database connection...');
+    console.log(`Auth database closed: ${Auth.close()}`);
+    console.log(`User database closed: ${User.close()}`);
+    console.log(`Articles database closed: ${Articles.close()}`);
+    console.log('Database connection closed!');
+    console.log('MPC Lab web-server is closed!');
+    console.log('Goodbye!');
   });
 
   // Handle application termination with Ctrl+C
@@ -77,7 +82,7 @@ function startServer() {
   process.on('unhandledRejection', (reason, promise) => {
     console.error('Unhandled Rejection at:', promise, 'reason:', reason);
     process.exit(1);
-  });  
+  });
 }
 
 // Function to open a test page in the default browser

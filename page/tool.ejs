@@ -6,10 +6,28 @@
     <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
 </head>
 
-<body>
+<body data-language="<%=language_code %>">
     <%- include('../partial/page-includes.ejs') %>
-    <%- include('../partial/header.ejs', { language_code }) %>
-    <!--Page Body-->
+    <%- include('../partial/header.ejs', { language_code, userData }) %>
+    <main>
+        <div class="page-main-content">
+            <div class="left-side-block" id="leftScroll">
+                <div class="block-inner-content">
+                    <div class="card large-card">
+                        <h1 class="text-left"><%=thisTool.name[language_code] %></h1>
+                    </div>
+                    <div class="card large-card tool">
+                        <%- include(`../tools/${thisTool.url}/${thisTool.url}_${language_code}.ejs`, { Tools, thisTool }) %>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side-block" id="rightScroll">
+                <div class="block-inner-content">
+                    <%- include('../partial/tools-right-bar.ejs', { Tools, thisTool }) %>
+                </div>
+            </div>
+        </div>
+    </main>
     <%- include('../partial/footer.ejs') %>
     <%- include('../partial/mobile-navigation-bar.ejs') %>
 </body>

@@ -1,0 +1,32 @@
+<div class="card large-card">
+    <h2 class="text-left">
+        <%=lan_about %>
+    </h2>
+    <p class="text-left">
+        <%=thisTool.about[language_code] %>
+    </p>
+</div>
+
+<div class="card large-card">
+    <h2 class="text-left">
+        <%=lan_recommended %>
+    </h2>
+        <% for (let i = 0; i < thisTool.recommended_tools.length; i++) { %>
+        <div class="recommended-item" onclick="window.location='/<%=language_code %>/tools/<%=thisTool.recommended_tools[i] %>'">
+            <% for(let j = 0;j<Tools.length;j++){ %>
+            <table>
+                <% if(Tools[j].url == thisTool.recommended_tools[i]){ %>
+                    <tr>
+                        <td>
+                            <img src="/assets/img/tools/<%=Tools[j].img %>">
+                        </td>
+                        <td>
+                            <h4><%=Tools[j].name[language_code] %></h4>
+                        </td>
+                    </tr>
+                <% } %>
+            </table>
+            <% } %>
+        </div>
+        <% } %>
+</div>

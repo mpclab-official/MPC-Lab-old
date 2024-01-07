@@ -19,6 +19,7 @@ const config = {
     logo: "/assets/svg/-logo-light.svg",
     logo_s: "/assets/svg/-logo-light-s.svg",
     background_image: "/assets/img/background.svg",
+    path: __dirname,
     version: "2.0",
     hostname: getIpAddress(),
     //hostname: "localhost",
@@ -35,7 +36,7 @@ const config = {
             logging: true,
             typ: "combined", /* combined common dev short tiny */
             // interval: "1d",
-            onlyError: false,
+            onlyError: true,
             maxFiles: 0,
             encoding: "utf-8",
             folderName: "requestsLogs",
@@ -44,7 +45,8 @@ const config = {
     },
     db: {
         auth: `${__dirname}/db/auth`,
-        user: `${__dirname}/db/user`
+        user: `${__dirname}/db/user`,
+        articles: `${__dirname}/db/articles`,
     },
     session: {
         secret: 'test-secret-key',

@@ -1,0 +1,136 @@
+.tool-card {
+    display: inline-block;
+    width: calc(24% - 2vw - 20px);
+    height: 9em;
+    min-width: 360px;
+    margin: 10px;
+}
+
+@media screen and (min-width: 768px) {
+
+    .tool-card:hover {
+        animation: cardHover 0.5s ease-in-out alternate;
+        transform: scale(1.05);
+        background-color: var(--card-hover-bg-color);
+    }
+
+    .tool-card:hover>table>tbody>tr>td>h1 {
+        animation: textUnderline 0.4s linear alternate;
+        border-bottom: solid 1px var(--h1-text-color);
+    }
+
+}
+
+@keyframes cardHover {
+    0% {
+        transform: scale(1);
+        background-color: var(--card-bg-color);
+    }
+
+    100% {
+        transform: scale(1.05);
+        background-color: var(--card-hover-bg-color);
+    }
+}
+
+@keyframes textUnderline {
+    0% {
+        width: 0;
+        border-bottom: solid 1px var(--h1-text-color);
+    }
+
+    100% {
+        width: 100%;
+        border-bottom: solid 1px var(--h1-text-color);
+    }
+}
+
+.tools {
+    display: block;
+    text-align: center;
+}
+
+.tools>.tool-card>table>tbody>tr>td>img {
+    border-radius: 5px;
+    height: 5em;
+    width: 5em;
+}
+
+.tools>.tool-card>table>tbody>tr>td>h1 {
+    margin-bottom: 0;
+    margin-left: 1em;
+    width: fit-content;
+    text-align: left;
+    word-break: break-word;
+    font-size: medium;
+}
+
+.tools>.tool-card>table>tbody>tr>td>p {
+    padding-left: 1.8em;
+    word-break: break-word;
+    font-size: x-small;
+    text-align: left;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .tool-card {
+        width: calc(49% - 2vw - 20px);
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .tool-card {
+        width: calc(100% - 2vw - 20px);
+    }
+
+    .tools>.tool-card>table>tbody>tr>td>img {
+        height: 8em;
+        width: 8em;
+    }
+
+    .tools>.tool-card>table>tbody>tr>td>h1 {
+        font-size: large;
+    }
+
+    .tools>.tool-card>table>tbody>tr>td>p {
+        font-size: medium;
+    }
+
+}
+
+@media screen and (max-width: 520px) {
+
+    .tools>.tool-card>table>tbody>tr>td>img {
+        height: 4em;
+        width: 4em;
+    }
+
+    .tools>.tool-card>table>tbody>tr>td>h1 {
+        font-size: medium;
+    }
+
+    .tools>.tool-card>table>tbody>tr>td>p {
+        font-size: x-small;
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+
+    .tools>.tool-card>table>tbody>tr>td>img {
+        height: 4em;
+        width: 4em;
+    }
+
+    .tools>.tool-card>table>tbody>tr>td>h1 {
+        font-size: small;
+    }
+
+    .tools>.tool-card>table>tbody>tr>td>p {
+        font-size: xx-small;
+    }
+
+}

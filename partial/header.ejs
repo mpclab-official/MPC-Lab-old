@@ -8,9 +8,9 @@
             <li class="main-header-navigation-drop-down"><a>≡</a></li>
             <% navigation_translate_pack.forEach(function(item){%>
                 <li class="main-header-navigation-drop-down-child"><a href="<%=item.url %>">
-                        <%=item.name %>
-                    </a></li>
-                <% }); %>
+                    <%=item.name %>
+                </a></li>
+            <% }); %>
         </ul>
         <div class="main-header-spacer"></div>
         <form action="/<%=language_code %>/search">
@@ -18,10 +18,14 @@
             <button><%- lan_search %></button>
         </form>
         <div>
-            <button class="login-register-button" id="login-register-button"
-                onclick="window.location='/<%=language_code %>/login'"><%- lan_login %> | <%- lan_register %></button>
-            <button class="login-button" id="login-button" onclick="window.location='/<%=language_code %>/login'"><%-
-                    lan_login %></button>
+            <% if(userData.avatarUrl){ %>
+                <div class="avatar" onclick="window.location='#'"><img src="/users-avatar/<%=userData.avatarUrl %>"></div>
+            <% }else{ %>
+                <button class="login-register-button" id="login-register-button"
+                    onclick="window.location='/<%=language_code %>/login'"><%- lan_login %> | <%- lan_register %></button>
+                <button class="login-button" id="login-button" onclick="window.location='/<%=language_code %>/login'"><%-
+                        lan_login %></button>
+            <% } %>
         </div>
     </nav>
 </header>

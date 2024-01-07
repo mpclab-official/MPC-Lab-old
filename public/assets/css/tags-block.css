@@ -1,0 +1,25 @@
+.tags {
+    height: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.tags>.tag {
+    display: inline-block;
+    height: 100%;
+    margin: 0.5%;
+    padding: 8px;
+    border-radius: 10px;
+    color: var(--tag-text-color);
+    background-color: var(--tag-bg-color);
+}
+
+.back-to-tags {
+    display: inline-block;
+    height: 100%;
+    margin: 0.5%;
+    padding: 8px;
+    border-radius: 10px;
+    color: var(--tag-bg-color);
+    border: solid 1px var(--tag-bg-color);
+}

@@ -85,6 +85,10 @@ var lan_es = {
         lan_user_setup_user_age_words: "¡Comparte tu cumpleaños con nosotros y celebremos juntos tu día especial!",
         lan_user_setup_user_bio: "Biografía",
         lan_user_setup_user_bio_words: "Descríbete en unas pocas frases; queremos conocer tu historia.",
+        lan_welcome_back: "Bienvenido de nuevo",
+        lan_user_id: "ID de usuario",
+        lan_about: "Acerca de",
+        lan_recommended: "Recomendado",
     }
 };
 

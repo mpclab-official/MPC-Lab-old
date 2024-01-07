@@ -235,6 +235,7 @@ class Auth {
     // Close database connection
     close() {
         db.close();
+        return true;
     }
 }
 

@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-// Use your SendGrid API key here
+// SendGrid API key
 const sendgridApiKey = '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';
 
 class EmailVerification {

@@ -1,3 +1,5 @@
+@import url("./basic.css");
+
 @import url("./page-main.css");
 
 @import url("./scrollbar.css");
@@ -7,3 +9,11 @@
 @import url("./page-body.css");
 
 @import url("./card.css");
+
+@import url("./avatar.css");
+
+@import url("./tags-block.css");
+
+@import url("./tools.css");
+
+@import url("./tool.css");

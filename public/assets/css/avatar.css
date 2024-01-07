@@ -1,0 +1,12 @@
+.avatar {
+    height: auto;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.avatar>img {
+    background-color: black;
+    border-radius: 50%;
+    height: 3em;
+}

@@ -62,7 +62,58 @@ function startSetup() {
                                                         const userBio = userSetup.userBio.getElementsByTagName("textarea")[0].value;
                                                         UserData.userBio = userBio;
                                                         fadeOut(userSetup.userBio);
-                                                        sendData();
+                                                        setTimeout(() => {
+                                                            fadeIn(userSetup.userAvatar);
+                                                            userSetup.userAvatar.getElementsByTagName("button")[0].addEventListener("click", () => {
+                                                                const avatarInput = userSetup.userAvatar.getElementsByTagName("input")[0];
+                                                                const file = avatarInput.files[0];
+
+                                                                if (file) {
+                                                                    const img = new Image();
+
+                                                                    img.onload = function () {
+                                                                        const width = img.width;
+                                                                        const height = img.height;
+
+                                                                        if (width > 0 && height > 0) {
+                                                                            if (file.size <= 5 * 1024 * 1024) {
+                                                                                const reader = new FileReader();
+
+                                                                                reader.onload = function (e) {
+                                                                                    const base64Data = e.target.result;
+
+                                                                                    UserData.userAvatar = base64Data;
+                                                                                    fadeOut(userSetup.userAvatar);
+
+                                                                                    UserData.colorTheme = "light";
+
+                                                                                    UserData.following = new Array();
+                                                                                    UserData.followers = new Array();
+
+                                                                                    UserData.Blog = new Object();
+                                                                                    UserData.Blog.articles = new Array();
+                                                                                    UserData.Blog.stars = new Array();
+
+                                                                                    UserData.interest = new Array();
+
+                                                                                    sendData();
+                                                                                };
+
+                                                                                reader.readAsDataURL(file);
+                                                                            } else {
+                                                                                alert('File size exceeds the maximum allowed size (5 MB).');
+                                                                            }
+                                                                        } else {
+                                                                            alert('Invalid image file.');
+                                                                        }
+                                                                    };
+
+                                                                    img.src = URL.createObjectURL(file);
+                                                                } else {
+                                                                    alert('Please select a file.');
+                                                                }
+                                                            });
+                                                        }, 500);
                                                     });
                                                 }, 500);
                                             } else {
@@ -103,9 +154,10 @@ function sendData() {
         })
         .then(json => {
             if (json.code.includes(0)) {
-                console.log("成功请求");
+                console.log("Good!");
+                location.reload();
             } else if (json.code.includes(1)) {
-                console.log("失败。。。");
+                console.log("failed...");
             }
         })
         .catch(error => {
@@ -121,7 +173,8 @@ window.onload = () => {
         userLanguage: document.getElementById("user-language"),
         userEducated: document.getElementById("user-educated"),
         userAge: document.getElementById("user-age"),
-        userBio: document.getElementById("user-bio")
+        userBio: document.getElementById("user-bio"),
+        userAvatar: document.getElementById("user-avatar")
     }
     startSetup();
 }

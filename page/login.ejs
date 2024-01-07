@@ -6,11 +6,11 @@
     <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
 </head>
 
-<body style="background-image: url('<%=background_image %>')" data-language="<%= language_code %>">
+<body style="background-image: url('<%=background_image %>')" data-language="<%=language_code %>">
     <%- include('../partial/page-includes.ejs') %>
     <main>
         <div class="auth-box">
-            <a href="../" class="back-to-home"><%=lan_back_to_home %></a>
+            <a href="/<%=language_code %>" class="back-to-home"><%=lan_back_to_home %></a>
             <div class="auth-img-box">
                 <img src="<%=logo_s %>">
             </div>

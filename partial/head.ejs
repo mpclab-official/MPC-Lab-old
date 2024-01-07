@@ -4,19 +4,22 @@
     <%=title %>
 </title>
 <link rel="icon" type="image/x-icon" href="<%= favicon %>">
+
 <link rel="stylesheet" href="/assets/css/style.css">
 <script src="/assets/js/script.js" defer></script>
+
 <% if(currentPage=="login" || currentPage=="register" || currentPage=="forget-password") { %>
 <link rel="stylesheet" href="/assets/css/auth.css">
 <script type="text/javascript" src="/assets/js/auth.js"></script>
 <% } %>
+
 <% if(currentPage=="user-setup") { %>
 <link rel="stylesheet" href="/assets/css/user-setup.css">
 <script type="text/javascript" src="/assets/js/user-setup.js"></script>
 <% } %>
 
-<% if(currentPage=="home") { %>
 <script type="text/javascript" src="/assets/js/page-left-right-scroll.js"></script>
-<% } %>
 
 <%- include('./page-style.ejs', { pageStyle }) %>
+
+<%- include('./katex.ejs') %>

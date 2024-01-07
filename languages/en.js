@@ -85,6 +85,10 @@ var lan_en = {
         lan_user_setup_user_age_words: "Share your birthday with us, and let's celebrate your special day together!",
         lan_user_setup_user_bio: "Bio",
         lan_user_setup_user_bio_words: "Describe yourself in a few sentences; we want to hear your story.",
+        lan_welcome_back: "Welcome Back",
+        lan_user_id: "User-ID",
+        lan_about: "About",
+        lan_recommended: "Recommended",
     }
 };
 

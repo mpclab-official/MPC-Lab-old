@@ -1,0 +1,93 @@
+.recommended-item {
+    padding-left: 1.5em;
+}
+
+.recommended-item:hover {
+    background-color: var(--card-hover-bg-color);
+}
+
+.recommended-item>table>tbody>tr>td>img {
+    height: 60px;
+    border-radius: 15px;
+}
+
+.recommended-item>table>tbody>tr>td>h4 {
+    margin-left: 0.3em;
+}
+
+.tool {
+    padding: 3%;
+}
+
+.tool>h1 {
+    font-size: x-large;
+}
+
+.tool>h2 {
+    font-size: large;
+}
+
+.tool>p {
+    font-size: medium;
+}
+
+.tool>hr {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.tool>input {
+    margin-left: 1em;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    height: 30px;
+    width: 70%;
+    font-size: large;
+}
+
+.tool>textarea {
+    margin-left: 1.188em;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    height: 120px;
+    width: 80%;
+    font-size: large;
+}
+
+.tool>button {
+    font-size: large;
+    margin-left: 1em;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding-left: 14px;
+    padding-right: 14px;
+    border-radius: 5px;
+    height: 35px;
+    width: auto;
+    border-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    background-color: var(--button-bg-color);
+}
+
+.tool>button:hover {
+    border-color: var(--button-bg-color);
+    color: var(--button-bg-color);
+    background-color: var(--button-text-color);
+}
+
+.tool>.locked {
+    pointer-events: none;
+}
+
+.errorMessage {
+    display: none;
+    font-weight: lighter;
+    padding-left: 3px;
+    margin-top: 3px;
+    margin-left: 1em;
+    width: 67%;
+    background-color: #ffd2d2;
+    border-left: 6px solid #f00 !important;
+    margin-bottom: 0 !important;
+    text-align: left !important;
+}

@@ -85,6 +85,10 @@ var lan_zh = {
         lan_user_setup_user_age_words: "告诉我们你的生日，让我们一起庆祝你的特别日子吧！",
         lan_user_setup_user_bio: "个人简介",
         lan_user_setup_user_bio_words: "用几句话来形容一下你自己吧，我们想要了解你的故事。",
+        lan_welcome_back: "欢迎回来",
+        lan_user_id: "用户ID",
+        lan_about: "关于",
+        lan_recommended: "推荐",
     }
 };
 
