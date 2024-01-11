@@ -1,0 +1,133 @@
+body {
+    width: 100%;
+}
+
+.post-settings {
+    width: 100%;
+}
+
+.post-settings>h1 {
+    margin-left: 20px;
+}
+
+.post-settings>#title {
+    margin-left: 20px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: calc(80% - 8px);
+    height: 35px;
+    font-size: 1.5em;
+    font-weight: bolder;
+    text-align: left;
+    background-color: var(--main-bg-color);
+}
+
+.post-settings>#tags {
+    margin-top: 1em;
+    margin-left: 20px;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    width: calc(80% - 8px);
+    height: 35px;
+    font-size: 1em;
+    font-weight: bolder;
+    text-align: left;
+    background-color: var(--main-bg-color);
+}
+
+.post-settings>#description {
+    margin-top: 1em;
+    margin-left: 20px;
+    border-left: none;
+    border-right: none;
+    width: calc(80% - 8px);
+    height: 100px;
+    font-size: 1.5em;
+    font-weight: bolder;
+    text-align: left;
+    background-color: var(--main-bg-color);
+}
+
+.post-settings>#language {
+    margin-top: 1em;
+    margin-left: 20px;
+    border-left: none;
+    border-right: none;
+    width: calc(80% - 8px);
+    height: 30px;
+    font-size: 1.2em;
+    font-weight: bolder;
+    text-align: left;
+    background-color: var(--main-bg-color);
+}
+
+.post-settings>#cover-img {
+    display: table;
+    margin-top: 1em;
+    margin-left: 20px;
+    border-left: none;
+    border-right: none;
+    border: 2px solid var(--button-bg-color);
+    border-radius: 0px 20px 20px 0px;
+    width: calc(50% - 8px);
+    height: 160px;
+    font-size: 1.2em;
+    font-weight: bolder;
+    text-align: center;
+    overflow: hidden;
+    background-color: var(--main-bg-color);
+}
+
+.post-settings>#cover-img>img {
+    width: calc(80% - 8px);
+}
+
+.post-settings>#cover-img>h1>#cover {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.post-settings>#cover-img>h1 {
+    font-size: 1em;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.post-settings>h3 {
+    margin-left: 20px;
+}
+
+.post-settings>#cover-img-inner {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.post-settings>#upload {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 20px;
+    border-radius: 10px;
+    font-size: large;
+    height: 35px;
+    width: calc(80% - 8px);
+    border-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    background-color: var(--button-bg-color);
+}
+
+.errorMessage {
+    display: block;
+    font-weight: lighter;
+    padding-left: 3px;
+    margin-top: 3px;
+    width: 67%;
+    background-color: #ffd2d2;
+    border-left: 6px solid #f00 !important;
+    margin-bottom: 0 !important;
+    text-align: left !important;
+}

@@ -90,14 +90,20 @@ class User {
 
     // Update existing user data
     updateExistingUserData(authUserId, newData, callback) {
-        // Build SET clause
-        const setClause = Object.keys(newData).map(field => `${field} = ?`).join(', ');
-        const updateValues = Object.values(newData);
-        updateValues.push(authUserId);
+        this.readUserData(authUserId, (err, oldData) => {
+            // Merge old and new data
+            newData = {
+                ...oldData,
+                ...newData
+            };
 
-        // Execute UPDATE statement
-        db.run(`UPDATE userData SET ${setClause} WHERE userId = ?`, updateValues, (err) => {
-            callback(err);
+            // Build SET statement
+            const updateValues = JSON.stringify(newData);
+
+            // Execute UPDATE statement
+            db.run(`UPDATE userData SET data = ? WHERE userId = ?`, updateValues, authUserId, (err) => {
+                callback(err);
+            });
         });
     }
 

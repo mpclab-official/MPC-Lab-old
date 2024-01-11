@@ -1,12 +1,15 @@
 .avatar {
-    height: auto;
-    width: auto;
     padding-left: 10px;
     padding-right: 10px;
+    height: 3em;
+    width: 3em;
+    overflow: hidden;
 }
 
 .avatar>img {
     background-color: black;
     border-radius: 50%;
-    height: 3em;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }

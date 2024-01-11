@@ -13,6 +13,8 @@ const routes = [
   '__verification_code',
   '__forget_password',
   '__user_setup',
+  '__blog_post',
+  '__post',
 ];
 
 for (let i = 0; i < routes.length; i++) {

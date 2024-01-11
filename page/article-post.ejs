@@ -4,12 +4,120 @@
 
 <head>
     <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+    <style>
+        .ql-toolbar{
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
 </head>
 
-<body>
+<body data-language="<%=language_code %>">
     <%- include('../partial/page-includes.ejs') %>
-    <%- include('../partial/header.ejs', { language_code, userData }) %>
-    <!--Page Body-->
+
+    <!-- Include Quill style file -->
+    <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
+
+    <!-- Create an editor container -->
+    <div id="editor">
+        <h1>H1</h1>
+        <h2>H2</h2>
+        <h3>H3</h3>
+        <h4>H4</h4>
+        <h5>H5</h5>
+        <h6>H6</h6>
+        <br>
+        <p><strong>BOLD</strong> text</p>
+        <p><i>talics</i> text</p>
+        <p><u>underline</u> text</p>
+        <p><s>strike</s> text</p>
+        <br>
+        <p><span class="ql-formula" data-value="e^iπ + 1 = 0&#xFEFF; ">&#xFEFF;<span contenteditable="false"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>e</mi><mi>i</mi></msup><mi>π</mi><mo>+</mo><mn>1</mn><mo>=</mo><mn>0</mn><mtext>&#xFEFF;</mtext></mrow><annotation encoding="application/x-tex">e^iπ + 1 = 0&#xFEFF; </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.908em; vertical-align: -0.0833em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.8247em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right: 0.0359em;">π</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">1</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">0&#xFEFF;</span></span></span></span></span>&#xFEFF;</span> </p>
+        <br>
+        <blockquote>Life is like riding a bicycle. To keep your balance, you must keep moving. —— Albert Einstein's</blockquote>
+        <br>
+        <pre class="ql-syntax" spellcheck="false">printMessage("Hello, World!");</pre>
+        <br>
+        <p>The sky was painted in shades of <span style="color: rgb(0, 102, 204);">blue</span>, with a gentle breeze carrying scents of lavender and lilac. The grass beneath our feet shimmered in a lush <span style="color: rgb(0, 138, 0);">green </span>carpet, and the flowers bloomed in vibrant hues of <span style="color: rgb(230, 0, 0);">red</span>, <span style="color: rgb(255, 255, 0);">yellow</span>, and <span style="color: rgb(255, 142, 208);">pink</span>. As the sun began to set, the horizon transformed into warm tones of <span style="color: rgb(255, 153, 0);">orange</span>, <span style="color: rgb(178, 178, 0);">gold</span>, and <span style="color: rgb(153, 51, 255);">purple</span>. Nature's palette created a mesmerizing scene, with every color blending harmoniously to form a picturesque landscape.</p>
+    </div>
+
+    <!-- Include Quill library file -->
+    <script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
+
+    <!-- Initialize Quill editor -->
+    <script>
+    var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'],             // Toggle buttons
+        ['blockquote', 'code-block'],
+        [{ 'header': 1 }, { 'header': 2 }],                    // User-defined button values
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],          // Subscript/Superscript
+        [{ 'indent': '-1' }, { 'indent': '+1' }],              // Decrease indent/Increase indent
+        [{ 'direction': 'rtl' }],                              // Text direction
+        [{ 'size': ['small', false, 'large', 'huge'] }],       // User-defined dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'color': [] }, { 'background': [] }],               // Default dropdowns using theme-provided values
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        ['link', 'image', 'video'],                            // Add image, link, video buttons
+        ['clean'],                                             // Clear formatting
+        ['formula'],                                           // Math formula button
+    ];
+
+    var quill = new Quill('#editor', {
+        modules: {
+            toolbar: toolbarOptions,
+            formula: true                                       // Enable math formula plugin
+        },
+        theme: 'snow'
+    });
+
+    // Custom Quill module for setting image size when inserting
+    const CustomImageModule = Quill.import('formats/image');
+        class CustomImage extends CustomImageModule {
+            static create(value) {
+                const node = super.create(value);
+                const size = prompt('Enter image size (width x height)[Typ:number or max]:', 'max x max');
+                if (size) {
+                    const [width, height] = size.split('x');
+                    node.setAttribute('width', width);
+                    node.setAttribute('height', height);
+                }
+                return node;
+            }
+        }
+
+    // Register custom module
+    Quill.register(CustomImage);
+    </script>
+
+    <div class="post-settings">
+        <h1><%=lan_post_settings %></h1>
+        <input id="title" type="text" placeholder="<%=lan_post_title %>">
+        <input id="tags" type="text" placeholder="<%=lan_post_tags %>">      
+        <textarea id="description" placeholder="<%=lan_post_descriptions %>"></textarea>
+        <select id="language">
+            <option value="en"><%=lan_en %></option>
+            <option value="zh"><%=lan_zh %></option>
+            <option value="es"><%=lan_es %></option>
+        </select>
+        <h3><%=lan_post_cover %></h3>
+        <div id="cover-img" for="cover"><h1><input id="cover" type="file" accept="image/*"></h1><img id="cover-img-inner"></div>
+        <button id="upload"><%=lan_post_upload %></button>
+    </div>
+
+    <script>
+        var cover = document.getElementById('cover');
+        var coverImg = document.getElementById('cover-img-inner');
+        cover.addEventListener('change', function() {
+            var file = cover.files[0];
+            var reader = new FileReader();
+            reader.onload = function() {
+                coverImg.src = reader.result;
+            }
+            reader.readAsDataURL(file);
+        });
+    </script>
+    
     <%- include('../partial/footer.ejs') %>
     <%- include('../partial/mobile-navigation-bar.ejs') %>
 </body>

@@ -56,7 +56,8 @@ const config = {
             maxAge: 30 * 24 * 60 * 60 * 1000,
             secure: false, // cookie
         }
-    }
+    },
+    sendgridApiKey: "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"
 };
 
 module.exports = config;

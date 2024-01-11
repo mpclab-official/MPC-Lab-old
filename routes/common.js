@@ -46,7 +46,14 @@ const checkPageRedirect = (req, res, next) => {
                 next();
             }
         });
-    } else {
+    } else if (req.url === `/${req.params.language}/blog/post`) {
+        if (!req.session.userID) {
+            res.redirect(`/${req.params.language}/login`);
+        } else {
+            next();
+        }
+    }
+    else {
         next();
     }
 };

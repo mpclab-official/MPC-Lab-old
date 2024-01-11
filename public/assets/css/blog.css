@@ -1,0 +1,95 @@
+.article-card {
+    width: auto;
+    height: auto;
+    padding: 1%;
+    border-radius: 3px;
+    background-color: var(--card-bg-color);
+    box-shadow: none;
+}
+
+.article-card:hover {
+    background-color: var(--card-hover-bg-color);
+}
+
+.article-card>table {
+    width: 100%;
+}
+
+.article-card>table>tbody>tr>td>h1 {
+    margin: 0;
+    margin-left: 10px;
+    font-size: larger;
+}
+
+.article-card>table>tbody>tr>td>p {
+    margin: 0;
+    margin-left: 10px;
+    font-size: 0.79em;
+}
+
+.article-card>table>tbody>tr>td>p>span {
+    float: right;
+    margin-left: 5px;
+    padding: 1.5px;
+    border-radius: 3px;
+    color: var(--tag-text-color);
+    background-color: var(--tag-bg-color);
+}
+
+.article-card>table>tbody>tr>.image-td {
+    width: 120px;
+}
+
+.article-card>table>tbody>tr>td>.image-container {
+    float: right;
+    height: 75px;
+    width: 110px;
+    overflow: hidden;
+}
+
+.article-card>table>tbody>tr>td>.image-container>img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.article-button {
+    font-size: medium;
+    height: 35px;
+    width: auto;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: var(--button-bg-color);
+    color: var(--button-bg-color);
+    background-color: var(--button-text-color);
+}
+
+.article-button-this {
+    font-size: medium;
+    height: 35px;
+    width: auto;
+    border-radius: 5px;
+    border-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    background-color: var(--button-bg-color);
+}
+
+.post-article-button {
+    float: right;
+    font-size: medium;
+    height: 35px;
+    width: auto;
+    border-radius: 5px;
+    border-color: var(--button-bg-color);
+    color: var(--button-bg-color);
+    background-color: var(--button-text-color);
+}
+
+@media screen and (max-width: 650px) {
+
+    .article-card>table>tbody>tr>td>p>span {
+        display: none;
+    }
+
+}

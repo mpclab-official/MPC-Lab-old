@@ -18,6 +18,9 @@ var lan_en = {
         }
     ],
     translate: {
+        lan_en: "English",
+        lan_es: "Spanish",
+        lan_zh: "Chinese",
         lan_search: "Search",
         lan_login: "Login",
         lan_register: "Register",
@@ -89,6 +92,22 @@ var lan_en = {
         lan_user_id: "User-ID",
         lan_about: "About",
         lan_recommended: "Recommended",
+        lan_for_you: "For You",
+        lan_new: "New",
+        lan_post: "Post",
+        lan_articles: "Articles",
+        lan_views: "Views",
+        lan_likes: "Likes",
+        lan_post_settings: "Post Settings",
+        lan_post_title: "Title",
+        lan_post_tags: "Tags —— Use spaces to separate tags",
+        lan_post_descriptions: "Descriptions of the article...",
+        lan_post_cover: "Cover Image",
+        lan_post_upload: "Upload",
+        lan_blog_post_code0: "Post successful!",
+        lan_blog_post_code1: "Title need to be 10 to 40 characters.",
+        lan_blog_post_code2: "Tags need to be 1 to 8 tags, evry tag need to be 4 to 20 characters.",
+        lan_blog_post_code3: "Descriptions need to be 20 to 150 characters.",
     }
 };
 

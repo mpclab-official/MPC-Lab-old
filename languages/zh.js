@@ -18,6 +18,9 @@ var lan_zh = {
         }
     ],
     translate: {
+        lan_en: "英语",
+        lan_es: "西班牙语",
+        lan_zh: "中文",
         lan_search: "搜索",
         lan_login: "登录",
         lan_register: "注册",
@@ -89,6 +92,22 @@ var lan_zh = {
         lan_user_id: "用户ID",
         lan_about: "关于",
         lan_recommended: "推荐",
+        lan_for_you: "推荐",
+        lan_new: "最新",
+        lan_post: "发布文章",
+        lan_articles: "文章",
+        lan_views: "浏览",
+        lan_likes: "点赞",
+        lan_post_settings: "文章设置",
+        lan_post_title: "标题",
+        lan_post_tags: "标签 —— 使用空格分隔标签",
+        lan_post_descriptions: "文章描述...",
+        lan_post_cover: "封面图片",
+        lan_post_upload: "上传",
+        lan_blog_post_code0: "发布成功！",
+        lan_blog_post_code1: "标题需要为10到40个字符。",
+        lan_blog_post_code2: "标签需要为1到8个标签, 每个标签需要为4到20个字符。",
+        lan_blog_post_code3: "文章描述需要为20到100个字符。",
     }
 };
 

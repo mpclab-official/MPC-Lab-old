@@ -10,7 +10,9 @@ class Articles {
         author_id TEXT,
         title TEXT,
         content TEXT,
+        about TEXT,
         tags TEXT,
+        cover TEXT,
         language TEXT,
         publish_date TEXT,
         views INTEGER DEFAULT 0,
@@ -49,24 +51,52 @@ class Articles {
     }
 
     async addArticle(article, callback) {
+
+        let errorCodes = [];
+
+        if (!(article.title.length >= 10 && article.title.length <= 40)) {
+            errorCodes.push(1); // Invalid title length
+        }
+
+        if (!(article.tags.length >= 1 && article.tags.length <= 8)) {
+            errorCodes.push(2); // Invalid tags length
+        } else {
+            for (let tag of article.tags) {
+                if (!(tag.length >= 4 && tag.length <= 20)) {
+                    errorCodes.push(2); // Invalid tag length
+                    break;
+                }
+            }
+        }
+
+        if (!(article.about.length >= 20 && article.about.length <= 150)) {
+            errorCodes.push(3); // Invalid about length
+        }
+
+        if (errorCodes.length > 0) {
+            callback({ code: errorCodes });
+            return;
+        }
+
         // Generate a random ID and check if it already exists
         let newId;
         do {
             newId = this.generateRandomId();
         } while (await this.isIdExists(newId));
 
+        article.publish_date = new Date().toISOString();
+
         // Add a new article to the 'articles' table
-        const query = 'INSERT INTO articles (id, author_id, title, content, tags, language, publish_date, views, likes, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const query = 'INSERT INTO articles (id, author_id, title, content, about, tags, cover, language, publish_date, views, likes, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
         db.run(
             query,
-            [newId, article.author_id, article.title, article.content, JSON.stringify(article.tags), article.language, article.publish_date, 0, 0, JSON.stringify(article.comments)],
+            [newId, article.author_id, article.title, JSON.stringify(article.content), article.about, JSON.stringify(article.tags), article.cover, article.language, article.publish_date, 0, 0, JSON.stringify(article.comments)],
             function (err) {
                 if (err) {
-                    console.error('Error adding article:', err.message);
-                    callback(err, null);
+                    callback({ code: [-1], message: err.message });
                 } else {
-                    callback(null, { id: newId });
+                    callback({ code: [0], id: newId });
                 }
             }
         );
@@ -77,10 +107,58 @@ class Articles {
         const query = 'SELECT * FROM articles ORDER BY publish_date DESC';
         db.all(query, (err, articles) => {
             if (err) {
-                console.error('Error fetching articles:', err.message);
-                callback(err, null);
+                callback({ code: [-1], message: err.message });
             } else {
-                callback(null, articles);
+                if (articles && articles.length > 0) {
+                    articles.forEach(article => {
+                        article.content = JSON.parse(article.content);
+                        article.tags = JSON.parse(article.tags);
+                        article.comments = JSON.parse(article.comments);
+                    });
+                }
+                callback({ code: [0], articles });
+            }
+        });
+    }
+
+    // Get paginated articles
+    getPaginatedArticles(page, pageSize, callback) {
+        const offset = (page - 1) * pageSize;
+        const query = `SELECT * FROM articles ORDER BY publish_date DESC LIMIT ? OFFSET ?`;
+
+        db.all(query, [pageSize, offset], (err, articles) => {
+            if (err) {
+                callback({ code: [-1], message: err.message });
+            } else {
+                if (articles && articles.length > 0) {
+                    articles.forEach(article => {
+                        article.content = JSON.parse(article.content);
+                        article.tags = JSON.parse(article.tags);
+                        article.comments = JSON.parse(article.comments);
+                    });
+                }
+                callback({ code: [0], articles });
+            }
+        });
+    }
+
+    // Get paginated articles based on publish date within a date range
+    getPaginatedArticlesByDate(page, pageSize, startDate, callback) {
+        const offset = (page - 1) * pageSize;
+        const query = 'SELECT * FROM articles WHERE publish_date <= ? ORDER BY publish_date DESC LIMIT ? OFFSET ?';
+
+        db.all(query, [startDate, pageSize, offset], (err, articles) => {
+            if (err) {
+                callback({ code: [-1], message: err.message });
+            } else {
+                if (articles && articles.length > 0) {
+                    articles.forEach(article => {
+                        article.content = JSON.parse(article.content);
+                        article.tags = JSON.parse(article.tags);
+                        article.comments = JSON.parse(article.comments);
+                    });
+                }
+                callback({ code: [0], articles });
             }
         });
     }
@@ -90,10 +168,12 @@ class Articles {
         const query = 'SELECT * FROM articles WHERE id = ?';
         db.get(query, [articleId], (err, article) => {
             if (err) {
-                console.error('Error fetching article by ID:', err.message);
-                callback(err, null);
+                callback({ code: [-1], message: err.message });
             } else {
-                callback(null, article);
+                article.content = JSON.parse(article.content);
+                article.tags = JSON.parse(article.tags);
+                article.comments = JSON.parse(article.comments);
+                callback({ code: [0], article });
             }
         });
     }
@@ -103,64 +183,131 @@ class Articles {
         const query = 'DELETE FROM articles WHERE id = ?';
         db.run(query, [articleId], (err) => {
             if (err) {
-                console.error('Error deleting article:', err.message);
-                callback(err);
+                callback({ code: [-1], message: err.message });
             } else {
-                callback(null);
+                callback({ code: [0] });
             }
         });
     }
 
     // Update an article by ID
     updateArticle(articleId, updatedArticle, callback) {
+
+        let errorCodes = [];
+
+        if (!(updatedArticle.title.length >= 10 && updatedArticle.title.length <= 40)) {
+            errorCodes.push(1); // Invalid title length
+        }
+
+        if (!(updatedArticle.tags.length >= 1 && updatedArticle.tags.length <= 8)) {
+            errorCodes.push(2); // Invalid tags length
+        }
+
+        if (!(updatedArticle.about.length >= 20 && updatedArticle.about.length <= 150)) {
+            errorCodes.push(3); // Invalid about length
+        }
+
+        if (errorCodes.length > 0) {
+            callback({ code: errorCodes });
+            return;
+        }
+
         const query = 'UPDATE articles SET title = ?, content = ?, tags = ?, language = ? WHERE id = ?';
         db.run(query, [updatedArticle.title, updatedArticle.content, JSON.stringify(updatedArticle.tags), updatedArticle.language, articleId], (err) => {
             if (err) {
-                console.error('Error updating article:', err.message);
-                callback(err);
+                callback({ code: [-1], message: err.message });
             } else {
-                callback(null);
+                callback({ code: [0] });
             }
         });
     }
 
-    // Find articles by tag
-    findArticlesByTag(tag, callback) {
-        const query = 'SELECT * FROM articles WHERE instr(tags, ?) > 0';
-        db.all(query, [tag], (err, articles) => {
+    // Find paginated articles by tag starting from a specific date
+    findPaginatedArticlesByTag(tag, page, pageSize, startDate, callback) {
+        const offset = (page - 1) * pageSize;
+        const query = 'SELECT * FROM articles WHERE instr(tags, ?) > 0 AND publish_date <= ? ORDER BY publish_date DESC LIMIT ? OFFSET ?';
+
+        db.all(query, [tag, startDate, pageSize, offset], (err, articles) => {
             if (err) {
-                console.error('Error finding articles by tag:', err.message);
-                callback(err, null);
+                callback({ code: [-1], message: err.message });
             } else {
-                callback(null, articles);
+                if (articles && articles.length > 0) {
+                    articles.forEach(article => {
+                        article.content = JSON.parse(article.content);
+                        article.tags = JSON.parse(article.tags);
+                        article.comments = JSON.parse(article.comments);
+                    });
+                }
+                callback({ code: [0], articles });
             }
         });
     }
 
-    // Fuzzy search articles by user interests
-    fuzzySearchArticlesByInterests(interests, callback) {
+    // Fuzzy search paginated articles by user interests starting from a specific date
+    fuzzySearchPaginatedArticlesByInterests(interests, page, pageSize, startDate, callback) {
+        const offset = (page - 1) * pageSize;
         const searchQuery = interests.map(interest => `instr(tags, '${interest}') > 0`).join(' OR ');
-        const query = `SELECT * FROM articles WHERE ${searchQuery}`;
+        const query = `SELECT * FROM articles WHERE ${searchQuery} AND publish_date <= ? ORDER BY publish_date DESC LIMIT ? OFFSET ?`;
 
-        db.all(query, (err, articles) => {
+        db.all(query, [startDate, pageSize, offset], (err, articles) => {
             if (err) {
-                console.error('Error fuzzy searching articles by interests:', err.message);
-                callback(err, null);
+                callback({ code: [-1], message: err.message });
             } else {
-                callback(null, articles);
+                if (articles && articles.length > 0) {
+                    articles.forEach(article => {
+                        article.content = JSON.parse(article.content);
+                        article.tags = JSON.parse(article.tags);
+                        article.comments = JSON.parse(article.comments);
+                    });
+                }
+                callback({ code: [0], articles });
             }
         });
     }
 
-    // Basic fuzzy search algorithm for articles
-    fuzzySearchArticles(keyword, callback) {
-        const query = 'SELECT * FROM articles WHERE instr(title, ?) > 0 OR instr(content, ?) > 0';
-        db.all(query, [keyword, keyword], (err, articles) => {
+    // Basic fuzzy search paginated algorithm for articles
+    fuzzySearchPaginatedArticles(keyword, page, pageSize, startDate, callback) {
+        const offset = (page - 1) * pageSize;
+        const query = 'SELECT * FROM articles WHERE (instr(title, ?) > 0 OR instr(content, ?) > 0) AND publish_date <= ? ORDER BY publish_date DESC LIMIT ? OFFSET ?';
+
+        db.all(query, [keyword, keyword, startDate, pageSize, offset], (err, articles) => {
             if (err) {
-                console.error('Error fuzzy searching articles:', err.message);
-                callback(err, null);
+                callback({ code: [-1], message: err.message });
             } else {
-                callback(null, articles);
+                if (articles && articles.length > 0) {
+                    articles.forEach(article => {
+                        article.content = JSON.parse(article.content);
+                        article.tags = JSON.parse(article.tags);
+                        article.comments = JSON.parse(article.comments);
+                    });
+                }
+                callback({ code: [0], articles });
+            }
+        });
+    }
+
+    // Function to increment likes for an article
+    async incrementLikes(articleId, callback) {
+        const query = 'UPDATE articles SET likes = likes + 1 WHERE id = ?';
+
+        db.run(query, [articleId], (err) => {
+            if (err) {
+                callback({ code: [-1], message: `Error incrementing likes for article with ID ${articleId}: ${err.message}` });
+            } else {
+                callback({ code: [0] });
+            }
+        });
+    }
+
+    // Function to increment views for an article
+    async incrementViews(articleId, callback) {
+        const query = 'UPDATE articles SET views = views + 1 WHERE id = ?';
+
+        db.run(query, [articleId], (err) => {
+            if (err) {
+                callback({ code: [-1], message: `Error incrementing views for article with ID ${articleId}: ${err.message}` });
+            } else {
+                callback({ code: [0] });
             }
         });
     }
@@ -174,109 +321,3 @@ class Articles {
 
 // Export Articles object
 module.exports = new Articles();
-
-// Example usage:
-// const articles = new Articles();
-
-/*setTimeout(() => {
-    // Example: Add a new article
-    const newArticle1 = {
-        author_id: 'user123',
-        title: 'Introduction to Quantum Entanglement',
-        content: 'In quantum mechanics, entanglement is a phenomenon where particles become correlated...',
-        tags: ['quantum', 'physics'],
-        language: 'en',
-        publish_date: new Date().toISOString(),
-        comments: [
-            { author: 'commenter1', content: 'Interesting topic!' },
-            { author: 'commenter2', content: 'I would love to learn more.' }
-        ]
-    };
-
-    articles.addArticle(newArticle1, (err, addedArticle1) => {
-        if (err) {
-            console.error('Error adding new article 1:', err);
-        } else {
-            console.log('Added article 1:', addedArticle1);
-
-            // Example: Add another new article
-            const newArticle2 = {
-                author_id: 'user456',
-                title: 'Newton\'s Laws of Motion',
-                content: 'Sir Isaac Newton formulated three laws of motion that describe the relationship...',
-                tags: ['physics', 'laws', 'motion'],
-                language: 'en',
-                publish_date: new Date().toISOString(),
-                comments: [
-                    { author: 'commenter3', content: 'Classic physics content!' },
-                    { author: 'commenter1', content: 'Newton was a genius.' }
-                ]
-            };
-
-            articles.addArticle(newArticle2, (err, addedArticle2) => {
-                if (err) {
-                    console.error('Error adding new article 2:', err);
-                } else {
-                    console.log('Added article 2:', addedArticle2);
-
-                    // Example: Update an article by ID
-                    const articleIdToUpdate = addedArticle2.id; // Use the ID of the second added article
-                    const updatedArticleData = {
-                        title: 'Updated Title',
-                        content: 'Updated content.',
-                        tags: ['量子纠缠', '裙子'],
-                        language: 'en'
-                    };
-                    articles.updateArticle(articleIdToUpdate, updatedArticleData, (err) => {
-                        if (err) {
-                            console.error(`Error updating article with ID ${articleIdToUpdate}:`, err);
-                        } else {
-                            console.log(`Updated article with ID ${articleIdToUpdate}`);
-
-                            // Example: Find articles by tag
-                            const tagToFind = 'tag1';
-                            articles.findArticlesByTag(tagToFind, (err, foundArticles) => {
-                                if (err) {
-                                    console.error(`Error finding articles by tag ${tagToFind}:`, err);
-                                } else {
-                                    console.log(`Articles with tag ${tagToFind}:`, foundArticles);
-
-                                    // Example: Fuzzy search articles by user interests
-                                    const userInterests = ["tag43", "tag12", "tage78"];
-                                    articles.fuzzySearchArticlesByInterests(userInterests, (err, foundArticles) => {
-                                        if (err) {
-                                            console.error('Error fuzzy searching articles by interests:', err);
-                                        } else {
-                                            console.log('Articles matching user interests:', foundArticles);
-
-                                            // Example: Fuzzy search articles by keyword
-                                            const searchKeyword = 'tag78';
-                                            articles.fuzzySearchArticles(searchKeyword, (err, foundArticles) => {
-                                                if (err) {
-                                                    console.error(`Error fuzzy searching articles by keyword '${searchKeyword}':`, err);
-                                                } else {
-                                                    console.log(`Articles matching keyword '${searchKeyword}':`, foundArticles);
-
-                                                    // Example: Delete an article by ID
-                                                    const articleIdToDelete = addedArticle1.id; // Use the ID of the first added article
-                                                    articles.deleteArticle(articleIdToDelete, (err) => {
-                                                        if (err) {
-                                                            console.error(`Error deleting article with ID ${articleIdToDelete}:`, err);
-                                                        } else {
-                                                            console.log(`Deleted article with ID ${articleIdToDelete}`);
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-        }
-    });
-
-}, 1000);*/

@@ -18,6 +18,9 @@ var lan_es = {
         }
     ],
     translate: {
+        lan_en: "Inglés",
+        lan_es: "Español",
+        lan_zh: "Chino",
         lan_search: "Buscar",
         lan_login: "Iniciar sesión",
         lan_register: "Registrarse",
@@ -89,6 +92,22 @@ var lan_es = {
         lan_user_id: "ID de usuario",
         lan_about: "Acerca de",
         lan_recommended: "Recomendado",
+        lan_for_you: "Recomendado",
+        lan_new: "Nuevo",
+        lan_post: "Publicar",
+        lan_articles: "Artículos",
+        lan_views: "Vistas",
+        lan_likes: "Me gusta",
+        lan_post_settings: "Configuración de publicaciones",
+        lan_post_title: "Título",
+        lan_post_tags: "Etiquetas —— Utilice espacios para separar etiquetas",
+        lan_post_descriptions: "Descripciones del artículo...",
+        lan_post_cover: "Imagen de portada",
+        lan_post_upload: "Subir",
+        lan_blog_post_code0: "¡Publicación exitosa!",
+        lan_blog_post_code1: "El título debe tener entre 10 y 40 caracteres.",
+        lan_blog_post_code2: "Las etiquetas deben ser de 1 a 8 etiquetas, cada etiqueta debe tener entre 4 y 20 caracteres.",
+        lan_blog_post_code3: "Las descripciones deben tener entre 20 y 150 caracteres.",
     }
 };
 

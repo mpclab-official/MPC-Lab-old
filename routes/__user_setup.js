@@ -35,6 +35,8 @@ router.route('/:language/user-setup')
             const UserData = params.UserData;
             const userID = req.session.userID;
 
+            UserData.joinDate = new Date().toISOString();
+
             // If the user uploads an avatar file
             if (UserData.userAvatar) {
                 // Extract MIME type

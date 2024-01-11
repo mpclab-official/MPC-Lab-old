@@ -6,10 +6,57 @@
     <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
 </head>
 
-<body>
+<body data-language="<%=language_code %>" data-views="<%=lan_views %>" data-likes="<%=lan_likes %>">
     <%- include('../partial/page-includes.ejs') %>
     <%- include('../partial/header.ejs', { language_code, userData }) %>
-    <!--Page Body-->
+    <main>
+        <div class="page-main-content">
+            <div class="left-side-block" id="leftScroll">
+                <div id="articles" class="block-inner-content" style="background-color: var(--card-bg-color);">
+                    <div class="card" style="box-shadow: none;">
+                        <button onclick="changePage('for_you');" id="for_you" class="article-button-this"><%=lan_for_you %></button>
+                        <button onclick="changePage('new');" id="new" class="article-button"><%=lan_new %></button>
+                        <button class="post-article-button" onclick="window.open(`/${languageCode}/blog/post`);"><%=lan_post %></button>
+                    </div>
+                    <hr style="margin-top: 1px;">
+                </div>
+            </div>
+            <div class="right-side-block" id="rightScroll">
+                <div class="block-inner-content">
+
+                </div>
+            </div>
+        </div>
+        <script>
+            function clearArticles() {
+                let Articles = document.getElementsByClassName("article-card");
+                while (Articles.length > 0) {
+                    Articles[0].remove();
+                }
+                page = 1;
+            }
+            let currentPage = 'for_you';
+            function changePage(targetPage) {
+                if (targetPage == 'for_you' && currentPage != 'for_you') {
+                    clearArticles();
+                    ALLarticlesID = [];
+                    getArticles(page, false);
+                    currentPage = 'for_you';
+                    newArticle = false;
+                    document.getElementById("for_you").className = "article-button-this";
+                    document.getElementById("new").className = "article-button";
+                } else if (targetPage == 'new' && currentPage != 'new') {
+                    clearArticles();
+                    ALLarticlesID = [];
+                    getArticles(page, true);
+                    currentPage = 'new';
+                    newArticle = true;
+                    document.getElementById("for_you").className = "article-button";
+                    document.getElementById("new").className = "article-button-this";
+                }
+            }
+        </script>
+    </main>
     <%- include('../partial/footer.ejs') %>
     <%- include('../partial/mobile-navigation-bar.ejs') %>
 </body>

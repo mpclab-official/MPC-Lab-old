@@ -150,7 +150,6 @@ function sendData() {
             }
             // If successful, redirect or perform other actions
             return response.json(); // This returns a Promise
-            // window.location.href = '/login'; // Redirect to the dashboard after successful registration
         })
         .then(json => {
             if (json.code.includes(0)) {

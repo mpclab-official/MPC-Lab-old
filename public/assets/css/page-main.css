@@ -8,3 +8,43 @@ body {
     zoom: 100%;
     background-color: var(--main-bg-color);
 }
+
+@media screen and (max-width: 425px) {
+
+    html,
+    body {
+        zoom: 95%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+
+    html,
+    body {
+        zoom: 90%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    html,
+    body {
+        zoom: 85%;
+    }
+}
+
+@media screen and (max-width: 280px) {
+
+    html,
+    body {
+        zoom: 80%;
+    }
+}
+
+@media screen and (max-width: 240px) {
+
+    html,
+    body {
+        zoom: 75%;
+    }
+}

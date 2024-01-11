@@ -1,7 +1,8 @@
+const config = require('../config');
 const nodemailer = require('nodemailer');
 
 // SendGrid API key
-const sendgridApiKey = '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';
+const sendgridApiKey = config.sendgridApiKey;
 
 class EmailVerification {
   constructor() {

@@ -18,6 +18,19 @@
 <script type="text/javascript" src="/assets/js/user-setup.js"></script>
 <% } %>
 
+<% if(currentPage=="blog" || currentPage=="home"){ %>
+<script type="text/javascript" src="/assets/js/get-articles.js"></script>
+<% } %>
+
+<% if(currentPage=="article-post") { %>
+<link rel="stylesheet" href="/assets/css/article-post.css">
+<script type="text/javascript" src="/assets/js/post-article.js"></script>
+<% } %>
+
+<% if(currentPage=="article") { %>
+<link rel="stylesheet" href="/assets/css/article-side-bar.css">
+<% } %>
+
 <script type="text/javascript" src="/assets/js/page-left-right-scroll.js"></script>
 
 <%- include('./page-style.ejs', { pageStyle }) %>
