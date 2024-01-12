@@ -40,12 +40,21 @@ router.route('/:language/blog/article/:id')
 
                     if (!err) {
                         if (json.code.includes(0)) {
+                            // provent to increase view count when user refresh the page
+                            if (!req.session.viewedArticles) req.session.viewedArticles = [];
+                            if (!req.session.viewedArticles.includes(req.params.id)) {
+                                req.session.viewedArticles.push(req.params.id);
+                                Articles.incrementViews(req.params.id, (err) => {
+                                    if (err) {
+                                        console.log(err);
+                                    }
+                                });
+                            }
                             res.render(path.join(config.path, 'page', 'article'), {
                                 title: config.name, language_code: req.params.language, favicon: config.favicon, logo: config.logo, logo_s: config.logo_s, background_image: config.background_image, navigation_translate_pack, ...languages_translate_pack, pageStyle: {
                                     colorTheme: userData.colorTheme,
                                 }, userData, postID: req.params.id, article: json.article, author
                             });
-                            Articles.incrementViews(req.params.id, () => { });
                         }
                     }
 

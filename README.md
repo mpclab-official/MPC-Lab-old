@@ -1,3 +1,5 @@
+<img src="http://mathscichem.com/assets/svg/-logo-light.svg" height="200">
+
 # MPC Lab Development Documentation
 
 This is the development documentation for MPC Lab, including user guides, versions, configurations, and other information...
@@ -89,6 +91,16 @@ The configuration information is located in the `config.js` configuration file.
 - sendgridApiKey - sendgridApiKey for Email API
 
 ## Versions
+
+### [V2.2.1-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.1-dev)
+
+- Fixed the issue with incorrect display and navigation of articles on the homepage
+
+- Modify the logic of pageviews to increase by up to 1 per session
+
+Contributors:
+
+- [Tony Kan](#tony-kan)
 
 ### [V2.2.0-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.0-dev)
 

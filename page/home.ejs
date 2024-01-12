@@ -6,7 +6,7 @@
     <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
 </head>
 
-<body>
+<body data-language="<%=language_code %>" data-views="<%=lan_views %>" data-likes="<%=lan_likes %>">
     <%- include('../partial/page-includes.ejs') %>
     <%- include('../partial/header.ejs', { language_code, userData }) %>
     <main>
@@ -24,7 +24,7 @@
                     </div>
                     <% } %>
                     <div id="articles" class="card">
-                        <h1 class="text-left"><%=lan_articles %></h1>
+                        <h2 class="text-left"><%=lan_articles %></h2>
                     </div>
                 </div>
             </div>
