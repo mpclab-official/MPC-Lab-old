@@ -1,3 +1,6 @@
+// zh.js
+// This is a language file that contains the code for the Chinese language.
+
 var lan_zh = {
     navigation: [
         {

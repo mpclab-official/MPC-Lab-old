@@ -1,3 +1,6 @@
+// __user_setup.js
+// This is a router file that contains the code for the user setup page.
+
 const {
     fs,
     router,

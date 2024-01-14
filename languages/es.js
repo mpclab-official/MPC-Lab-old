@@ -1,3 +1,6 @@
+// es.js
+// This is a language file that contains the code for the Spanish language.
+
 var lan_es = {
     navigation: [
         {

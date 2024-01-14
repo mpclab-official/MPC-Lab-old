@@ -1,4 +1,4 @@
-<img src="http://mathscichem.com/assets/svg/-logo-light.svg" height="200">
+<img src="http://mathscichem.com/assets/svg/-logo-light.svg" style="max-hight='200px'">
 
 # MPC Lab Development Documentation
 
@@ -48,49 +48,108 @@ forever start server.js
 disown
 ```
 
-### Auth Management Module
-
-Start the Auth management module and connect to the Auth database.
-
-```shell
-node auth
-```
-
-Stop the connection to the Auth module and Auth database with `^C`.
-
 ## Configuration
+
+```javascript
+const config = {
+  // Project name
+  name: "MPC Lab",
+
+  // Path to favicon
+  favicon: "/favicon.ico",
+
+  // Path to main logo
+  logo: "/assets/svg/-logo-light.svg",
+
+  // Path to small version of the logo
+  logo_s: "/assets/svg/-logo-light-s.svg",
+
+  // Path to background image
+  background_image: "/assets/img/background.svg",
+
+  // Absolute path to the project directory
+  path: __dirname,
+
+  // Project version
+  version: "2.2.2-dev",
+
+  // Hostname configuration (auto to automatically detect)
+  hostname: "auto",
+
+  // Port to run the application on
+  port: 80,
+
+  // Flag to open the test page during startup
+  openTestPage: true,
+
+  // Supported languages with their code and display name
+  languages: [
+    ["en", "English"],
+    ["zh", "简体中文"],
+    ["es", "Español"],
+  ],
+
+  // Logging configuration
+  log: {
+    // Path to log files directory
+    path: `${__dirname}/log/logs`,
+
+    // Web requests logging configuration
+    webRequestsLog: {
+      logging: true,
+      typ: "combined" /* combined common dev short tiny */,
+      // interval: "1d",
+      onlyError: true,
+      maxFiles: 0,
+      encoding: "utf-8",
+      folderName: "webRequestsLogs",
+      fileName: "errorRequests.log",
+    },
+
+    // Server start logging configuration
+    serverStartLog: {
+      logging: true,
+      folderName: "serverStartLogs",
+      fileName: "serverStart.log",
+    },
+  },
+
+  // Database file paths
+  db: {
+    auth: `${__dirname}/db/auth.db`,
+    user: `${__dirname}/db/user.db`,
+    articles: `${__dirname}/db/articles.db`,
+  },
+
+  // Session configuration
+  session: {
+    secret: "test-secret-key",
+    resave: false,
+    saveUninitialized: true,
+
+    // Cookie configuration
+    cookie: {
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      secure: false, // Set to true if using HTTPS
+    },
+  },
+
+  // SendGrid API key for email functionality
+  sendgridApiKey: "", // Add your SendGrid API key here
+};
+```
 
 The configuration information is located in the `config.js` configuration file.
 
-- name - The name of the project
-- favicon - Website favicon
-- logo - Website logo
-- logo_s - Website small logo
-- background_image - Website background image
-- version - Version number
-- hostname - Server IP
-- port - Port number
-- startDelay - Startup delay
-- openTestPage - Open the test page in the default browser
-- languages - Language configuration, please add language packs in the `languages` folder of the project
-- log - Server log configuration
-  - requestsLog - Client request log
-    - logging - Whether to log client requests
-    - typ - Log type
-    - onlyError - Only log error requests (4**, 5**)
-    - maxFiles - Maximum number of rotating files
-    - encoding - Encoding format
-    - folderName - Log folder name
-    - fileName - Main log file name
-- db - Database configuration
-  - auth - Location of the auth database
-  - user - Location of the user database
-  - articles - Location of the articles database
-- session - Session configuration
-  - secret - Session secret key
-- sendgridApiKey - sendgridApiKey for Email API
-
 ## Versions
+
+### [V2.2.2-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.2-dev)
+
+- Organize project structure
+
+Contributors:
+
+- [Tony Kan](#tony-kan)
 
 ### [V2.2.1-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.1-dev)
 

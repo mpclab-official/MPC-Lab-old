@@ -1,3 +1,6 @@
+// en.js
+// This is a language file that contains the code for the English language.
+
 var lan_en = {
     navigation: [
         {

@@ -1,108 +1,140 @@
 // server.js
+// This is the main file of the server.
+
+// Load config file
+const config = require(`${__dirname}/config.js`);
 
 // Import required modules
-const express = require('express');
-const session = require('express-session');
-const path = require('path');
-const bodyParser = require('body-parser');
-const routes = require('./routes/routes.js');
-const config = require(`${__dirname}/config.js`);
-const startLog = require('./log/recorder.js');
-const Auth = require(`${config.db.auth}/auth.js`);
-const User = require(`${config.db.user}/user.js`);
-const Articles = require(`${config.db.articles}/articles.js`);
+const express = require("express"); // call express
+const session = require("express-session"); // call express-session
+const path = require("path"); // call path
+const bodyParser = require("body-parser"); // call body-parser
+
+// Load routes
+const routes = require("./routes/routes.js"); // call routes.js
+
+// Load database modules
+const Auth = require(`./auth.js`);
+const User = require(`./user.js`);
+const Articles = require(`./articles.js`);
 
 // Create express application
 const app = express();
 const port = config.port;
-const hostname = config.hostname;
 
-// Configure session middleware
-app.use(session({
-  ...config.session
-}));
+// Get hostname
+let hostname;
+if (config.hostname == "auto") {
+  const os = require("os");
 
-// Use body-parser middleware
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+  function getIpAddress() {
+    let ifaces = os.networkInterfaces();
+    for (let dev in ifaces) {
+      let iface = ifaces[dev];
+      for (let i = 0; i < iface.length; i++) {
+        let { family, address, internal } = iface[i];
+        if (family === "IPv4" && address !== "127.0.0.1" && !internal) {
+          if (address) {
+            return address;
+          }
+        } else if (address === "127.0.0.1") return "127.0.0.1";
+      }
+    }
+  }
+  hostname = getIpAddress();
+} else hostname = config.hostname;
 
-// Function to start the server
-function startServer() {
-  let startTable = new Object();
-  console.clear();
+// Server class
+class Server {
+  static start() {
+    // Use middlewares
 
-  console.log("MPC Lab web-server is starting...");
+    // Configure session middleware
+    app.use(
+      session({
+        ...config.session,
+      })
+    );
 
-  let startTime = new Date();
+    // Use body-parser middleware
+    app.use(
+      bodyParser.json({
+        limit: "10mb",
+      })
+    );
+    app.use(
+      bodyParser.urlencoded({
+        limit: "10mb",
+        extended: true,
+      })
+    );
 
-  // Header
-  startTable.Name = config.name;
-  startTable.Version = config.version;
-  startTable.Start_Time = `${startTime.getFullYear()}/${(startTime.getMonth() + 1)}/${startTime.getDay()} - ${startTime.getHours()}:${startTime.getMinutes()}:${startTime.getSeconds()}.${startTime.getMilliseconds()}`;
+    // startLog
+    const webRequestsLog = require("./log/webRequestsLog.js");
 
-  // startLog
-  startTable.Web_Requests_Logs = startLog(app);
+    // Web requests logger
+    webRequestsLog(app);
 
-  // Serve static files
-  app.use(express.static(path.join(config.path, '/public')));
+    // Serve static files
+    app.use(express.static(path.join(__dirname, "public")));
 
-  // Set view engine to ejs and use routes
-  app.use('/', routes);
-  app.set('view engine', 'ejs');
+    // Set view engine to ejs and use routes
+    app.use("/", routes);
+    app.set("view engine", "ejs");
 
-  // Start the server
-  app.listen(port, hostname, () => {
-    console.log(`MPC Lab web-server is running on host ${hostname}, port ${port}`, ` | ${hostname}:${port}`);
-    if (config.openTestPage) openTestPage(`http://${hostname}:${port}`);
-  });
+    // Start the server
+    app.listen(port, hostname, () => {
+      console.log(
+        `MPC Lab web-server is running on host ${hostname}, port ${port}`,
+        ` | ${hostname}:${port}`
+      );
+      if (config.openTestPage) openTestPage(`http://${hostname}:${port}`);
+    });
 
-  console.table(startTable);
+    // Process
 
-  // Close database connections when the application exits
-  process.on('exit', () => {
-    console.log('Closing database connection...');
-    console.log(`Auth database closed: ${Auth.close()}`);
-    console.log(`User database closed: ${User.close()}`);
-    console.log(`Articles database closed: ${Articles.close()}`);
-    console.log('Database connection closed!');
-    console.log('MPC Lab web-server is closed!');
-    console.log('Goodbye!');
-  });
+    // Close database connections when the application exits
+    process.on("exit", () => {
+      console.log("Closing database connection...");
+      console.log(`Auth database closed: ${Auth.close()}`);
+      console.log(`User database closed: ${User.close()}`);
+      console.log(`Articles database closed: ${Articles.close()}`);
+      console.log("Database connection closed!");
+      console.log("MPC Lab web-server is closed!");
+      console.log("Goodbye!");
+    });
 
-  // Handle application termination with Ctrl+C
-  process.on('SIGINT', () => {
-    process.exit();
-  });
+    // Handle application termination with Ctrl+C
+    process.on("SIGINT", () => {
+      process.exit();
+    });
 
-  process.on('uncaughtException', (err) => {
-    console.error('Uncaught Exception:', err);
-    process.exit(1);
-  });
+    // Error handling
+    process.on("uncaughtException", (err) => {
+      console.error("Uncaught Exception:", err);
+      process.exit(1);
+    });
 
-  process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-    process.exit(1);
-  });
+    // Promise rejection handling
+    process.on("unhandledRejection", (reason, promise) => {
+      console.error("Unhandled Rejection at:", promise, "reason:", reason);
+      process.exit(1);
+    });
+  }
+
+  static stop() {
+    // Stop the server
+    app.close(() => {
+      console.log("Server stopped");
+    });
+  }
 }
 
 // Function to open a test page in the default browser
 function openTestPage(url) {
-  var c = require('child_process');
+  var c = require("child_process");
   c.exec(`start ${url}`);
 }
 
-// Function to delay server start
-function preStart() {
-  var timesRun = 0;
-  var interval = setInterval(function () {
-    timesRun += 1;
-    console.log("Server start in " + (config.startDelay - timesRun) + "...");
-    if (timesRun === config.startDelay) {
-      clearInterval(interval);
-      startServer();
-    }
-  }, 1000);
-}
-
-// Call the preStart function to start the server
-preStart();
+// Start the server
+Server.start();

@@ -1,226 +1,314 @@
-const config = require(`./config.js`);
-const Auth = require(`${config.db.auth}/auth.js`);
+// auth.js
+// This is a database file that contains the code for the authentication system.
 
-const rl = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// Load config file
+const config = require(`${__dirname}/config.js`);
 
-const PAGE_SIZE = 5;
+// Load fs module
+const fs = require("fs");
 
-function addUser() {
-    rl.question('Enter username: ', (username) => {
-        rl.question('Enter email: ', (email) => {
-            rl.question('Enter password: ', (password) => {
-                Auth.register(username, email, password, (code, userId) => {
-                    if (code.includes(0)) {
-                        console.log('User added successfully! UserID:', userId);
-                    }
-                    if (code.includes(1)) {
-                        console.error('Invalid username format.');
-                    }
-                    if (code.includes(2)) {
-                        console.error('Invalid email format.');
-                    }
-                    if (code.includes(3)) {
-                        console.error('Invalid password format.');
-                    }
-                    if (code.includes(4)) {
-                        console.error('Username already exists.');
-                    }
-                    if (code.includes(5)) {
-                        console.error('Email already exists.');
-                    }
-                    if (code.includes(6)) {
-                        console.error('Unknown error occurred.');
-                    }
-                    mainMenu();
-                });
-            });
-        });
-    });
+// Extract the directory path from the database path
+const dbDirectory = `${config.db.auth.replace(/\/[^/]+$/, "")}`;
+
+// Create the directory if it doesn't exist
+if (!fs.existsSync(dbDirectory)) {
+  fs.mkdirSync(dbDirectory, { recursive: true });
 }
 
-function listUsers(page) {
-    const offset = (page - 1) * PAGE_SIZE;
-    Auth.getAllUsers((err, users) => {
-        if (err) {
-            console.error('Error listing users:', err.message);
-        } else {
-            console.log('\n=== User List ===');
-            console.table(users.slice(offset, offset + PAGE_SIZE));
+// Import sqlite3 module
+const sqlite3 = require("sqlite3").verbose();
+
+// Create database connection
+const db = new sqlite3.Database(`${config.db.auth}`);
+
+class Auth {
+  constructor() {
+    // Create users table if it doesn't exist
+    db.serialize(() => {
+      db.run(
+        "CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, username TEXT, email TEXT, password TEXT, banned BOOLEAN DEFAULT 0)"
+      );
+      console.log("Database connected!");
+    });
+  }
+
+  // User registration function
+  register(username, email, password, callback) {
+    // Convert username and email to lowercase
+    const lowercaseUsername = username.toLowerCase();
+    const lowercaseEmail = email.toLowerCase();
+
+    // Check username and email format
+    const usernameRegex = /^[a-zA-Z0-9_]{7,21}$/; // Username must be 7 to 21 characters and can only contain letters, numbers, and underscores
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email format validation
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/; // Password format
+
+    let errors = [];
+
+    if (!usernameRegex.test(lowercaseUsername)) {
+      errors.push(1); // Invalid username format
+    }
+
+    if (!emailRegex.test(lowercaseEmail)) {
+      errors.push(2); // Invalid email format
+    }
+
+    if (!passwordRegex.test(password)) {
+      errors.push(3); // Invalid password format
+    }
+
+    // Check if username and email already exist
+    db.get(
+      "SELECT * FROM users WHERE username = ?",
+      [lowercaseUsername],
+      (err, rowUsername) => {
+        if (rowUsername) {
+          errors.push(4); // Username already exists
         }
-        mainMenu();
-    });
-}
 
-function findUser() {
-    rl.question('Enter username or email to search: ', (searchTerm) => {
-        Auth.getAllUsers((err, users) => {
-            if (err) {
-                console.error('Error finding user:', err.message);
+        db.get(
+          "SELECT * FROM users WHERE email = ?",
+          [lowercaseEmail],
+          (err, rowEmail) => {
+            if (rowEmail) {
+              errors.push(5); // Email already exists
+            }
+
+            if (errors.length > 0) {
+              callback(errors);
             } else {
-                const filteredUsers = users.filter(user =>
-                    user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    user.email.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-                console.log(filteredUsers.length > 0 ? 'User(s) found:' : 'User not found');
-                console.table(filteredUsers);
-            }
-            mainMenu();
-        });
-    });
-}
+              // Generate a 6-character lowercase alphanumeric string as the user ID
+              const userId = this.generateId();
 
-function updateUser() {
-    rl.question('Enter user ID to update: ', (userId) => {
-        // Check if the user exists
-        Auth.getAllUsers((err, users) => {
-            const userExists = users.some(user => user.id === userId);
-            if (!userExists) {
-                console.error('User not found!');
-                mainMenu();
-                return;
-            }
-
-            // Prompt for new information
-            rl.question('Enter new username: ', (newUsername) => {
-                rl.question('Enter new email: ', (newEmail) => {
-                    rl.question('Enter new password: ', (newPassword) => {
-                        // Prepare an object with the updated information
-                        const updatedInfo = {};
-                        if (newUsername) updatedInfo.username = newUsername;
-                        if (newEmail) updatedInfo.email = newEmail;
-                        if (newPassword) updatedInfo.password = newPassword;
-
-                        // Update the user
-                        Auth.updateUser(userId, updatedInfo, (code) => {
-                            if (code.includes(0)) {
-                                console.log('User added successfully! UserID:', userId);
-                            }
-                            if (code.includes(1)) {
-                                console.error('Invalid username format.');
-                            }
-                            if (code.includes(2)) {
-                                console.error('Invalid email format.');
-                            }
-                            if (code.includes(3)) {
-                                console.error('Invalid password format.');
-                            }
-                            if (code.includes(4)) {
-                                console.error('Username already exists.');
-                            }
-                            if (code.includes(5)) {
-                                console.error('Email already exists.');
-                            }
-                            if (code.includes(6)) {
-                                console.error('Unknown error occurred.');
-                            }
-                            mainMenu();
-                        });
-                    });
-                });
-            });
-        });
-    });
-}
-
-function deleteUser() {
-    rl.question('Enter user ID to delete: ', (userId) => {
-        // Check if the user exists
-        Auth.getAllUsers((err, users) => {
-            const userExists = users.some(user => user.id === userId);
-            if (!userExists) {
-                console.error('User not found!');
-                mainMenu();
-                return;
-            }
-
-            Auth.deleteUser(userId, (code) => {
-                if (code.includes(0)) {
-                    console.log('User deleted successfully!');
-                } else if (code.includes(1)) {
-                    console.error('Deletion failed.');
+              // Insert user data into the database
+              const insertUser = db.prepare(
+                "INSERT INTO users (id, username, email, password) VALUES (?, ?, ?, ?)"
+              );
+              insertUser.run(
+                userId,
+                lowercaseUsername,
+                lowercaseEmail,
+                password,
+                function (err) {
+                  if (err) {
+                    errors.push(6); // Unknown error
+                    callback(errors);
+                  } else {
+                    callback([0], userId); // Registration successful
+                  }
                 }
-                mainMenu();
-            });
-        });
-    });
-}
-
-function banUser() {
-    rl.question('Enter user ID to ban/unban: ', (userId) => {
-        // Check if the user exists
-        Auth.getAllUsers((err, users) => {
-            const userExists = users.some(user => user.id === userId);
-            if (!userExists) {
-                console.error('User not found!');
-                mainMenu();
-                return;
+              );
+              insertUser.finalize();
             }
+          }
+        );
+      }
+    );
+  }
 
-            rl.question('Ban user/Un-Ban user (true/false): ', (isBanned) => {
-                Auth.banUser(userId, isBanned === 'true', (code) => {
-                    if (code.includes(0)) {
-                        console.log('User ban status updated successfully!');
-                    } else if (code.includes(1)) {
-                        console.error('Ban/Unban operation failed.');
-                    }
-                    mainMenu();
-                });
-            });
-        });
-    });
-}
-
-function mainMenu() {
-    console.log('\n=== User Management ===');
-    console.log('1. Add User');
-    console.log('2. List Users');
-    console.log('3. Find User');
-    console.log('4. Update User');
-    console.log('5. Delete User');
-    console.log('6. Ban/Unban User');
-    console.log('7. Exit');
-
-    rl.question('Select an option: ', (option) => {
-        switch (option) {
-            case '1':
-                addUser();
-                break;
-            case '2':
-                rl.question('Enter page number: ', (page) => listUsers(page));
-                break;
-            case '3':
-                findUser();
-                break;
-            case '4':
-                updateUser();
-                break;
-            case '5':
-                deleteUser();
-                break;
-            case '6':
-                banUser();
-                break;
-            case '7':
-                rl.close();
-                break;
-            default:
-                console.log('Invalid option. Try again.');
-                mainMenu();
-                break;
+  // User login function
+  login(identifier, password, callback) {
+    // The identifier can be either an email or a username
+    if (!(identifier && password)) {
+      callback([1]); // Username/Email or password is incorrect
+      return false;
+    }
+    const query = "SELECT * FROM users WHERE username = ? OR email = ?";
+    db.get(
+      query,
+      [identifier.toLowerCase(), identifier.toLowerCase()],
+      (err, row) => {
+        if (row) {
+          if (row.banned == 1) {
+            callback([2]); // User is banned
+          } else if (row.password == password) {
+            callback([0], row); // Login successful
+          } else {
+            callback([1]); // Username/Email or password is incorrect
+          }
+        } else {
+          callback([1]); // Username/Email or password is incorrect
         }
+      }
+    );
+  }
+
+  // Delete user
+  deleteUser(userId, callback) {
+    db.run("DELETE FROM users WHERE id = ?", [userId], (err) => {
+      if (err) {
+        callback([1]); // Delete failed
+      } else {
+        callback([0]); // Delete successful
+      }
     });
+  }
+
+  // Ban/unban user
+  banUser(userId, isBanned, callback) {
+    db.run(
+      "UPDATE users SET banned = ? WHERE id = ?",
+      [isBanned ? 1 : 0, userId],
+      (err) => {
+        if (err) {
+          callback([1]); // Ban/unban failed
+        } else {
+          callback([0]); // Ban/unban successful
+        }
+      }
+    );
+  }
+
+  // Update user information
+  updateUser(userId, newData, callback) {
+    // Check username and email format
+    const usernameRegex = /^[a-zA-Z0-9_]{7,21}$/; // Username must be 7 to 21 characters and can only contain letters, numbers, and underscores
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email format validation
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/; // Password format
+
+    let errors = [];
+
+    if ("username" in newData && !usernameRegex.test(newData.username)) {
+      errors.push(1); // Invalid username format
+    }
+
+    if ("email" in newData && !emailRegex.test(newData.email)) {
+      errors.push(2); // Invalid email format
+    }
+
+    if (!passwordRegex.test(newData.password)) {
+      errors.push(3); // Invalid password format
+    }
+
+    // Check if username and email already exist
+    if ("username" in newData) {
+      db.get(
+        "SELECT * FROM users WHERE username = ? AND id != ?",
+        [newData.username.toLowerCase(), userId],
+        (err, rowUsername) => {
+          if (rowUsername) {
+            errors.push(4); // Username already exists
+          }
+
+          if ("email" in newData) {
+            db.get(
+              "SELECT * FROM users WHERE email = ? AND id != ?",
+              [newData.email.toLowerCase(), userId],
+              (err, rowEmail) => {
+                if (rowEmail) {
+                  errors.push(5); // Email already exists
+                }
+
+                if (errors.length > 0) {
+                  callback(errors);
+                } else {
+                  const updateFields = Object.keys(newData)
+                    .map((field) => `${field} = ?`)
+                    .join(", ");
+                  const updateValues = Object.values(newData);
+                  updateValues.push(userId);
+
+                  db.run(
+                    `UPDATE users SET ${updateFields} WHERE id = ?`,
+                    updateValues,
+                    (err) => {
+                      if (err) {
+                        errors.push(6); // Unknown error
+                        callback(errors);
+                      } else {
+                        callback([0]); // Update successful
+                      }
+                    }
+                  );
+                }
+              }
+            );
+          }
+        }
+      );
+    }
+  }
+
+  // Reset user password
+  resetPassword(identifier, newPassword, callback) {
+    let errors = [];
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/; // Password format
+    if (!passwordRegex.test(newPassword)) {
+      errors.push(2); // Invalid password format
+    }
+    // Update the user's password in the database based on email or username
+    db.run(
+      "UPDATE users SET password = ? WHERE email = ? OR username = ?",
+      [newPassword, identifier, identifier],
+      function (err) {
+        if (err) {
+          errors.push(3);
+        } else {
+          // Check if any rows were affected (indicating a successful update)
+          if (this.changes > 0) {
+            errors.push(0);
+          } else {
+            errors.push(1); // User with the given email or username not found
+          }
+        }
+        callback(errors);
+      }
+    );
+  }
+
+  // Get user information by user ID
+  getUserById(userId, callback) {
+    db.get("SELECT * FROM users WHERE id = ?", [userId], (err, row) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, row);
+      }
+    });
+  }
+
+  // Generate a 6-character lowercase alphanumeric string
+  generateId() {
+    const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < 6; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    return result;
+  }
+
+  // Get all users
+  getAllUsers(callback) {
+    if (typeof callback !== "function") {
+      console.error("Callback is not a function");
+      return;
+    }
+
+    db.all("SELECT * FROM users", (err, rows) => {
+      callback(err, rows);
+    });
+  }
+
+  initialize(callback) {
+    db.serialize(() => {
+      db.run(
+        "CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, username TEXT, email TEXT, password TEXT, banned BOOLEAN DEFAULT 0)"
+      );
+      callback();
+    });
+  }
+
+  // Close database connection
+  close() {
+    db.close();
+    return true;
+  }
 }
 
-// Initialize Auth and start the main menu
-Auth.initialize(() => {
-    mainMenu();
-});
-
-rl.on('close', () => {
-    console.log('Exiting User Management Program.');
-    Auth.close();
-    process.exit(0);
-});
+// Export Auth object
+module.exports = new Auth();

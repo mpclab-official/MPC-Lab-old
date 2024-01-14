@@ -1,3 +1,6 @@
+// get-articles.js
+// This is a JavaScript file that contains the code for getting articles from the server.
+
 const pageSize = 10;
 const startDate = new Date().toISOString();
 let page = 1;
@@ -5,75 +8,78 @@ let newArticles = false;
 let ALLarticlesID = [];
 
 function getArticles(page, newArticles = false) {
-    fetch(`/${languageCode}/blog`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            page: page,
-            pageSize: 10,
-            startDate: new Date(),
-            newArticles: newArticles,
-        }),
+  fetch(`/${languageCode}/blog`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      page: page,
+      pageSize: 10,
+      startDate: new Date(),
+      newArticles: newArticles,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Post failed");
+      }
+      return response.json();
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Post failed');
-            }
-            return response.json();
-        })
-        .then(json => {
-            console.log(json);
-            randerArticles(json.articles, () => {
-                if (json.noMoreArticles) {
-                    console.log("No more articles");
-                    page = 1;
-                    newArticles = true;
-                    getArticles(page, newArticles);
-                }
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error.message);
-        });
+    .then((json) => {
+      console.log(json);
+      randerArticles(json.articles, () => {
+        if (json.noMoreArticles) {
+          console.log("No more articles");
+          page = 1;
+          newArticles = true;
+          getArticles(page, newArticles);
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error.message);
+    });
 }
 
 function randerArticles(articles, callback) {
-    const articlesEL = document.getElementById('articles');
-    let index = 1;
+  const articlesEL = document.getElementById("articles");
+  let index = 1;
 
-    // Create Intersection Observer instance
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Load more
-                page++;
-                getArticles(page, newArticles);
+  // Create Intersection Observer instance
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Load more
+        page++;
+        getArticles(page, newArticles);
 
-                // Stop observing once visible
-                observer.disconnect();
-            }
-        });
+        // Stop observing once visible
+        observer.disconnect();
+      }
     });
+  });
 
-    articles.forEach(article => {
-        let lastClass = "";
-        if (index == articles.length) {
-            lastClass = "last-article";
-            setTimeout(function () {
-                // Start observing once visible
-                const observerElement = document.getElementsByClassName('last-article')[document.getElementsByClassName('last-article').length - 1];
-                observer.observe(observerElement);
-            }, 1000);
-        }
-        let tagsText = '';
-        for (let i = 0; i < article.tags.length; i++) {
-            tagsText += `<span>${article.tags[i]}</span>`;
-        }
-        if (!ALLarticlesID.includes(article.id)) {
-            if (article.cover == "0") {
-                articlesEL.innerHTML += `
+  articles.forEach((article) => {
+    let lastClass = "";
+    if (index == articles.length) {
+      lastClass = "last-article";
+      setTimeout(function () {
+        // Start observing once visible
+        const observerElement =
+          document.getElementsByClassName("last-article")[
+            document.getElementsByClassName("last-article").length - 1
+          ];
+        observer.observe(observerElement);
+      }, 1000);
+    }
+    let tagsText = "";
+    for (let i = 0; i < article.tags.length; i++) {
+      tagsText += `<span>${article.tags[i]}</span>`;
+    }
+    if (!ALLarticlesID.includes(article.id)) {
+      if (article.cover == "0") {
+        articlesEL.innerHTML += `
                     <div class="card article-card ${lastClass}" onclick="window.location='/${languageCode}/blog/article/${article.id}'">
                         <table>
                             <tr>
@@ -93,9 +99,9 @@ function randerArticles(articles, callback) {
                             </tr>
                         </table>
                     </div>
-                    `
-            } else {
-                articlesEL.innerHTML += `
+                    `;
+      } else {
+        articlesEL.innerHTML += `
                     <div class="card article-card ${lastClass}" onclick="window.location='/${languageCode}/blog/article/${article.id}'">
                         <table>
                             <tr>
@@ -120,15 +126,15 @@ function randerArticles(articles, callback) {
                             </tr>
                         </table>
                     </div>
-                    `
-            }
-            ALLarticlesID.push(article.id);
-        }
-        index++;
-    });
-    callback();
+                    `;
+      }
+      ALLarticlesID.push(article.id);
+    }
+    index++;
+  });
+  callback();
 }
 
-window.addEventListener('load', function () {
-    getArticles(page, false);
+window.addEventListener("load", function () {
+  getArticles(page, false);
 });
