@@ -35,7 +35,10 @@ router
       if (data) userData = data;
       else userData = { colorTheme: "light" };
       const language_index = languages_list.indexOf(req.params.language);
-      if (language_index == -1) res.redirect(`/${languages_list[0]}`);
+      if (language_index == -1) {
+        res.redirect(`/${languages_list[0]}`);
+        return;
+      }
       const languages_translate_pack = languages_translate[language_index];
       const navigation_translate_pack = language_navigation[language_index];
       Articles.getArticleById(req.params.id, (json) => {
@@ -53,7 +56,7 @@ router
                 });
               }
               res.render(path.join(config.path, "page", "article"), {
-                title: config.name,
+                title: json.article.title,
                 language_code: req.params.language,
                 favicon: config.favicon,
                 logo: config.logo,

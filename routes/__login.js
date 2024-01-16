@@ -20,11 +20,14 @@ router
       if (data) userData = data;
       else userData = { colorTheme: "light" };
       const language_index = languages_list.indexOf(req.params.language);
-      if (language_index == -1) res.redirect(`/${languages_list[0]}`);
+      if (language_index == -1) {
+        res.redirect(`/${languages_list[0]}`);
+        return;
+      }
       const languages_translate_pack = languages_translate[language_index];
       const navigation_translate_pack = language_navigation[language_index];
       res.render(path.join(config.path, "page", "login"), {
-        title: config.name,
+        title: `${config.name} | ${languages_translate_pack.lan_login}`,
         language_code: req.params.language,
         favicon: config.favicon,
         logo: config.logo,
@@ -41,7 +44,10 @@ router
   })
   .post((req, res) => {
     const language_index = languages_list.indexOf(req.params.language);
-    if (language_index == -1) res.redirect(`/${languages_list[0]}`);
+    if (language_index == -1) {
+      res.redirect(`/${languages_list[0]}`);
+      return;
+    }
     const languages_translate_pack = languages_translate[language_index];
     const messages = [
       languages_translate_pack.lan_auth_login_code0,

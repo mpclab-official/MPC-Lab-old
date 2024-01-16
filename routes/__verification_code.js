@@ -8,10 +8,12 @@ const {
   emailVerification,
 } = require("./common.js");
 
-// Verification code
 router.post("/:language/verification", (req, res) => {
   const language_index = languages_list.indexOf(req.params.language);
-  if (language_index == -1) res.redirect(`/${languages_list[0]}`);
+  if (language_index == -1) {
+    res.redirect(`/${languages_list[0]}`);
+    return;
+  }
   const languages_translate_pack = languages_translate[language_index];
   const messages = [
     languages_translate_pack.lan_auth_register_verification0,

@@ -14,19 +14,24 @@ const {
   checkVerificationCodeExpiration,
 } = require("./common.js");
 
-// Register
 router
   .route("/:language/register")
   .get(checkPageRedirect, (req, res) => {
     getUserData(req.session.userID, (err, data) => {
       if (data) userData = data;
-      else userData = { colorTheme: "light" };
+      else
+        userData = {
+          colorTheme: "light",
+        };
       const language_index = languages_list.indexOf(req.params.language);
-      if (language_index == -1) res.redirect(`/${languages_list[0]}`);
+      if (language_index == -1) {
+        res.redirect(`/${languages_list[0]}`);
+        return;
+      }
       const languages_translate_pack = languages_translate[language_index];
       const navigation_translate_pack = language_navigation[language_index];
       res.render(path.join(config.path, "page", "register"), {
-        title: config.name,
+        title: `${config.name} | ${languages_translate_pack.lan_register}`,
         language_code: req.params.language,
         favicon: config.favicon,
         logo: config.logo,
@@ -43,7 +48,10 @@ router
   })
   .post(checkVerificationCodeExpiration, (req, res) => {
     const language_index = languages_list.indexOf(req.params.language);
-    if (language_index == -1) res.redirect(`/${languages_list[0]}`);
+    if (language_index == -1) {
+      res.redirect(`/${languages_list[0]}`);
+      return;
+    }
     const languages_translate_pack = languages_translate[language_index];
     const messages = [
       languages_translate_pack.lan_auth_register_code0,
@@ -77,21 +85,33 @@ router
                   req.session.verificationCode = null;
                   req.session.verificationCodeExpiration = null;
                 }
-                res.status(200).json({ code, messages });
+                res.status(200).json({
+                  code,
+                  messages,
+                });
               }
             }
           );
         } else {
           let code = [9]; // Incorrect verification code
-          res.status(200).json({ code, messages });
+          res.status(200).json({
+            code,
+            messages,
+          });
         }
       } else {
         let code = [8]; // Verification code not entered
-        res.status(200).json({ code, messages });
+        res.status(200).json({
+          code,
+          messages,
+        });
       }
     } else {
       let code = [7]; // Verification code not obtained or expired
-      res.status(200).json({ code, messages });
+      res.status(200).json({
+        code,
+        messages,
+      });
 
       req.session.verificationCode = null;
       req.session.verificationCodeExpiration = null;

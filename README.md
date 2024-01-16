@@ -55,6 +55,9 @@ const config = {
   // Project name
   name: "MPC Lab",
 
+  // Url
+  url: "https://mathscichem.com/",
+
   // Path to favicon
   favicon: "/favicon.ico",
 
@@ -141,7 +144,27 @@ const config = {
 
 The configuration information is located in the `config.js` configuration file.
 
+## Site Maps
+
+- Main page sitemap: `/sitemaps/navigation`
+
+- Toolbox sitemap: `/sitemaps/toolbox`
+
+- Articles sitemap: `/sitemaps/articles`
+
 ## Versions
+
+### [V2.2.3-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.3-dev)
+
+- Fixed the issue of incorrect redirection when modifying language requests
+
+- Improved SEO:
+  - Added site map
+  - Page titles
+
+Contributors:
+
+- [Tony Kan](#tony-kan)
 
 ### [V2.2.2-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.2-dev)
 

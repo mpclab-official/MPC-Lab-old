@@ -16,6 +16,7 @@ const routes = [
   "__user_setup",
   "__blog_post",
   "__post",
+  "__sitemaps",
 ];
 
 for (let i = 0; i < routes.length; i++) {

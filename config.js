@@ -5,6 +5,9 @@ const config = {
   // Project name
   name: "MPC Lab",
 
+  // Url
+  url: "https://mathscichem.com",
+
   // Path to favicon
   favicon: "/favicon.ico",
 
