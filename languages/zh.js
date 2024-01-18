@@ -111,6 +111,12 @@ var lan_zh = {
         lan_blog_post_code1: "标题需要为10到40个字符。",
         lan_blog_post_code2: "标签需要为1到8个标签, 每个标签需要为4到20个字符。",
         lan_blog_post_code3: "文章描述需要为20到100个字符。",
+        lan_user_daily_check_in: "每日签到",
+        lan_check_in: "签到",
+        lan_check_in_successfully: "签到成功",
+        lan_checked_in: "今日已签到",
+        lan_check_in_successfully_coins: "签到成功！你获得了1个硬币！",
+        lan_user_crruent_coins: "当前硬币数",
     }
 };
 

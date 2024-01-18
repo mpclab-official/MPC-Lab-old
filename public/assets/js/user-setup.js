@@ -156,6 +156,8 @@ function startSetup() {
                                                         UserData.interest =
                                                           new Array();
 
+                                                        UserData.coins = 0;
+
                                                         sendData();
                                                       };
 

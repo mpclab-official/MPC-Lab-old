@@ -154,6 +154,16 @@ The configuration information is located in the `config.js` configuration file.
 
 ## Versions
 
+### [V2.2.4-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.4-dev)
+
+- Add the function of daily check-in for users to obtain coins
+
+- Add error/success notification
+
+Contributors:
+
+- [Tony Kan](#tony-kan)
+
 ### [V2.2.3-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.3-dev)
 
 - Fixed the issue of incorrect redirection when modifying language requests

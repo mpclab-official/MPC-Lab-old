@@ -111,6 +111,12 @@ var lan_es = {
         lan_blog_post_code1: "El título debe tener entre 10 y 40 caracteres.",
         lan_blog_post_code2: "Las etiquetas deben ser de 1 a 8 etiquetas, cada etiqueta debe tener entre 4 y 20 caracteres.",
         lan_blog_post_code3: "Las descripciones deben tener entre 20 y 150 caracteres.",
+        lan_user_daily_check_in: "Registro diario",
+        lan_check_in: "Registro",
+        lan_check_in_successfully: "Registro exitoso",
+        lan_checked_in: "Ya registrado",
+        lan_check_in_successfully_coins: "¡Registro exitoso! ¡Obtuviste 1 moneda!",
+        lan_user_crruent_coins: "Monedas actuales",
     }
 };
 

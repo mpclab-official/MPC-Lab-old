@@ -1,0 +1,27 @@
+#check_in {
+    font-size: medium;
+    margin-left: 1.5em;
+    margin-top: 0;
+    margin-bottom: 1em;
+    height: 30px;
+    width: 70%;
+    border-radius: 5px;
+    border-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    background-color: var(--button-bg-color);
+}
+
+#check_in:hover,
+#check_in_successfully,
+#checked_in {
+    font-size: medium;
+    margin-left: 1.5em;
+    margin-top: 0;
+    margin-bottom: 1em;
+    height: 30px;
+    width: 70%;
+    border-radius: 5px;
+    border-color: var(--button-bg-color);
+    color: var(--button-bg-color);
+    background-color: var(--button-text-color);
+}

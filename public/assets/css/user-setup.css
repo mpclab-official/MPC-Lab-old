@@ -63,15 +63,22 @@
 }
 
 .user-setup>.user-setup-inner>div>button {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-align: center;
-    box-sizing: border-box;
     font-size: large;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    height: 35px;
+    width: 70%;
+    border-radius: 8px;
+    border-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    background-color: var(--button-bg-color);
+}
+
+.user-setup>.user-setup-inner>div>button:hover {
+    color: var(--button-bg-color);
+    background-color: var(--button-text-color);
 }
 
 .fade-in-out {

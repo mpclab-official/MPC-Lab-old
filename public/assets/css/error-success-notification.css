@@ -1,0 +1,38 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.success-message,
+.error-message {
+    z-index: 9999;
+    position: fixed;
+    top: 10px;
+    right: 5px;
+    width: 300px;
+    padding: 5px;
+    border-left: 5px solid;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-timing-function: emphasized;
+    animation-play-state: running;
+}
+
+.success-message {
+    color: rgb(0, 0, 0);
+    background-color: rgb(100, 255, 100);
+    border-color: green;
+}
+
+.error-message {
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 100, 100);
+    border-color: red;
+}

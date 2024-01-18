@@ -30,7 +30,9 @@
             </div>
             <div class="right-side-block" id="rightScroll">
                 <div class="block-inner-content">
-
+                    <% if(userData.userName && userData.UID){ %>
+                    <%- include('../partial/user-daily-check-in.ejs') %>
+                    <% } %>
                 </div>
             </div>
         </div>

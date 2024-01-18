@@ -48,7 +48,7 @@ class EmailVerification {
         console.error(error);
         callback(error);
       } else {
-        console.log("Message sent: %s", info.messageId);
+        //console.log("Message sent: %s", info.messageId);
         callback(null, verificationCode);
       }
     });

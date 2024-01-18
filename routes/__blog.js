@@ -93,7 +93,6 @@ router
               (json) => {
                 if (json.articles?.length > 0) {
                   // Related interest articles A
-                  console.log(json.articles);
                   if (json.articles.length < params.pageSize) {
                     json.noMoreArticles = true;
                   }

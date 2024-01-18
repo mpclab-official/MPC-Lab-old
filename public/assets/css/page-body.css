@@ -48,4 +48,8 @@ main>.page-main-content>.right-side-block>.block-inner-content {
         width: 100%;
     }
 
+    main>.page-main-content>.right-side-block {
+        margin-top: 1em;
+    }
+
 }

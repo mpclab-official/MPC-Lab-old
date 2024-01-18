@@ -49,9 +49,9 @@ router
               if (!req.session.viewedArticles) req.session.viewedArticles = [];
               if (!req.session.viewedArticles.includes(req.params.id)) {
                 req.session.viewedArticles.push(req.params.id);
-                Articles.incrementViews(req.params.id, (err) => {
-                  if (err) {
-                    console.log(err);
+                Articles.incrementViews(req.params.id, (json) => {
+                  if (!json.code.includes(0)) {
+                    console.log(json);
                   }
                 });
               }

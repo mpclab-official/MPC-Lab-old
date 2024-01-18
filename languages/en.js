@@ -111,6 +111,12 @@ var lan_en = {
         lan_blog_post_code1: "Title need to be 10 to 40 characters.",
         lan_blog_post_code2: "Tags need to be 1 to 8 tags, evry tag need to be 4 to 20 characters.",
         lan_blog_post_code3: "Descriptions need to be 20 to 150 characters.",
+        lan_user_daily_check_in: "Daily Check-In",
+        lan_check_in: "Check-In",
+        lan_check_in_successfully: "Check-In Successfully",
+        lan_checked_in: "Already checked-In",
+        lan_check_in_successfully_coins: "Check-In Successfully! You got 1 coin!",
+        lan_user_crruent_coins: "Current Coins",
     }
 };
 
