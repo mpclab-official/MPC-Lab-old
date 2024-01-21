@@ -7,8 +7,8 @@ let page = 1;
 let newArticles = false;
 let ALLarticlesID = [];
 
-function getArticles(page, newArticles = false) {
-  fetch(`/${languageCode}/blog`, {
+function getArticles(page, newArticles = false, userID = false) {
+  fetch(`/${document.body.dataset.language}/blog`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,6 +18,7 @@ function getArticles(page, newArticles = false) {
       pageSize: 10,
       startDate: new Date(),
       newArticles: newArticles,
+      targetUID: userID,
     }),
   })
     .then((response) => {
@@ -75,7 +76,7 @@ function randerArticles(articles, callback) {
     }
     let tagsText = "";
     for (let i = 0; i < article.tags.length; i++) {
-      tagsText += `<span>${article.tags[i]}</span>`;
+      tagsText += `<span class="tag">${article.tags[i]}</span>`;
     }
     if (!ALLarticlesID.includes(article.id)) {
       if (article.cover == "0") {
@@ -94,7 +95,7 @@ function randerArticles(articles, callback) {
                             </tr>
                             <tr>
                                 <td colspan="3">
-                                    <p>${article.author_name} | ${article.views} ${document.body.dataset.views}   ${article.likes} ${document.body.dataset.likes}      ${tagsText}</p>
+                                    <p><span onclick="window.location='/${languageCode}/user/${article.author_id}'">${article.author_name}</span> | ${article.views} ${document.body.dataset.views}   ${article.likes} ${document.body.dataset.likes}      ${tagsText}</p>
                                 </td>
                             </tr>
                         </table>
@@ -121,7 +122,7 @@ function randerArticles(articles, callback) {
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <p>${article.author_name} | ${article.views} ${document.body.dataset.views}   ${article.likes} ${document.body.dataset.likes}      ${tagsText}</p>
+                                    <p><span onclick="window.location='/${languageCode}/user/${article.author_id}'">${article.author_name}</span> | ${article.views} ${document.body.dataset.views}   ${article.likes} ${document.body.dataset.likes}      ${tagsText}</p>
                                 </td>
                             </tr>
                         </table>

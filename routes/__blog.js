@@ -80,38 +80,60 @@ router
         }
       }
     }
-    if (req.session.userID) {
-      getUserData(req.session.userID, (err, data) => {
-        if (data) {
-          if (data.interest.length > 0 && !params.newArticles) {
-            // User has interest tags A
-            Articles.fuzzySearchPaginatedArticlesByInterests(
-              data.interest,
-              params.page,
-              params.pageSize,
-              params.startDate,
-              (json) => {
-                if (json.articles?.length > 0) {
-                  // Related interest articles A
-                  if (json.articles.length < params.pageSize) {
-                    json.noMoreArticles = true;
-                  }
-                  processArticlesAndSendResponse(res, json);
-                } else {
-                  // All related interest articles have been loaded, load other articles B
-                  Articles.getPaginatedArticlesByDate(
-                    params.page,
-                    params.pageSize,
-                    params.startDate,
-                    (json) => {
-                      processArticlesAndSendResponse(res, json);
+    if (params.targetUID != false) {
+      // Request to load articles targetUID
+      Articles.getPaginatedArticlesByAuthorId(
+        params.targetUID,
+        params.page,
+        params.pageSize,
+        (json) => {
+          processArticlesAndSendResponse(res, json);
+        }
+      );
+    } else {
+      if (req.session.userID) {
+        getUserData(req.session.userID, (err, data) => {
+          if (data) {
+            if (data.interest.length > 0 && !params.newArticles) {
+              // User has interest tags A
+              Articles.fuzzySearchPaginatedArticlesByInterests(
+                data.interest,
+                params.page,
+                params.pageSize,
+                params.startDate,
+                (json) => {
+                  if (json.articles?.length > 0) {
+                    // Related interest articles A
+                    if (json.articles.length < params.pageSize) {
+                      json.noMoreArticles = true;
                     }
-                  );
+                    processArticlesAndSendResponse(res, json);
+                  } else {
+                    // All related interest articles have been loaded, load other articles B
+                    Articles.getPaginatedArticlesByDate(
+                      params.page,
+                      params.pageSize,
+                      params.startDate,
+                      (json) => {
+                        processArticlesAndSendResponse(res, json);
+                      }
+                    );
+                  }
                 }
-              }
-            );
+              );
+            } else {
+              // User has no interest tags or requests to load new articles B
+              Articles.getPaginatedArticlesByDate(
+                params.page,
+                params.pageSize,
+                params.startDate,
+                (json) => {
+                  processArticlesAndSendResponse(res, json);
+                }
+              );
+            }
           } else {
-            // User has no interest tags or requests to load new articles B
+            // Failed to retrieve user data B
             Articles.getPaginatedArticlesByDate(
               params.page,
               params.pageSize,
@@ -121,28 +143,18 @@ router
               }
             );
           }
-        } else {
-          // Failed to retrieve user data B
-          Articles.getPaginatedArticlesByDate(
-            params.page,
-            params.pageSize,
-            params.startDate,
-            (json) => {
-              processArticlesAndSendResponse(res, json);
-            }
-          );
-        }
-      });
-    } else {
-      // User is not logged in B
-      Articles.getPaginatedArticlesByDate(
-        params.page,
-        params.pageSize,
-        params.startDate,
-        (json) => {
-          processArticlesAndSendResponse(res, json);
-        }
-      );
+        });
+      } else {
+        // User is not logged in B
+        Articles.getPaginatedArticlesByDate(
+          params.page,
+          params.pageSize,
+          params.startDate,
+          (json) => {
+            processArticlesAndSendResponse(res, json);
+          }
+        );
+      }
     }
   });
 

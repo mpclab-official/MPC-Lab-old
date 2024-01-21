@@ -1,6 +1,11 @@
 // user-setup.js
 // The script file that contains the code for the user setup page.
 
+let messages;
+window.addEventListener("load", () => {
+  messages = JSON.parse(document.body.dataset.message);
+});
+
 let userSetup = new Object();
 let UserData = new Object();
 
@@ -20,8 +25,9 @@ function startSetup() {
   }
 
   function userNameTest(tester) {
-    const regex = /^[^\s].{0,20}[^\s]$/u;
-    return regex.test(tester);
+    if (tester.length < 3 || tester.length > 20) return false;
+    if (tester[0] == " " || tester[tester.length - 1] == " ") return false;
+    return true;
   }
 
   fadeIn(userSetup.userName);
@@ -121,7 +127,13 @@ function startSetup() {
                                                   if (width > 0 && height > 0) {
                                                     if (
                                                       file.size <=
-                                                      5 * 1024 * 1024
+                                                        5 * 1024 * 1024 &&
+                                                      (file.type ==
+                                                        "image/png" ||
+                                                        file.type ==
+                                                          "image/jpeg" ||
+                                                        file.type ==
+                                                          "image/jpg")
                                                     ) {
                                                       const reader =
                                                         new FileReader();
@@ -165,13 +177,19 @@ function startSetup() {
                                                         file
                                                       );
                                                     } else {
-                                                      alert(
-                                                        "File size exceeds the maximum allowed size (5 MB)."
+                                                      pageMessage(
+                                                        false,
+                                                        messages.lan_edit_user_avatar_size +
+                                                          ", " +
+                                                          lan_edit_user_avatar_file_type,
+                                                        8000
                                                       );
                                                     }
                                                   } else {
-                                                    alert(
-                                                      "Invalid image file."
+                                                    pageMessage(
+                                                      false,
+                                                      messages.lan_avatar_file_error,
+                                                      4000
                                                     );
                                                   }
                                                 };
@@ -196,6 +214,7 @@ function startSetup() {
             });
         }, 500);
       } else {
+        pageMessage(false, messages.lan_edit_username_error, 4000);
       }
     });
 }

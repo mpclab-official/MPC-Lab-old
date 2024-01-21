@@ -1,0 +1,247 @@
+.block-inner-content {
+    margin-bottom: 10px !important;
+    border-radius: 3px;
+}
+
+#userAvatarAndUserName>span {
+    margin-left: 15px;
+}
+
+#userAvatarAndUserName>input {
+    margin-left: 15px;
+}
+
+#userAvatar {
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 82%;
+    height: auto;
+    aspect-ratio: 1;
+}
+
+#userName {
+    color: var(--h1-text-color);
+    margin-top: 0.8em;
+    margin-bottom: 0.3em;
+    margin-left: 15px;
+    font-size: larger;
+}
+
+#username {
+    color: var(--h2-text-color);
+    font-weight: 250;
+    margin-top: 0.3em;
+    margin-bottom: 0.8em;
+    margin-left: 15px;
+    font-size: large;
+}
+
+#userGender-M {
+    width: 1.3em;
+    margin-left: 5px;
+}
+
+#userGender-F {
+    width: 1.3em;
+    margin-left: 5px;
+}
+
+#userBio {
+    margin-left: 15px;
+    margin-bottom: 0.8em;
+    width: calc(100% - 30px);
+    font-size: 0.9em;
+}
+
+textarea#userBio {
+    height: 100px;
+}
+
+#editProfile {
+    margin-left: 15px;
+    height: 30px;
+    margin-bottom: 1.3em;
+    width: calc(100% - 30px);
+}
+
+#followersAndFollowing {
+    margin-left: 15px;
+    margin-bottom: 0.8em;
+    display: flex;
+    flex-direction: row;
+}
+
+#followersAndFollowing>span {
+    margin-right: 8px;
+}
+
+#userEmail {
+    margin-left: 15px;
+    margin-bottom: 0.8em;
+    display: flex;
+    flex-direction: row;
+}
+
+#userEmail>embed {
+    margin-right: 6px;
+    height: 1.1em;
+}
+
+#userCoins {
+    margin-left: 15px;
+    margin-bottom: 0.8em;
+    display: flex;
+    flex-direction: row;
+}
+
+#userCoins>embed {
+    margin-right: 6px;
+    height: 1.1em;
+}
+
+#userCoins>span {
+    font-weight: bolder;
+}
+
+#userBirthday {
+    margin-left: 15px;
+    margin-bottom: 0.8em;
+    display: flex;
+    flex-direction: row;
+}
+
+#userBirthday>embed {
+    margin-right: 6px;
+    height: 1.1em;
+}
+
+#userJoinDate {
+    margin-left: 15px;
+    margin-bottom: 0.8em;
+    display: flex;
+    flex-direction: row;
+}
+
+#userJoinDate>embed {
+    margin-right: 6px;
+    height: 1.1em;
+}
+
+#userEducated {
+    margin-left: 15px;
+    margin-bottom: 0.8em;
+    display: flex;
+    flex-direction: row;
+}
+
+#userEducated>embed {
+    margin-right: 6px;
+    height: 1.1em;
+}
+
+#saveButton {
+    margin-left: 15px;
+    height: 30px;
+    margin-bottom: 1.3em;
+    width: calc(100% - 30px);
+    font-size: large;
+}
+
+#userGenders {
+    margin-left: 15px;
+    margin-bottom: 0.4em;
+}
+
+#gM,
+#gF {
+    height: 1.3em;
+}
+
+.gSelect {
+    border: 1px solid var(--hr-color);
+    transform: scale(1.2);
+}
+
+@media screen and (max-width: 1000px) {
+
+    #userDiv {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #userAvatarAndUserName {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .edit#userAvatarAndUserName {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #userAvatarAndUserName>span {
+        font-size: large;
+    }
+
+    #userAvatarAndUserName>input {
+        font-size: large;
+        margin-bottom: 10px;
+    }
+
+    #userAvatar {
+        width: 25%;
+        margin-left: 2%;
+        margin-right: 2%;
+        aspect-ratio: 1;
+    }
+
+    #userNames {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+        margin-left: 15px;
+    }
+
+    #userName {
+        font-size: x-large;
+        margin: 0;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    input#userName {
+        height: 30px;
+    }
+
+    #username {
+        font-size: larger;
+        margin: 0;
+        margin-top: 5px;
+    }
+
+    #userBio {
+        margin-top: 0.8em;
+        font-size: large;
+    }
+
+    #editProfile,
+    #userFollowers,
+    #userFollowing,
+    #userEmail,
+    #userCoins,
+    #userBirthday,
+    #userJoinDate,
+    #userEducated,
+    #userEducatedSelect {
+        font-size: larger;
+    }
+
+    #userBirthday>input {
+        font-size: x-large;
+    }
+
+}

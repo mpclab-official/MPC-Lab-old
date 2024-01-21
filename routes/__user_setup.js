@@ -44,6 +44,12 @@ router
     });
   })
   .post((req, res) => {
+    // Check if the user is logged in
+    if (!req.session.userID) {
+      res.status(401).json({ code: [-1] });
+      return;
+    }
+
     const params = req.body;
 
     if (params.UserData) {

@@ -6,7 +6,7 @@
     <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
 </head>
 
-<body data-language="<%= language_code %>">
+<body data-language="<%= language_code %>" data-message="<%=JSON.stringify({lan_edit_username_error,lan_edit_user_bio_too_long,lan_edit_user_bio_too_long,lan_edit_user_avatar_size,lan_edit_user_avatar_file_type,lan_avatar_file_error,lan_saved,lan_save_failed}) %>">
     <%- include('../partial/page-includes.ejs') %>
     <div class="user-setup">
         <div class="user-setup-inner">
@@ -58,7 +58,7 @@
             <div id="user-bio" class="fade-in-out">
                 <h1><%=lan_user_setup_user_bio %></h1>
                 <p><%=lan_user_setup_user_bio_words %></p>
-                <textarea name="bio" maxlength="50"></textarea>
+                <textarea name="bio" maxlength="200"></textarea>
                 <button><%=lan_next %></button>
             </div>
             <div id="user-avatar" class="fade-in-out">

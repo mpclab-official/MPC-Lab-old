@@ -18,6 +18,9 @@ const routes = [
   "__post",
   "__sitemaps",
   "__user_daily_check_in",
+  "__user",
+  "__my",
+  "__my_edit",
 ];
 
 for (let i = 0; i < routes.length; i++) {

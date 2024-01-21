@@ -195,6 +195,28 @@ class Articles {
     });
   }
 
+  // Get paginated articles by author ID
+  getPaginatedArticlesByAuthorId(authorId, page, pageSize, callback) {
+    const offset = (page - 1) * pageSize;
+    const query =
+      "SELECT * FROM articles WHERE author_id = ? ORDER BY publish_date DESC LIMIT ? OFFSET ?";
+
+    db.all(query, [authorId, pageSize, offset], (err, articles) => {
+      if (err) {
+        callback({ code: [-1], message: err.message });
+      } else {
+        if (articles && articles.length > 0) {
+          articles.forEach((article) => {
+            article.content = JSON.parse(article.content);
+            article.tags = JSON.parse(article.tags);
+            article.comments = JSON.parse(article.comments);
+          });
+        }
+        callback({ code: [0], articles });
+      }
+    });
+  }
+
   // Get an article by ID
   getArticleById(articleId, callback) {
     const query = "SELECT * FROM articles WHERE id = ?";

@@ -6,10 +6,98 @@
     <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
 </head>
 
-<body>
+<body data-language="<%=language_code %>" data-views="<%=lan_views %>" data-likes="<%=lan_likes %>">
     <%- include('../partial/page-includes.ejs') %>
     <%- include('../partial/header.ejs', { language_code, userData }) %>
-    <!--Page Body-->
+    <main>
+        <div class="page-main-content">
+            <div class="right-side-block" id="leftScroll">
+                <div class="block-inner-content">
+                    <div id="userDiv" class="card">
+                        <div id="userAvatarAndUserName">
+                            <div id="userAvatar" class="avatar"><img src="/users-avatar/<%=targetData.avatarUrl %>"></div>
+                            <div id="userNames">
+                                <% if(targetData.userGender != "u"){ %>
+                                    <% if(targetData.userGender == "m"){ %>
+                                        <h3 id="userName" class="text-left"><%=targetData.userName %><sub><embed id="userGender-M" src="/assets/svg/icons/male.svg"></sub></h3>
+                                    <% } else { %>
+                                        <h3 id="userName" class="text-left"><%=targetData.userName %><sub><embed id="userGender-F" src="/assets/svg/icons/female.svg"></sub></h3>
+                                    <% } %>
+                                <% } %>
+                                <h4 id="username" class="text-left">@<%=targetData.username %></h4>
+                            </div>
+                        </div>
+                        <% if(targetData.userBio && targetData.userBio!=""){ %>
+                        <p id="userBio"><%=targetData.userBio %></p>
+                        <% } %>
+                        <% if(targetData.UID == userData.UID){ %>
+                            <button id="editProfile" onclick="window.location='/<%=language_code %>/my/edit'"><%=lan_edit_profile %></button>
+                        <% } %>
+                        <div id="followersAndFollowing">
+                            <span id="userFollowers"><b><%=targetData.following.length %></b> <%=lan_user_following %></span>
+                            <span> · </span>
+                            <span id="userFollowing"><b><%=targetData.followers.length %></b> <%=lan_user_followers %></span>
+                        </div>
+                        <div id="userEmail">
+                            <embed src="/assets/svg/icons/email.svg">
+                            <span><%=targetData.email %></span>
+                        </div>
+                        <div id="userCoins">
+                            <embed src="/assets/svg/icons/coin.svg">
+                            <span><%=targetData.coins %></span>
+                        </div>
+                        <% if(targetData.userEducated == "k"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_k %></span>
+                            </div>
+                        <% }else if(targetData.userEducated == "e"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_e %></span>
+                            </div>
+                        <% }else if(targetData.userEducated == "j"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_j %></span>
+                            </div>
+                        <% }else if(targetData.userEducated == "h"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_h %></span>
+                            </div>
+                        <% }else if(targetData.userEducated == "c"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_c %></span>
+                            </div>
+                        <% }else if(targetData.userEducated == "m"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_m %></span>
+                            </div>
+                        <% } %>
+                        <div id="userBirthday">
+                            <embed src="/assets/svg/icons/birthday.svg">
+                            <span><%=targetData.userAge %></span>
+                        </div>
+                        <div id="userJoinDate">
+                            <embed src="/assets/svg/icons/date.svg">
+                            <span><%=new Date(targetData.joinDate).toISOString().split('T')[0]; %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="left-side-block" id="rightScroll">
+                <div class="block-inner-content">
+                    <div id="articles" class="block-inner-content" style="background-color: var(--card-bg-color);"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            getArticles(page, true, "<%=targetData.UID %>");
+        </script>
+    </main>
     <%- include('../partial/footer.ejs') %>
     <%- include('../partial/mobile-navigation-bar.ejs') %>
 </body>

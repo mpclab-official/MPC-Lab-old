@@ -79,14 +79,30 @@ const checkPageRedirect = (req, res, next) => {
         next();
       }
     });
-  } else if (req.url === `/${req.params.language}/blog/post`) {
-    if (!req.session.userID) {
-      res.redirect(`/${req.params.language}/login`);
+  } else if (req.url != `/${req.params.language}/user-setup`) {
+    if (req.session.userID) {
+      User.readUserData(req.session.userID, (err, data) => {
+        if (data) {
+          next();
+        } else {
+          res.redirect(`/${req.params.language}/user-setup`);
+        }
+      });
     } else {
-      next();
+      if (
+        req.url === `/${req.params.language}/blog/post` ||
+        req.url === `/${req.params.language}/my` ||
+        req.url === `/${req.params.language}/my/edit`
+      ) {
+        if (!req.session.userID) {
+          res.redirect(`/${req.params.language}/login`);
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
     }
-  } else {
-    next();
   }
 };
 

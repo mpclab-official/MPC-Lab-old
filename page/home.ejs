@@ -18,13 +18,13 @@
                         <table>
                             <tr>
                                 <td><div class="avatar"><img src="/users-avatar/<%=userData.avatarUrl %>"></div></td>
-                                <td><h3 class="card-title"><%=lan_welcome_back %> <%=userData.userName %></h3><p><%=lan_user_id %>: <%=userData.UID %></p></td>
+                                <td><h3 class="card-title"><%=lan_welcome_back %> <span class="clickable" onclick="window.location='/<%=language_code %>/user/<%=userData.UID %>'"><%=userData.userName %></span></h3><p><%=lan_user_id %>: <%=userData.UID %></p></td>
                             </tr>
                         </table>
                     </div>
                     <% } %>
                     <div id="articles" class="card">
-                        <h2 class="text-left"><%=lan_articles %></h2>
+                        <h2 class="text-left clickable" onclick="window.location='/<%=language_code %>/blog'"><%=lan_articles %></h2>
                     </div>
                 </div>
             </div>

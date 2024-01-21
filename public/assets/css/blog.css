@@ -27,7 +27,7 @@
     font-size: 0.79em;
 }
 
-.article-card>table>tbody>tr>td>p>span {
+.article-card>table>tbody>tr>td>p>.tag {
     float: right;
     margin-left: 5px;
     padding: 1.5px;
@@ -88,7 +88,7 @@
 
 @media screen and (max-width: 650px) {
 
-    .article-card>table>tbody>tr>td>p>span {
+    .article-card>table>tbody>tr>td>p>.tag {
         display: none;
     }
 

@@ -1,0 +1,294 @@
+<% let currentPage = 'my-edit' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body data-language="<%=language_code %>" data-views="<%=lan_views %>" data-likes="<%=lan_likes %>">
+    <%- include('../partial/page-includes.ejs') %>
+    <%- include('../partial/header.ejs', { language_code, userData }) %>
+    <main>
+        <div class="page-main-content">
+            <div class="right-side-block" id="leftScroll">
+                <div class="block-inner-content">
+                    <div id="userDiv" class="card" data-message="<%=JSON.stringify({lan_edit_username_error,lan_edit_user_bio_too_long,lan_edit_user_bio_too_long,lan_edit_user_avatar_size,lan_edit_user_avatar_file_type,lan_avatar_file_error,lan_saved,lan_save_failed}) %>">
+                        <div id="userAvatarAndUserName"class="edit">
+                            <div id="userAvatar" class="avatar"><img id="userAvatarImg" src="/users-avatar/<%=userData.avatarUrl %>"></div>
+                            <span><%=lan_change_avatar %></span><input type="file" id="userAvatarInput" accept="image/*">
+                            <div id="userNames">
+                                <input id="userName" class="text-left" value="<%=userData.userName %>"></input>
+                                <h4 id="username" class="text-left">@<%=userData.username %></h4>
+                            </div>
+                        </div>
+                        <% if(userData.userGender == "m"){ %>
+                        <div id="userGenders">
+                            <img id="gM" class="gSelect" onclick="changeGender('gM')" src="/assets/svg/icons/male.svg">
+                            <img id="gF" onclick="changeGender('gF')" src="/assets/svg/icons/female.svg">
+                        </div>
+                        <% }else{ %>
+                        <div id="userGenders">
+                            <img id="gM" onclick="changeGender('gM')" src="/assets/svg/icons/male.svg">
+                            <img id="gF" class="gSelect" onclick="changeGender('gF')" src="/assets/svg/icons/female.svg">
+                        </div>
+                        <% } %>
+                        <textarea id="userBio"><%=userData.userBio %></textarea>
+                        <div id="followersAndFollowing">
+                            <span id="userFollowers"><b><%=userData.following.length %></b> <%=lan_user_following %></span>
+                            <span> · </span>
+                            <span id="userFollowing"><b><%=userData.followers.length %></b> <%=lan_user_followers %></span>
+                        </div>
+                        <div id="userEmail">
+                            <embed src="/assets/svg/icons/email.svg">
+                            <span><%=userData.email %></span>
+                        </div>
+                        <div id="userCoins">
+                            <embed src="/assets/svg/icons/coin.svg">
+                            <span><%=userData.coins %></span>
+                        </div>
+                        <% if(userData.userEducated == "k"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <select id="userEducatedSelect">
+                                    <option value="k" selected><%=lan_user_educated_k %></option>
+                                    <option value="e"><%=lan_user_educated_e %></option>
+                                    <option value="j"><%=lan_user_educated_j %></option>
+                                    <option value="h"><%=lan_user_educated_h %></option>
+                                    <option value="c"><%=lan_user_educated_c %></option>
+                                    <option value="m"><%=lan_user_educated_m %></option>
+                                </select>
+                            </div>
+                        <% }else if(userData.userEducated == "e"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <select id="userEducatedSelect">
+                                    <option value="k"><%=lan_user_educated_k %></option>
+                                    <option value="e" selected><%=lan_user_educated_e %></option>
+                                    <option value="j"><%=lan_user_educated_j %></option>
+                                    <option value="h"><%=lan_user_educated_h %></option>
+                                    <option value="c"><%=lan_user_educated_c %></option>
+                                    <option value="m"><%=lan_user_educated_m %></option>
+                                </select>
+                            </div>
+                        <% }else if(userData.userEducated == "j"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <select id="userEducatedSelect">
+                                    <option value="k"><%=lan_user_educated_k %></option>
+                                    <option value="e"><%=lan_user_educated_e %></option>
+                                    <option value="j" selected><%=lan_user_educated_j %></option>
+                                    <option value="h"><%=lan_user_educated_h %></option>
+                                    <option value="c"><%=lan_user_educated_c %></option>
+                                    <option value="m"><%=lan_user_educated_m %></option>
+                                </select>
+                            </div>
+                        <% }else if(userData.userEducated == "h"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <select id="userEducatedSelect">
+                                    <option value="k"><%=lan_user_educated_k %></option>
+                                    <option value="e"><%=lan_user_educated_e %></option>
+                                    <option value="j"><%=lan_user_educated_j %></option>
+                                    <option value="h" selected><%=lan_user_educated_h %></option>
+                                    <option value="c"><%=lan_user_educated_c %></option>
+                                    <option value="m"><%=lan_user_educated_m %></option>
+                                </select>
+                            </div>
+                        <% }else if(userData.userEducated == "c"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <select id="userEducatedSelect">
+                                    <option value="k"><%=lan_user_educated_k %></option>
+                                    <option value="e"><%=lan_user_educated_e %></option>
+                                    <option value="j"><%=lan_user_educated_j %></option>
+                                    <option value="h"><%=lan_user_educated_h %></option>
+                                    <option value="c" selected><%=lan_user_educated_c %></option>
+                                    <option value="m"><%=lan_user_educated_m %></option>
+                                </select>
+                            </div>
+                        <% }else if(userData.userEducated == "m"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <select id="userEducatedSelect">
+                                    <option value="k"><%=lan_user_educated_k %></option>
+                                    <option value="e"><%=lan_user_educated_e %></option>
+                                    <option value="j"><%=lan_user_educated_j %></option>
+                                    <option value="h"><%=lan_user_educated_h %></option>
+                                    <option value="c"><%=lan_user_educated_c %></option>
+                                    <option value="m" selected><%=lan_user_educated_m %></option>
+                                </select>
+                            </div>
+                        <% } %>
+                        <div id="userBirthday">
+                            <embed src="/assets/svg/icons/birthday.svg">
+                            <input type="date" value="<%=userData.userAge %>"></input>
+                        </div>
+                        <div id="userJoinDate">
+                            <embed src="/assets/svg/icons/date.svg">
+                            <span><%=new Date(userData.joinDate).toISOString().split('T')[0]; %></span>
+                        </div>
+                        <button id="saveButton"><%=lan_save %></button>
+                    </div>
+                </div>
+            </div>
+            <div class="left-side-block" id="rightScroll">
+                <div class="block-inner-content">
+                    <!--Todo: User likes and more...-->
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById("userAvatarInput").addEventListener("change",()=>{
+            const file = document.getElementById("userAvatarInput").files[0];
+            document.getElementById("userAvatarImg").src = window.URL.createObjectURL(file);
+        });
+
+        const saveButton = document.getElementById("saveButton");
+        let currentGender = document.getElementsByClassName("gSelect")[0].id;
+        let messages = JSON.parse(document.getElementById("userDiv").getAttribute("data-message"));
+
+        function changeGender(to){
+            switch(to){
+                case "gM":
+                    document.getElementById("gM").className = "gSelect";
+                    document.getElementById("gF").className = "";
+                    currentGender = "gM";
+                    break;
+                case "gF":
+                    document.getElementById("gM").className = "";
+                    document.getElementById("gF").className = "gSelect";
+                    currentGender = "gF";
+                    break;
+            }
+        }
+
+        let userData = {};
+
+        function userNameTest(tester) {
+            if(tester.length < 3 || tester.length > 20) return false;
+            if(tester[0] == " " || tester[tester.length-1] == " ") return false;
+            return true;
+        }
+
+        saveButton.addEventListener("click", ()=>{
+            userData = {
+                userName: document.getElementById("userName"),
+                userGender: currentGender,
+                userEducated: document.getElementById("userEducatedSelect"),
+                userAge: document.getElementById("userBirthday"),
+                userBio: document.getElementById("userBio"),
+                userAvatar: document.getElementById("userAvatarInput"),
+            };
+            userData.userName = userData.userName.value;
+            userData.userGender = currentGender;
+            userData.userEducated = userData.userEducated.value;
+            userData.userAge = userData.userAge.value;
+            userData.userBio = userData.userBio.value;
+
+            if(!userNameTest(userData.userName)){
+                pageMessage(false, messages.lan_edit_username_error, 6000);
+                return;
+            }
+
+            if(userData.userBio.length > 200) {
+                pageMessage(false, messages.lan_edit_user_bio_too_long, 4000);
+                return;
+            }
+
+            if(userData.userAge == ""){
+                pageMessage(false, messages.lan_edit_user_age_error, 4000);
+                return;
+            }
+
+            const file = userData?.userAvatar?.files[0];
+
+            if(file){
+                if(file.size > 1024 * 1024 * 5){
+                    pageMessage(false, messages.lan_edit_user_avatar_size, 4000);
+                    return;
+                } else if(file.type != "image/png" && file.type != "image/jpeg" && file.type != "image/jpg"){
+                    pageMessage(false, messages.lan_edit_user_avatar_file_type, 4000);
+                    return;
+                } else{
+                    const img = new Image();
+                    img.src = window.URL.createObjectURL(file);
+                    if(img.width<0 || img.height<0){
+                        pageMessage(false, messages.lan_avatar_file_error, 4000);
+                        return;
+                    } else{
+                        userData.userAvatar = file;
+                        // Convert file to base64
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = () => {
+                            const base64Data = reader.result;
+                            userData.userAvatar = base64Data;
+                            sendData();
+                        };
+                    }
+                }
+            }else{
+                fetch(document.getElementById("userAvatarImg").src)
+                .then(response => response.blob())
+                .then(blob => {
+                    const reader = new FileReader();
+                    return new Promise((resolve, reject) => {
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                    });
+                })
+                .then(base64Data => {
+                    userData.userAvatar = base64Data;
+                    sendData();
+                })
+                .catch(error => console.error("Error fetching or converting image:", error));
+            }
+
+        function sendData(){
+            if(userData.userGender == "gM"){
+                userData.userGender = "m";
+            }else{
+                userData.userGender = "f";
+            }
+            console.log(userData)
+            fetch(`/${languageCode}/user-setup`, {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                UserData: userData,
+                }),
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("failed");
+                }
+                // If successful, redirect or perform other actions
+                return response.json(); // This returns a Promise
+            })
+            .then((json) => {
+                if (json.code.includes(0)) {
+                    pageMessage(true, messages.lan_saved, 4000);
+                    setTimeout(() => {
+                        location.href = "/<%=language_code %>/my";
+                    }, 1000);
+                } else if (json.code.includes(1)) {
+                    pageMessage(false, messages.lan_save_failed, 4000);
+                }
+            })
+            .catch((error) => {
+                // Handle errors, display error messages, etc.
+                console.error("Error:", error.message);
+            });
+        }
+       });
+    </script>
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/mobile-navigation-bar.ejs') %>
+</body>
+
+</html>

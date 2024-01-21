@@ -69,8 +69,8 @@
                         <div class="card large-card">
                             <table>
                                 <tr>
-                                    <td><div class="avatar"><img src="/users-avatar/<%=author.avatarUrl %>"></div></td>
-                                    <td><h3 class="card-title"><%=author.userName %></h3></td>
+                                    <td><div class="avatar" onclick="window.location='/<%=language_code %>/user/<%=article.author_id %>'"><img src="/users-avatar/<%=author.avatarUrl %>"></div></td>
+                                    <td><h3 class="card-title clickable" onclick="window.location='/<%=language_code %>/user/<%=article.author_id %>'"><%=author.userName %></h3></td>
                                 </tr>
                             </table>
                         </div>

@@ -85,3 +85,11 @@
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
+
+@media screen and (max-width: 1000px) {
+
+    .user-setup>.user-setup-inner {
+        width: 90%;
+    }
+
+}

@@ -21,7 +21,7 @@
 <script type="text/javascript" src="/assets/js/user-setup.js"></script>
 <% } %>
 
-<% if(currentPage=="blog" || currentPage=="home"){ %>
+<% if(currentPage=="blog" || currentPage=="home" || currentPage=="user") { %>
 <script type="text/javascript" src="/assets/js/get-articles.js"></script>
 <% } %>
 
@@ -32,6 +32,10 @@
 
 <% if(currentPage=="article") { %>
 <link rel="stylesheet" href="/assets/css/article-side-bar.css">
+<% } %>
+
+<% if(currentPage=="user" || currentPage=="my" || currentPage=="my-edit") { %>
+<link rel="stylesheet" href="/assets/css/user.css">
 <% } %>
 
 <script type="text/javascript" src="/assets/js/page-left-right-scroll.js"></script>

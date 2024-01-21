@@ -74,7 +74,7 @@ const config = {
   path: __dirname,
 
   // Project version
-  version: "2.2.2-dev",
+  version: "2.2.5-dev",
 
   // Hostname configuration (auto to automatically detect)
   hostname: "auto",
@@ -154,11 +154,21 @@ The configuration information is located in the `config.js` configuration file.
 
 ## Versions
 
+### [V2.2.5-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.5-dev)
+
+- Display and modification of user information.
+
+- Fixed some security vulnerabilities.
+
+Contributors:
+
+- [Tony Kan](#tony-kan)
+
 ### [V2.2.4-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.4-dev)
 
-- Add the function of daily check-in for users to obtain coins
+- Add the function of daily check-in for users to obtain coins.
 
-- Add error/success notification
+- Add error/success notification.
 
 Contributors:
 
@@ -166,7 +176,7 @@ Contributors:
 
 ### [V2.2.3-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.3-dev)
 
-- Fixed the issue of incorrect redirection when modifying language requests
+- Fixed the issue of incorrect redirection when modifying language requests.
 
 - Improved SEO:
   - Added site map
@@ -178,7 +188,7 @@ Contributors:
 
 ### [V2.2.2-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.2-dev)
 
-- Organize project structure
+- Organize project structure.
 
 Contributors:
 
@@ -186,9 +196,9 @@ Contributors:
 
 ### [V2.2.1-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.1-dev)
 
-- Fixed the issue with incorrect display and navigation of articles on the homepage
+- Fixed the issue with incorrect display and navigation of articles on the homepage.
 
-- Modify the logic of pageviews to increase by up to 1 per session
+- Modify the logic of pageviews to increase by up to 1 per session.
 
 Contributors:
 
@@ -196,13 +206,13 @@ Contributors:
 
 ### [V2.2.0-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.0-dev)
 
-- Added blog + article functionality
+- Added blog + article functionality.
 
-  - Supports rich text editing
-  - Supports custom cover image
-  - Supports adding keywords
+  - Supports rich text editing.
+  - Supports custom cover image.
+  - Supports adding keywords.
 
-- Added user interest modeling algorithm
+- Added user interest modeling algorithm.
 
 Contributors:
 
@@ -210,17 +220,17 @@ Contributors:
 
 ### [V2.1.0-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.1.0-dev)
 
-- Added tool functionality
+- Added tool functionality.
 
 - Added tools:
 
-  - Two Variable Linear Equation Calculator
+  - Two Variable Linear Equation Calculator.
 
-- Added user avatar functionality
+- Added user avatar functionality.
 
 - Added error reminder when filling in basic information after user login.
 
-- Added articles database
+- Added articles database.
 
 Contributors:
 
