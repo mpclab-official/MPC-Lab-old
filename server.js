@@ -21,6 +21,7 @@ const Articles = require(`./articles.js`);
 // Create express application
 const app = express();
 const port = config.port;
+const httpsPort = 443;
 
 // Get hostname
 let hostname;
@@ -43,6 +44,47 @@ if (config.hostname == "auto") {
   }
   hostname = getIpAddress();
 } else hostname = config.hostname;
+
+// HTTPS
+let httpsServer;
+if (config.https) {
+  // Load HTTP/HTTPs module
+  const http = require("http");
+  const https = require("https");
+
+  // Redirect HTTP to HTTPS
+  app.use((req, res, next) => {
+    if (!req.secure) {
+      return res.redirect(`https://${req.headers.host}${req.url}`);
+    }
+    next();
+  });
+
+  // Load fs module to read private key and certificate
+  const fs = require("fs");
+  const privateKey = fs.readFileSync(config.certificate.key, "utf8");
+  const certificate = fs.readFileSync(config.certificate.cert, "utf8");
+  const credentials = { key: privateKey, cert: certificate };
+
+  // Create HTTPs server
+  httpsServer = https.createServer(credentials, app);
+
+  // Create HTTP server
+  const httpApp = express();
+
+  // Redirect HTTP to HTTPS
+  httpApp.use((req, res) => {
+    res.redirect(`https://${req.headers.host}${req.url}`);
+  });
+
+  // Create HTTP server
+  const httpServer = http.createServer(httpApp);
+
+  // Start HTTP server
+  httpServer.listen(port, () => {
+    console.log(`HTTP server listening on port ${port}`);
+  });
+}
 
 // Server class
 class Server {
@@ -82,14 +124,25 @@ class Server {
     app.use("/", routes);
     app.set("view engine", "ejs");
 
-    // Start the server
-    app.listen(port, hostname, () => {
-      console.log(
-        `MPC Lab web-server is running on host ${hostname}, port ${port}`,
-        ` | ${hostname}:${port}`
-      );
-      if (config.openTestPage) openTestPage(`http://${hostname}:${port}`);
-    });
+    if (config.https) {
+      // Start the server with HTTPS
+      httpsServer.listen(httpsPort, hostname, () => {
+        console.log(
+          `MPC Lab web-server is running on host ${hostname}, port ${httpsPort}`,
+          ` | ${hostname}:${httpsPort}`
+        );
+        if (config.openTestPage) openTestPage(`http://${hostname}:${port}`);
+      });
+    } else {
+      // Start the server
+      app.listen(port, hostname, () => {
+        console.log(
+          `MPC Lab web-server is running on host ${hostname}, port ${port}`,
+          ` | ${hostname}:${port}`
+        );
+        if (config.openTestPage) openTestPage(`http://${hostname}:${port}`);
+      });
+    }
 
     // Process
 

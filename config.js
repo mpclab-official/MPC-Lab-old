@@ -24,7 +24,7 @@ const config = {
   path: __dirname,
 
   // Project version
-  version: "2.2.6-dev",
+  version: "2.2.7-dev",
 
   // Hostname configuration (auto to automatically detect)
   hostname: "auto",
@@ -34,6 +34,18 @@ const config = {
 
   // Flag to open the test page during startup
   openTestPage: true,
+
+  // Flag to enable HTTPS
+  https: false,
+
+  // Certificate
+  certificate: {
+    // Path to private key
+    key: `${__dirname}/certificate/private-key.pem`,
+
+    // Path to certificate
+    cert: `${__dirname}/certificate/certificate.pem`,
+  },
 
   // Supported languages with their code and display name
   languages: [

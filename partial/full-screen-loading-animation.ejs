@@ -1,0 +1,78 @@
+<style>
+    .loading-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--main-bg-color);
+        z-index: 999999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .loading-animation .logo {
+        width: 30%;
+        animation: loading 2s linear infinite alternate;
+    }
+
+    @keyframes loading {
+        0% {
+            transform: scale3d(1, 1, 1);
+            opacity: 1;
+        }
+
+        50% {
+            transform: scale3d(1.2, 1.2, 1.2);
+            opacity: 0.8;
+        }
+
+        75% {
+            transform: scale3d(1.3, 1.3, 1.3);
+            opacity: 0.6;
+        }
+
+        100% {
+            transform: scale3d(1, 1, 1);
+            opacity: 1;
+        }
+    }
+
+    .loaded {
+        animation: dilute 0.5s linear;
+    }
+
+    @keyframes dilute {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+</style>
+<div>
+    <div class="loading-animation">
+        <img src="<%- logo %>" class="logo">
+    </div>
+</div>
+<script>
+    window.addEventListener('load', function () {
+        hideLoadingAnimation();
+    });
+
+    function showLoadingAnimation() {
+        document.querySelector('.loading-animation').style.display = 'block';
+        document.querySelector('.loading-animation').classList.remove('loading-animation');
+        document.querySelector('.loading-animation').classList.add('loading-animation');
+    }
+    function hideLoadingAnimation() {
+        document.querySelector('.loading-animation').classList.add('loaded');
+        setTimeout(function () {
+            document.querySelector('.loading-animation').style.display = 'none';
+            document.querySelector('.loading-animation').classList.remove('loaded');
+        }, 500);
+    }
+</script>
