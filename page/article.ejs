@@ -81,12 +81,31 @@
                     </div>
                 </div>
             </div>
-            <div class="article-side-bar">
-                <button><embed src="/assets/svg/icons/like.svg"></button>
-                <button><embed src="/assets/svg/icons/star.svg"></button>
-                <button><embed src="/assets/svg/icons/coin.svg"></button>
-                <button><embed src="/assets/svg/icons/forward.svg"></button>
+            <div class="article-side-bar" data-copy="<%=lan_successfully_copy %>">
+                <% if(userData.Blog) { %>
+                <% if(userData.Blog.likes.includes(article.id)){ %>
+                <button onclick="likeArticle(article.id)"><img src="/assets/svg/icons/liked.svg" id="likeArticle"></button>
+                <% }else{ %>
+                <button onclick="likeArticle(article.id)"><img src="/assets/svg/icons/like.svg" id="likeArticle"></button>
+                <% } %>
+                <% if(userData.Blog.stars.includes(article.id)){ %>
+                <button onclick="starArticle(article.id)"><img src="/assets/svg/icons/starred.svg" id="starArticle"></button>
+                <% }else{ %>
+                <button onclick="starArticle(article.id)"><img src="/assets/svg/icons/star.svg" id="starArticle"></button>
+                <% } %>
+                <% if(userData.Blog.puttedCoins.includes(article.id)){ %>
+                <button onclick="coinArticle(article.id,article.author_id)"><img src="/assets/svg/icons/putted-coin.svg" id="coinArticle"></button>
+                <% }else{ %>
+                <button onclick="coinArticle(article.id,article.author_id)"><img src="/assets/svg/icons/coin.svg" id="coinArticle"></button>
+                <% } %>
+                <% }else{ %>
+                <button onclick="likeArticle(article.id)"><img src="/assets/svg/icons/like.svg" id="likeArticle"></button>
+                <button onclick="starArticle(article.id)"><img src="/assets/svg/icons/star.svg" id="starArticle"></button>
+                <button onclick="coinArticle(article.id,article.author_id)"><img src="/assets/svg/icons/coin.svg" id="coinArticle"></button>
+                <% } %>
+                <button onclick="shareArticle()"><img src="/assets/svg/icons/forward.svg" id=""></button>
             </div>
+            <script type="text/javascript" src="/assets/js/article-side-bar.js"></script>
     </main>
 
     <%- include('../partial/footer.ejs') %>

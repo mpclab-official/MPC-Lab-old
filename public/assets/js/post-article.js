@@ -1,6 +1,11 @@
 // post-article.js
 // This is a client-side script that contains the code for posting an article.
 
+let messages;
+window.addEventListener("load", () => {
+  messages = JSON.parse(document.body.getAttribute("data-message"));
+});
+
 // Function to mark input fields as invalid and display error messages
 function markInvalidInput(inputElement, errorMessage) {
   let newNode = document.createElement("span");
@@ -24,6 +29,31 @@ function convertImageToBase64(callback) {
   // Ensure a file is selected
   if (fileInput.files.length > 0) {
     const file = fileInput.files[0];
+
+    if (file.size > 1024 * 1024 * 5) {
+      pageMessage(false, messages.lan_blog_post_img_too_large, 4000);
+      callback(null);
+      return;
+    }
+
+    if (
+      file.type != "image/png" &&
+      file.type != "image/jpeg" &&
+      file.type != "image/jpg"
+    ) {
+      pageMessage(false, messages.lan_blog_post_img_file_type, 4000);
+      callback(null);
+      return;
+    }
+
+    const img = new Image();
+    img.src = window.URL.createObjectURL(file);
+
+    if (img.width < 0 || img.height < 0) {
+      pageMessage(false, messages.lan_blog_post_img_file_error, 4000);
+      return;
+    }
+
     const reader = new FileReader();
 
     // Read the file as Data URL (base64)

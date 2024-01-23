@@ -21,6 +21,7 @@ const routes = [
   "__user",
   "__my",
   "__my_edit",
+  "__article_side_bar",
 ];
 
 for (let i = 0; i < routes.length; i++) {

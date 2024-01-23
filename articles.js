@@ -384,6 +384,22 @@ class Articles {
     });
   }
 
+  // Function to dislike an article
+  async decrementLikes(articleId, callback) {
+    const query = "UPDATE articles SET likes = likes - 1 WHERE id = ?";
+
+    db.run(query, [articleId], (err) => {
+      if (err) {
+        callback({
+          code: [-1],
+          message: `Error decrementing likes for article with ID ${articleId}: ${err.message}`,
+        });
+      } else {
+        callback({ code: [0] });
+      }
+    });
+  }
+
   // Function to increment views for an article
   async incrementViews(articleId, callback) {
     const query = "UPDATE articles SET views = views + 1 WHERE id = ?";

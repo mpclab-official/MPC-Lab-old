@@ -111,6 +111,9 @@ var lan_en = {
         lan_blog_post_code1: "Title need to be 10 to 40 characters.",
         lan_blog_post_code2: "Tags need to be 1 to 8 tags, evry tag need to be 4 to 20 characters.",
         lan_blog_post_code3: "Descriptions need to be 20 to 150 characters.",
+        lan_blog_post_img_too_large: "Image size cannot exceed 5MB.",
+        lan_blog_post_img_file_type: "Images can only be in JPG, PNG, JPEG format.",
+        lan_blog_post_img_file_error: "Image file error...",
         lan_user_daily_check_in: "Daily Check-In",
         lan_check_in: "Check-In",
         lan_check_in_successfully: "Check-In Successfully",
@@ -136,6 +139,7 @@ var lan_en = {
         lan_avatar_file_error: "Avatar file error.",
         lan_saved: "Saved!",
         lan_save_failed: "Save Failed!",
+        lan_successfully_copy: "Successfully Copied!",
     }
 };
 

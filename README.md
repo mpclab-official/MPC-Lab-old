@@ -154,6 +154,16 @@ The configuration information is located in the `config.js` configuration file.
 
 ## Versions
 
+### [V2.2.6-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.6-dev)
+
+- Add article likes, collections, forwarding, and coin-voting functions.
+
+- Fixed vulnerabilities related to the format, size, and compliance of article covers during publishing.
+
+Contributors:
+
+- [Tony Kan](#tony-kan)
+
 ### [V2.2.5-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.5-dev)
 
 - Display and modification of user information.

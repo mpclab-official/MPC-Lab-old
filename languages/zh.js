@@ -111,6 +111,9 @@ var lan_zh = {
         lan_blog_post_code1: "标题需要为10到40个字符。",
         lan_blog_post_code2: "标签需要为1到8个标签, 每个标签需要为4到20个字符。",
         lan_blog_post_code3: "文章描述需要为20到100个字符。",
+        lan_blog_post_img_too_large: "图片大小不能超过5MB。",
+        lan_blog_post_img_file_type: "图片只能为 JPG、PNG、JPEG 格式。",
+        lan_blog_post_img_file_error: "图片文件错误...",
         lan_user_daily_check_in: "每日签到",
         lan_check_in: "签到",
         lan_check_in_successfully: "签到成功",
@@ -136,6 +139,7 @@ var lan_zh = {
         lan_avatar_file_error: "头像文件错误。",
         lan_saved: "保存成功！",
         lan_save_failed: "保存失败...",
+        lan_successfully_copy: "复制成功！",
     }
 };
 

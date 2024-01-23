@@ -160,9 +160,11 @@ function startSetup() {
 
                                                         UserData.Blog =
                                                           new Object();
-                                                        UserData.Blog.articles =
+                                                        UserData.Blog.likes =
                                                           new Array();
                                                         UserData.Blog.stars =
+                                                          new Array();
+                                                        UserData.Blog.puttedCoins =
                                                           new Array();
 
                                                         UserData.interest =

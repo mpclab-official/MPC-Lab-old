@@ -24,8 +24,14 @@
     transition: 0.3s;
 }
 
-.article-side-bar>button>embed {
+.article-side-bar>button>img {
     width: 35px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 @media screen and (max-width: 1000px) {

@@ -111,6 +111,9 @@ var lan_es = {
         lan_blog_post_code1: "El título debe tener entre 10 y 40 caracteres.",
         lan_blog_post_code2: "Las etiquetas deben ser de 1 a 8 etiquetas, cada etiqueta debe tener entre 4 y 20 caracteres.",
         lan_blog_post_code3: "Las descripciones deben tener entre 20 y 150 caracteres.",
+        lan_blog_post_img_too_large: "El tamaño de la imagen no puede exceder los 5 MB.",
+        lan_blog_post_img_file_type: "Las imágenes solo pueden estar en formato JPG, PNG, JPEG.",
+        lan_blog_post_img_file_error: "Error en el archivo de imagen...",
         lan_user_daily_check_in: "Registro diario",
         lan_check_in: "Registro",
         lan_check_in_successfully: "Registro exitoso",
@@ -136,6 +139,7 @@ var lan_es = {
         lan_avatar_file_error: "Error en el archivo de avatar.",
         lan_saved: "¡Guardado exitosamente!",
         lan_save_failed: "Error al guardar...",
+        lan_successfully_copy: "¡Copiado exitosamente!",
     }
 };
 
