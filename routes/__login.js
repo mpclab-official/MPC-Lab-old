@@ -59,6 +59,8 @@ router
       if (code) {
         if (code == 0) {
           req.session.userID = user.id;
+          req.session.hash = user.hash;
+          req.session.hash_created_at = Date.now();
         }
         res.status(200).json({ code, messages });
       }

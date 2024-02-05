@@ -7,7 +7,7 @@
         height: 100%;
         background-color: var(--main-bg-color);
         z-index: 999999;
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
     }
@@ -15,6 +15,24 @@
     .loading-animation .logo {
         width: 30%;
         animation: loading 2s linear infinite alternate;
+    }
+
+    @media screen and (max-width: 768px) {
+        .loading-animation .logo {
+            width: 50%;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .loading-animation .logo {
+            width: 70%;
+        }
+    }
+
+    @media screen and (max-width: 320px) {
+        .loading-animation .logo {
+            width: 90%;
+        }
     }
 
     @keyframes loading {
@@ -40,7 +58,7 @@
     }
 
     .loaded {
-        animation: dilute 0.5s linear;
+        animation: dilute 1s linear;
     }
 
     @keyframes dilute {
@@ -53,26 +71,45 @@
         }
     }
 </style>
-<div>
-    <div class="loading-animation">
-        <img src="<%- logo %>" class="logo">
-    </div>
+<div class="loading-animation">
+    <img src="<%- logo %>" class="logo">
 </div>
 <script>
+    let documentLoaded = false;
+    document.addEventListener('DOMContentLoaded', function () {
+        documentLoaded = true;
+    });
+    const loadingAnimation = document.querySelector('.loading-animation');
+    if (sessionStorage.getItem("first_load") != "false") {
+        loadingAnimation.style.display = 'flex';
+    } else {
+        setTimeout(function () {
+            if (!documentLoaded) loadingAnimation.style.display = 'flex';
+        }, 1000);
+    }
     window.addEventListener('load', function () {
-        hideLoadingAnimation();
+        if (sessionStorage.getItem("first_load") != "false") {
+            hideLoadingAnimation(true);
+            sessionStorage.setItem("first_load", "false");
+        } else {
+            hideLoadingAnimation(false);
+        }
     });
 
     function showLoadingAnimation() {
-        document.querySelector('.loading-animation').style.display = 'block';
-        document.querySelector('.loading-animation').classList.remove('loading-animation');
-        document.querySelector('.loading-animation').classList.add('loading-animation');
+        loadingAnimation.style.display = 'flex';
+        loadingAnimation.classList.remove('loading-animation');
+        loadingAnimation.classList.add('loading-animation');
     }
-    function hideLoadingAnimation() {
-        document.querySelector('.loading-animation').classList.add('loaded');
-        setTimeout(function () {
+    function hideLoadingAnimation(animation) {
+        if (animation) {
+            document.querySelector('.loading-animation').classList.add('loaded');
+            setTimeout(function () {
+                document.querySelector('.loading-animation').style.display = 'none';
+                document.querySelector('.loading-animation').classList.remove('loaded');
+            }, 1000);
+        } else {
             document.querySelector('.loading-animation').style.display = 'none';
-            document.querySelector('.loading-animation').classList.remove('loaded');
-        }, 500);
+        }
     }
 </script>

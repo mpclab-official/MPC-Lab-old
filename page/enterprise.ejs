@@ -1,0 +1,44 @@
+<% let currentPage = 'enterprise' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body data-language="<%=language_code %>" data-views="<%=lan_views %>" data-likes="<%=lan_likes %>">
+    <%- include('../partial/page-includes.ejs') %>
+    <%- include('../partial/header.ejs', { language_code, userData }) %>
+    <main>
+        <div class="page-main-content">
+            <div class="left-side-block" id="leftScroll">
+                <div class="block-inner-content">
+                    <div class="card large-card" style="display: flex; flex-direction: row;">
+                        <div class="classroom-logo" style="margin-bottom: auto; margin-top: auto; margin-left: 1em;"><img src="<%=enterprise.logo %>"></div>
+                        <hr style="margin-left: 1em; margin-right: 1em;">
+                        <h1><%=enterprise.name %></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side-block" id="rightScroll">
+                <div class="block-inner-content">
+                    <div class="card large-card">
+                        <h2 class="text-left"  style="margin-bottom: 10px;"><%=enterprise.name %></h2>
+                        <h3 class="text-left" style="margin-top: 10px;">@<%=enterprise.name_formal %></h3>
+                        <div class="text-left" style="display: flex; flex-direction: row;"><embed style="width: 18px;" src="/assets/svg/icons/email.svg"><span style="margin-left: 4px;"><%=enterprise.email %></span></div>
+                        <div class="text-left" style="display: flex; flex-direction: row; margin-top: 0.5em;"><embed style="width: 18px;" src="/assets/svg/icons/phone.svg"><span style="margin-left: 4px;"><%=enterprise.phone %></span></div>
+                        <div class="text-left" style="display: flex; flex-direction: row; margin-top: 0.5em;"><embed style="width: 18px;" src="/assets/svg/icons/peoples.svg"><span style="margin-left: 4px;"><%=enterprise.peoples %></span></div>
+                        <% if(enterprise.website){ %>
+                        <div class="text-left" style="display: flex; flex-direction: row; margin-top: 0.5em;"><embed style="width: 18px;" src="/assets/svg/icons/website.svg"><span style="margin-left: 4px;"><a href="<%=enterprise.website %>"><%=enterprise.website %></a></span></div>
+                        <% } %>
+                        <p class="text-left"><%=enterprise.description %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/mobile-navigation-bar.ejs') %>
+</body>
+
+</html>

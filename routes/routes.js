@@ -22,6 +22,16 @@ const routes = [
   "__my",
   "__my_edit",
   "__article_side_bar",
+  "__class",
+  "__enterprises",
+  "__dashboard",
+  "__logout",
+  "__create_classroom",
+  "__create_enterprise",
+  "__join_classroom",
+  "__join_enterprise",
+  "__classroom",
+  "__enterprise",
 ];
 
 for (let i = 0; i < routes.length; i++) {
@@ -31,5 +41,8 @@ for (let i = 0; i < routes.length; i++) {
 
 // tools
 router.use(`/`, require("../tools/routes.js"));
+
+// 404 page
+router.use(`*`, require(`./__404.js`));
 
 module.exports = router;

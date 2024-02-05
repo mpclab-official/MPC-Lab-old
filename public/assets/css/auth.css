@@ -75,7 +75,8 @@ main>.auth-box>form>.verification-code {
     width: 45%;
 }
 
-main>.auth-box>form>button {
+main>.auth-box>form>button,
+.auth-box>form>button {
     font-size: large;
     margin-left: 15%;
     margin-right: 15%;

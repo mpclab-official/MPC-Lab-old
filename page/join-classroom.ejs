@@ -1,0 +1,95 @@
+<% let currentPage = 'join-classroom' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body>
+    <%- include('../partial/page-includes.ejs') %>
+    <%- include('../partial/header.ejs', { language_code, userData }) %>
+    <main>
+        <div class="page-main-content" style="flex-direction: column;">
+            <div class="row-block">
+                <div class="block-inner-content">
+                    <div class="card large-card">
+                        <h2 class="text-left"><%=lan_join_classroom %></h2>
+                        <form id="joinClassroomForm">
+                            <span class="main-input-span" style="display: block; margin-top: 1em; margin-left: 38px; font-size: larger;"><%=lan_join_classroom_classroom_code %></span>
+                            <input name="classroom_code" class="main-input" style="display: block; margin-left: 38px; font-size: x-large;" placeholder="********" maxlength="8">
+                            <button type="button" class="btn" style="display: block; margin-top: 1em; margin-left: 38px; margin-bottom: 1em; font-size: x-large;"><%=lan_join_classroom %></button>
+                        </form>
+                        <style>
+                            .classroom-logo>img {
+                                background-color: black;
+                                border-radius: 10px;
+                                height: 100%;
+                                width: 100%;
+                                object-fit: cover;
+                            }
+                            .errorMessageCreateClassroom{
+                                display: block;
+                                font-weight: lighter;
+                                padding-left: 3px;
+                                margin-top: 3px;
+                                margin-left: 39px;
+                                width: 67%;
+                                background-color: #ffd2d2;
+                                border-left: 6px solid #f00 !important;
+                                margin-bottom: 0 !important;
+                                text-align: left !important;
+                            }
+                        </style>
+                        <script>
+                            // Function to mark input fields as invalid and display error messages
+                            function markInvalidInput(inputElement, errorMessage) {
+                                let newNode = document.createElement("span");
+                                newNode.innerHTML += `• ${errorMessage} </br>`;
+                                newNode.className = "errorMessageCreateClassroom";
+                                let parentDiv = inputElement.parentNode;
+                                parentDiv.insertBefore(newNode, inputElement);
+                            }
+                            // Function to reset input fields as invalid and remove error messages
+                            function resetInvalidInput() {
+                                let errorMessage = document.getElementsByClassName("errorMessageCreateClassroom");
+                                for (let i = errorMessage.length - 1; i >= 0; i--) {
+                                    errorMessage[i].remove();
+                                }
+                            }
+
+                            // Function to submit form
+                            document.querySelector('#joinClassroomForm button').addEventListener('click', () => {
+                                resetInvalidInput();
+                                let classroom_code = document.querySelector('#joinClassroomForm input[name="classroom_code"]').value;
+                                fetch('/<%=language_code %>/class/join', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        classCode: classroom_code
+                                    })
+                                }).then(res => res.json()).then(data => {
+                                    if (data.class_name_formal) {
+                                        pageMessage(true, data.class_name_formal + ' ' + data.message, 2000);
+                                        setTimeout(() => {
+                                            window.location = '/<%=language_code %>/class/' + classroom_code;
+                                        }, 1000);
+                                    } else {
+                                        pageMessage(false, data.message, 8000);
+                                        markInvalidInput(document.querySelector('#joinClassroomForm input[name="classroom_code"]'), data.message);
+                                    }
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/mobile-navigation-bar.ejs') %>
+</body>
+
+</html>

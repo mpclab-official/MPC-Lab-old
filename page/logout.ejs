@@ -1,0 +1,40 @@
+<% let currentPage = 'logout' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body style="background-image: url('<%=background_image %>');" data-language="<%=language_code %>">
+    <%- include('../partial/page-includes.ejs') %>
+    <a href="/<%=language_code %>" class="back-to-home clickable"><%=lan_back_to_home %></a>
+    <style>
+        .back-to-home{
+            position: fixed;
+            top: 10px;
+            left: 15px;
+            background-color: var(--card-bg-color);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <main>
+        <div class="page-main-content" style="flex-direction: column;">
+            <div class="row-block">
+                <div class="block-inner-content">
+                    <div class="card auth-box" style="max-width: 1000px; text-align: center; margin: 0 auto; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <form method="post">
+                            <div class="avatar" style="margin: 0 auto; height: 200px; width: 200px;"><img src="/users-avatar/<%=userData.avatarUrl %>"></div>
+                            <h1><%=lan_logout %></h1>
+                            <p><%=lan_logout_confirm %></p>
+                            <button class=""><%=lan_logout %></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

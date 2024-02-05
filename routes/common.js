@@ -29,6 +29,12 @@ const User = require(path.join(config.path, "user.js"));
 // Load articles module
 const Articles = require(path.join(config.path, "articles.js"));
 
+// Load classroom module
+const Classroom = require(path.join(config.path, "classroom.js"));
+
+// Load enterprise module
+const Enterprise = require(path.join(config.path, "enterprise.js"));
+
 // Load email verification module
 const emailVerification = require(path.join(
   config.path,
@@ -92,10 +98,19 @@ const checkPageRedirect = (req, res, next) => {
       if (
         req.url === `/${req.params.language}/blog/post` ||
         req.url === `/${req.params.language}/my` ||
-        req.url === `/${req.params.language}/my/edit`
+        req.url === `/${req.params.language}/my/edit` ||
+        req.url === `/${req.params.language}/dashboard` ||
+        req.url === `/${req.params.language}/logout` ||
+        req.url === `/${req.params.language}/enterprise/create` ||
+        req.url === `/${req.params.language}/class/create` ||
+        req.url === `/${req.params.language}/enterprise/join` ||
+        req.url === `/${req.params.language}/class/join` ||
+        req.url === `/${req.params.language}/class/${req.params.classID}` ||
+        req.url ===
+          `/${req.params.language}/enterprise/${req.params.enterpriseID}`
       ) {
         if (!req.session.userID) {
-          res.redirect(`/${req.params.language}/login`);
+          res.redirect(`/${req.params.language}/login?targeturl=${req.url}`);
         } else {
           next();
         }
@@ -151,4 +166,6 @@ module.exports = {
   emailVerification,
   checkVerificationCodeExpiration,
   Big,
+  Classroom,
+  Enterprise,
 };

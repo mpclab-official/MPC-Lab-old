@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=0.9">
 <title>
     <%=title %>
 </title>
@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/assets/css/error-success-notification.css">
 <script type="text/javascript" src="/assets/js/error-success-notification.js"></script>
 
-<% if(currentPage=="login" || currentPage=="register" || currentPage=="forget-password") { %>
+<% if(currentPage=="login" || currentPage=="register" || currentPage=="forget-password" || currentPage=="logout") { %>
 <link rel="stylesheet" href="/assets/css/auth.css">
 <script type="text/javascript" src="/assets/js/auth.js"></script>
 <% } %>
@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="/assets/css/article-side-bar.css">
 <% } %>
 
-<% if(currentPage=="user" || currentPage=="my" || currentPage=="my-edit") { %>
+<% if(currentPage=="user" || currentPage=="my" || currentPage=="my-edit" || currentPage=="dashboard") { %>
 <link rel="stylesheet" href="/assets/css/user.css">
 <% } %>
 

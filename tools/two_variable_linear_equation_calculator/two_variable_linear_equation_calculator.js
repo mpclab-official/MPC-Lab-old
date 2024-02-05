@@ -14,46 +14,36 @@ router.get(
   "/:language/tools/two_variable_linear_equation_calculator",
   checkPageRedirect,
   (req, res) => {
-    fs.readFile(
-      path.join(config.path, "tools", "tools.json"),
-      "utf8",
-      (err, data) => {
-        if (data) {
-          const Tools = JSON.parse(data);
-          let thisTool;
-          for (let i = 0; i < Tools.length; i++) {
-            if (Tools[i].url == "two_variable_linear_equation_calculator")
-              thisTool = Tools[i];
-          }
-          getUserData(req.session.userID, (err, data) => {
-            if (data) userData = data;
-            else userData = { colorTheme: "light" };
-            const language_index = languages_list.indexOf(req.params.language);
-            if (language_index == -1) res.redirect(`/${languages_list[0]}`);
-            const languages_translate_pack =
-              languages_translate[language_index];
-            const navigation_translate_pack =
-              language_navigation[language_index];
-            res.render(path.join(config.path, "page", "tool"), {
-              title: `${config.name} | ${thisTool.name[req.params.language]}`,
-              language_code: req.params.language,
-              favicon: config.favicon,
-              logo: config.logo,
-              logo_s: config.logo_s,
-              background_image: config.background_image,
-              navigation_translate_pack,
-              ...languages_translate_pack,
-              pageStyle: {
-                colorTheme: userData.colorTheme,
-              },
-              userData,
-              Tools,
-              thisTool,
-            });
-          });
-        }
-      }
-    );
+    const Tools = require(`../tools.js`);
+    let thisTool;
+    for (let i = 0; i < Tools.length; i++) {
+      if (Tools[i].url == "two_variable_linear_equation_calculator")
+        thisTool = Tools[i];
+    }
+    getUserData(req.session.userID, (err, data) => {
+      if (data) userData = data;
+      else userData = { colorTheme: "light" };
+      const language_index = languages_list.indexOf(req.params.language);
+      if (language_index == -1) res.redirect(`/${languages_list[0]}`);
+      const languages_translate_pack = languages_translate[language_index];
+      const navigation_translate_pack = language_navigation[language_index];
+      res.render(path.join(config.path, "page", "tool"), {
+        title: `${config.name} | ${thisTool.name[req.params.language]}`,
+        language_code: req.params.language,
+        favicon: config.favicon,
+        logo: config.logo,
+        logo_s: config.logo_s,
+        background_image: config.background_image,
+        navigation_translate_pack,
+        ...languages_translate_pack,
+        pageStyle: {
+          colorTheme: userData.colorTheme,
+        },
+        userData,
+        Tools,
+        thisTool,
+      });
+    });
   }
 );
 

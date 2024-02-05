@@ -1,0 +1,104 @@
+<% let currentPage = 'enterprises' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body data-language="<%=language_code %>" data-views="<%=lan_views %>" data-likes="<%=lan_likes %>">
+    <%- include('../partial/page-includes.ejs') %>
+    <%- include('../partial/header.ejs', { language_code, userData }) %>
+    <main>
+        <div class="page-main-content">
+            <div class="left-side-block" id="leftScroll">
+                <div class="block-inner-content">
+                    <% if(userData.userName && userData.UID){ %>
+                    <div class="card large-card">
+                        <table>
+                            <tr>
+                                <td><div class="avatar"><img src="/users-avatar/<%=userData.avatarUrl %>"></div></td>
+                                <td><h3 class="card-title"><%=lan_welcome_back %> <span class="clickable" onclick="window.location='/<%=language_code %>/user/<%=userData.UID %>'"><%=userData.userName %></span></h3><p><%=lan_user_id %>: <%=userData.UID %></p></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <% } %>
+
+                    <% if(userData.enterprises.length>0){ %>
+                        <% for(let i=0; i<userData.enterprises.length; i++){ %>
+                            <% if(!userData.enterprises[i].joined){ %>
+                            <div class="card large-card class-enterprise-card class-enterprise-card-pending" onclick="window.location='/<%=language_code %>/enterprise/<%=userData.enterprises[i].enterprise.id %>'">
+                                <span class="class-enterprise-card-tag"><%=lan_enterprise_pending_join_requests %></span>
+                                <div class="classroom-logo"><img src="<%=userData.enterprises[i].enterprise.logo %>"></div>
+                                <div>
+                                    <h3><%=userData.enterprises[i].enterprise.name %></h3>
+                                    <p><%=userData.enterprises[i].enterprise.description %></p>
+                                </div>
+                            </div>
+                            <% }else if(userData.enterprises[i].role == "member"){ %>
+                            <div class="card large-card class-enterprise-card class-enterprise-card-student" onclick="window.location='/<%=language_code %>/enterprise/<%=userData.enterprises[i].enterprise.id %>'">
+                                <span class="class-enterprise-card-tag"><%=lan_enterprise_authority_member %></span>
+                                <div class="classroom-logo"><img src="<%=userData.enterprises[i].enterprise.logo %>"></div>
+                                <div>
+                                    <h3><%=userData.enterprises[i].enterprise.name %></h3>
+                                    <p><%=userData.enterprises[i].enterprise.description %></p>
+                                </div>
+                            </div>
+                            <% }else if(userData.enterprises[i].role == "staff"){ %>
+                            <div class="card large-card class-enterprise-card class-enterprise-card-teacher" onclick="window.location='/<%=language_code %>/enterprise/<%=userData.enterprises[i].enterprise.id %>'">
+                                <span class="class-enterprise-card-tag"><%=lan_enterprise_authority_staff %></span>
+                                <div class="classroom-logo"><img src="<%=userData.enterprises[i].enterprise.logo %>"></div>
+                                <div>
+                                    <h3><%=userData.enterprises[i].enterprise.name %></h3>
+                                    <p><%=userData.enterprises[i].enterprise.description %></p>
+                                </div>
+                            </div>
+                            <% }else if(userData.enterprises[i].role == "administrator"){ %>
+                            <div class="card large-card class-enterprise-card class-enterprise-card-administrator" onclick="window.location='/<%=language_code %>/enterprise/<%=userData.enterprises[i].enterprise.id %>'">
+                                <span class="class-enterprise-card-tag"><%=lan_enterprise_authority_administrator %></span>
+                                <div class="classroom-logo"><img src="<%=userData.enterprises[i].enterprise.logo %>"></div>
+                                <div>
+                                    <h3><%=userData.enterprises[i].enterprise.name %></h3>
+                                    <p><%=userData.enterprises[i].enterprise.description %></p>
+                                </div>
+                            </div>
+                            <% }else if(userData.enterprises[i].role == "owner"){ %>
+                            <div class="card large-card class-enterprise-card class-enterprise-card-owner" onclick="window.location='/<%=language_code %>/enterprise/<%=userData.enterprises[i].enterprise.id %>'">
+                                <span class="class-enterprise-card-tag"><%=lan_enterprise_authority_owner %></span>
+                                <div class="classroom-logo"><img src="<%=userData.enterprises[i].enterprise.logo %>"></div>
+                                <div>
+                                    <h3><%=userData.enterprises[i].enterprise.name %></h3>
+                                    <p><%=userData.enterprises[i].enterprise.description %></p>
+                                </div>
+                            </div>
+                            <% } %>
+                        <% } %>
+                    <% }else{ %>
+                        <div class="card large-card">
+                            <h4 class="text-left"><%=lan_still_not_join_enterprise_yet %></h4>
+                            <button class="btn" style="margin-left: 1.4em;" onclick="window.location='/<%=language_code %>/enterprise/join'"><%=lan_join_enterprise %></button>
+                            <p style="margin-left: 1.5em;"><%=lan_or %> <a href="/<%=language_code %>/enterprise/create"><%=lan_creat_enterprise %></a></p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+            <div class="right-side-block" id="rightScroll">
+                <div class="block-inner-content">
+                    <% if(userData.userName && userData.UID){ %>
+                    <%- include('../partial/user-daily-check-in.ejs') %>
+                    <% } %>
+
+                    <div class="card large-card">
+                        <h4 class="text-left"><%=lan_still_not_join_enterprise_yet %></h4>
+                        <button class="btn" style="margin-left: 1.4em;" onclick="window.location='/<%=language_code %>/enterprise/join'"><%=lan_join_enterprise %></button>
+                        <p style="margin-left: 1.5em;"><%=lan_or %> <a href="/<%=language_code %>/enterprise/create"><%=lan_creat_enterprise %></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/mobile-navigation-bar.ejs') %>
+</body>
+
+</html>

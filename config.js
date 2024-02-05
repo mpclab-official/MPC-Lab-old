@@ -24,7 +24,7 @@ const config = {
   path: __dirname,
 
   // Project version
-  version: "2.2.7-dev",
+  version: "2.3.0-dev",
 
   // Hostname configuration (auto to automatically detect)
   hostname: "auto",
@@ -84,6 +84,8 @@ const config = {
     auth: `${__dirname}/db/auth.db`,
     user: `${__dirname}/db/user.db`,
     articles: `${__dirname}/db/articles.db`,
+    enterprise: `${__dirname}/db/enterprise.db`,
+    classroom: `${__dirname}/db/classroom.db`,
   },
 
   // Session configuration
@@ -100,7 +102,8 @@ const config = {
   },
 
   // SendGrid API key for email functionality
-  sendgridApiKey: "", // Add your SendGrid API key here
+  sendgridApiKey:
+    "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", // Add your SendGrid API key here
 };
 
 module.exports = config;

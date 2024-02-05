@@ -8,10 +8,67 @@
 
 <body>
     <%- include('../partial/page-includes.ejs') %>
-    <%- include('../partial/header.ejs', { language_code, userData }) %>
-    <!--Page Body-->
-    <%- include('../partial/footer.ejs') %>
-    <%- include('../partial/mobile-navigation-bar.ejs') %>
+    <div class="P404">$f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}, \quad \sigma = \frac{1}{404\sqrt{2\pi}}, \quad f(\mu + 404\sigma) = $ <span id="inner-404"></span></div>
+    <style>
+        .P404 {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+        }
+        #inner-404 {
+            font-size: 80px;
+            font-weight: bolder;
+        }
+        .BIG-404{
+            animation: forwards BIG404 1s;
+            display: block;
+        }
+        .small-404{
+            font-size: 40px;
+            animation: forwards small404 1s;
+        }
+        @keyframes BIG404 {
+            0%{
+                font-size: 100px;
+                display: inline;
+            }
+            100%{
+                font-size: 200px;
+                display: block;
+            }
+        }
+        @keyframes small404 {
+            0%{
+                font-size: 40px;
+            }
+            100%{
+                font-size: 20px;
+            }
+        }
+    </style>
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const outer = document.getElementsByClassName('P404')[0];
+                const inner = document.getElementById('inner-404');
+                const innerText = "404";
+                let i = 0;
+                const timer = setInterval(function() {
+                    inner.innerText = innerText.slice(0, i);
+                    i++;
+                    if (i > innerText.length) {
+                        clearInterval(timer);
+                        setTimeout(()=>{
+                            inner.classList.add("BIG-404");
+                            outer.classList.add("small-404");
+                        }, 1000);
+                    }
+                }, 300);
+            }, 500);
+        });
+    </script>
 </body>
 
 </html>

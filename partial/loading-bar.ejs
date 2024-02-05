@@ -1,0 +1,37 @@
+<style>
+    .loading-bar {
+        position: fixed;
+        background-color: var(--tag-bg-color);
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        z-index: 999999;
+        transition: width 0.3s ease-in-out;
+    }
+</style>
+
+<div class="loading-bar"></div>
+
+<script>
+    // Get the progress bar element
+    const progressBar = document.querySelector('.loading-bar');
+
+    // Listen for page load event
+    window.addEventListener("load", () => {
+        // Set the width of the progress bar to 100%
+        progressBar.style.width = "100%";
+        // After a delay of 500ms, hide the progress bar
+        setTimeout(() => {
+            progressBar.style.display = "none";
+        }, 500);
+    });
+
+    // Listen for page load progress event
+    window.addEventListener("progress", (event) => {
+        // Calculate the loading progress
+        const percent = (event.loaded / event.total) * 100;
+        // Set the width of the progress bar to the loading progress
+        progressBar.style.width = `${percent}%`;
+    });
+</script>

@@ -54,7 +54,10 @@ function submitLoginForm() {
     })
     .then((json) => {
       if (json.code.includes(0)) {
-        location.reload();
+        const params = new URLSearchParams(window.location.search);
+        const targeturl = params.get("targeturl");
+        if (targeturl) window.location = targeturl;
+        else location.reload();
       } else if (json.code.includes(1)) {
         markInvalidInput(
           document.getElementById("loginForm").elements["username"],
@@ -171,7 +174,10 @@ function submitResetPasswordForm() {
     })
     .then((json) => {
       if (json.code.includes(0)) {
-        // OK
+        pageMessage(true, json.messages[0], 8000);
+        setTimeout(() => {
+          window.location = `/${languageCode}/login`;
+        }, 2000);
       }
       if (json.code.includes(1)) {
         markInvalidInput(form.elements["email"], json.messages[1]);

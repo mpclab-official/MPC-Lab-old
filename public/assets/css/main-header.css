@@ -1,6 +1,7 @@
 .main-header {
     z-index: 10;
     display: flex;
+    justify-content: space-between;
     position: fixed;
     align-items: center;
     width: 100%;
@@ -102,7 +103,7 @@
 .main-header>nav>div {
     display: flex;
     align-items: center;
-    margin-right: 2%;
+    margin-right: 1%;
     margin-left: 1%;
 }
 
@@ -119,6 +120,32 @@
 .main-header>nav>div>.login-button {
     display: none;
     white-space: nowrap;
+}
+
+.main-header>nav>div>.user-avatar-dropdown {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 60px;
+    right: 10px;
+    width: 170px;
+    height: auto;
+    box-shadow: 4px 4px 5px var(--shadow-color);
+    background-color: var(--card-bg-color);
+    border-radius: 0 0px 10px 10px;
+}
+
+.main-header>nav>div>.user-avatar-dropdown>button {
+    width: 100%;
+    border: 0px;
+    padding: 10px;
+    font-size: medium;
+    background-color: var(--card-bg-color);
+    border-radius: 2px;
+}
+
+.main-header>nav>div>.user-avatar-dropdown>button:hover {
+    background-color: var(--card-hover-bg-color);
 }
 
 @media screen and (max-width: 1000px) {
@@ -144,7 +171,10 @@
     }
 
     .main-header>nav>ul:hover .main-header-navigation-drop-down-child {
-        display: block !important;
+        display: flex !important;
+        flex-wrap: nowrap;
+        justify-content: center;
+        width: 120px;
     }
 
     .main-header-navigation-drop-down-child>a {

@@ -80,15 +80,25 @@ router
             (code, id) => {
               if (code) {
                 if (code == 0) {
-                  req.session.userID = id;
+                  Auth.getUserById(id, (err, data) => {
+                    req.session.userID = id;
+                    req.session.hash = data.hash;
+                    req.session.hash_created_at = Date.now();
 
-                  req.session.verificationCode = null;
-                  req.session.verificationCodeExpiration = null;
+                    req.session.verificationCode = null;
+                    req.session.verificationCodeExpiration = null;
+
+                    res.status(200).json({
+                      code,
+                      messages,
+                    });
+                  });
+                } else {
+                  res.status(200).json({
+                    code,
+                    messages,
+                  });
                 }
-                res.status(200).json({
-                  code,
-                  messages,
-                });
               }
             }
           );

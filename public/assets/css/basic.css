@@ -33,9 +33,51 @@ hr {
     color: var(--hr-color);
 }
 
+.btn {
+    font-size: large;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    border-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    background-color: var(--button-bg-color);
+}
+
+.btn:hover {
+    color: var(--button-bg-color);
+    background-color: var(--button-text-color);
+}
+
+.main-input-span {
+    display: block;
+    margin-top: 1em;
+    color: var(--main-text-color);
+}
+
+.main-input {
+    height: 1.8em;
+    margin-top: 5px;
+    border: 1px solid var(--main-text-color);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    color: var(--main-text-color);
+    font-size: large;
+}
+
+.main-textarea {
+    margin-top: 12px;
+    height: 10em;
+    min-width: 230px;
+    border: solid var(--main-text-color) 1px;
+    border-radius: 3px;
+}
+
 .text-left {
     text-align: left;
-    margin-left: 1.5em;
+    margin-left: 25px;
 }
 
 .text-center {
@@ -44,7 +86,7 @@ hr {
 
 .text-right {
     text-align: right;
-    margin-right: 1.5em;
+    margin-right: 25px;
 }
 
 .hot-tag {
@@ -63,8 +105,29 @@ hr {
     animation: shake 0.3s infinite;
 }
 
+label.xrequired:before {
+    content: '* ';
+    color: red;
+}
+
 @keyframes shake {
-    0% { transform: translate(0, 0) rotate(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translate(-2px, -2px) rotate(-1deg); }
-    20%, 40%, 60%, 80%, 100% { transform: translate(2px, 2px) rotate(1deg); }
+    0% {
+        transform: translate(0, 0) rotate(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translate(-2px, -2px) rotate(-1deg);
+    }
+
+    20%,
+    40%,
+    60%,
+    80%,
+    100% {
+        transform: translate(2px, 2px) rotate(1deg);
+    }
 }

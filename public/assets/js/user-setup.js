@@ -153,6 +153,11 @@ function startSetup() {
                                                         UserData.colorTheme =
                                                           "light";
 
+                                                        UserData.classroom =
+                                                          new Array();
+                                                        UserData.enterprise =
+                                                          new Array();
+
                                                         UserData.following =
                                                           new Array();
                                                         UserData.followers =

@@ -1,4 +1,4 @@
-<img src="http://mathscichem.com/assets/svg/-logo-light.svg" style="max-hight='200px'">
+<img src="https://mathscichem.com/assets/svg/-logo-light.svg" style="max-hight='200px'">
 
 # MPC Lab Development Documentation
 
@@ -74,7 +74,7 @@ const config = {
   path: __dirname,
 
   // Project version
-  version: "2.2.7-dev",
+  version: "2.3.0-dev",
 
   // Hostname configuration (auto to automatically detect)
   hostname: "auto",
@@ -134,6 +134,8 @@ const config = {
     auth: `${__dirname}/db/auth.db`,
     user: `${__dirname}/db/user.db`,
     articles: `${__dirname}/db/articles.db`,
+    enterprise: `${__dirname}/db/enterprise.db`,
+    classroom: `${__dirname}/db/classroom.db`,
   },
 
   // Session configuration
@@ -154,6 +156,8 @@ const config = {
 };
 ```
 
+Please set the `robots.txt` file at `/public/robots.txt`.
+
 The configuration information is located in the `config.js` configuration file.
 
 ## Site Maps
@@ -165,6 +169,36 @@ The configuration information is located in the `config.js` configuration file.
 - Articles sitemap: `/sitemaps/articles`
 
 ## Versions
+
+### [V2.3.0-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.3.0-dev)
+
+- Add enterprise functionality (demo/basic).
+
+- Add classroom functionality (demo/basic).
+
+- Hash comparison between session and Auth modules.
+
+- Optimize loading animation.
+
+- Add user dashboard.
+
+- Add `robots.txt`.
+
+- Create a new 404 processing route.
+
+- Fixed article sitemap rendering bug.
+
+- Optimize page loading speed by locally loading KaTeX instead of using CDN.
+
+- Fixed the issue where `Personal Information > Date of Birth` cannot be modified.
+
+- Added redirection to the login page when not logged in, and automatic redirection back to the target page after logging in.
+
+- Optimize the automatic hiding of the sign-in bar after daily check-in.
+
+Contributors:
+
+- [Tony Kan](#tony-kan)
 
 ### [V2.2.7-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.2.7-dev)
 

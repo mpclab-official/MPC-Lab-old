@@ -1,0 +1,112 @@
+.class-enterprise-card {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+}
+
+.class-enterprise-card:hover {
+    background-color: var(--card-hover-bg-color);
+}
+
+.class-enterprise-card>.classroom-logo {
+    flex-shrink: 0;
+    border-radius: 10px;
+    height: 80px;
+    width: 80px;
+    margin: 10px;
+}
+
+.class-enterprise-card>div>h3 {
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-left: 10px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+.class-enterprise-card>div>p {
+    margin: 0;
+    margin-top: 3px;
+    margin-left: 11px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+.classroom-logo {
+    height: 3em;
+    width: 3em;
+    overflow: hidden;
+}
+
+.classroom-logo>img {
+    background-color: black;
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.class-enterprise-card-pending {
+    position: relative;
+    border: 2px solid gray;
+}
+
+.class-enterprise-card-pending>.class-enterprise-card-tag {
+    color: gray;
+    border: 2px solid gray;
+}
+
+.class-enterprise-card-student {
+    position: relative;
+    border: 2px solid green;
+}
+
+.class-enterprise-card-student>.class-enterprise-card-tag {
+    color: green;
+    border: 2px solid green;
+}
+
+.class-enterprise-card-teacher {
+    position: relative;
+    border: 2px solid blue;
+}
+
+.class-enterprise-card-teacher>.class-enterprise-card-tag {
+    color: blue;
+    border: 2px solid blue;
+}
+
+.class-enterprise-card-administrator {
+    position: relative;
+    border: 2px solid red;
+}
+
+.class-enterprise-card-administrator>.class-enterprise-card-tag {
+    color: red;
+    border: 2px solid red;
+}
+
+.class-enterprise-card-owner {
+    position: relative;
+    border: 2px solid purple;
+}
+
+.class-enterprise-card-owner>.class-enterprise-card-tag {
+    color: purple;
+    border: 2px solid purple;
+}
+
+.class-enterprise-card-tag {
+    z-index: 99;
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-weight: bolder;
+    padding: 4px;
+    background-color: var(--card-bg-color);
+    border-radius: 5px;
+}

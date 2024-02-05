@@ -17,6 +17,8 @@ const routes = require("./routes/routes.js"); // call routes.js
 const Auth = require(`./auth.js`);
 const User = require(`./user.js`);
 const Articles = require(`./articles.js`);
+const Classroom = require(`./classroom.js`);
+const Enterprise = require(`./enterprise.js`);
 
 // Create express application
 const app = express();
@@ -111,6 +113,10 @@ class Server {
       })
     );
 
+    // Use auth-crypto-check middleware
+    const authCryptoCheck = require("./routes/auth-crypto.js");
+    app.use(authCryptoCheck);
+
     // startLog
     const webRequestsLog = require("./log/webRequestsLog.js");
 
@@ -152,6 +158,8 @@ class Server {
       console.log(`Auth database closed: ${Auth.close()}`);
       console.log(`User database closed: ${User.close()}`);
       console.log(`Articles database closed: ${Articles.close()}`);
+      console.log(`Classroom database closed: ${Classroom.close()}`);
+      console.log(`Enterprise database closed: ${Enterprise.close()}`);
       console.log("Database connection closed!");
       console.log("MPC Lab web-server is closed!");
       console.log("Goodbye!");

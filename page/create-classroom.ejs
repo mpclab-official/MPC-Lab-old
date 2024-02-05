@@ -1,0 +1,236 @@
+<% let currentPage = 'create-classroom' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body>
+    <%- include('../partial/page-includes.ejs') %>
+    <%- include('../partial/header.ejs', { language_code, userData }) %>
+    <main>
+        <div class="page-main-content" style="flex-direction: column;">
+            <div class="row-block">
+                <div class="block-inner-content">
+                    <div class="card large-card">
+                        <h2 class="text-left"><%=lan_creat_classroom %></h2>
+                        <form id="createClassroomForm" data-file-error="<%=JSON.stringify({lan_blog_post_img_too_large,lan_blog_post_img_file_type,lan_blog_post_img_file_error}) %>">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_name %><label class="xrequired"></label></span>
+                            <input type="text" name="name" class="main-input" style="margin-left: 38px;" placeholder="Math Classroom">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_name_formal %><label class="xrequired"></label></span>
+                            <input type="text" name="name_formal" class="main-input" style="margin-left: 38px;" placeholder="highschool_math_class5">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_email %><label class="xrequired"></label></span>
+                            <input type="email" name="email" class="main-input" style="margin-left: 38px;" placeholder="support@mathscichem.com">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_phone %></span>
+                            <input type="tel" name="phone" class="main-input" style="margin-left: 38px;" placeholder="123-456-7890">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_address %><label class="xrequired"></label></span>
+                            <input type="text" name="address" class="main-input" style="margin-left: 38px;" placeholder="123 Main Street">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_address_city %><label class="xrequired"></label></span>
+                            <input type="text" name="address_city" class="main-input" style="margin-left: 38px;" placeholder="Anytown">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_address_state %><label class="xrequired"></label></span>
+                            <input type="text" name="address_state" class="main-input" style="margin-left: 38px;" placeholder="Anystate">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_address_zip %><label class="xrequired"></label></span>
+                            <input type="text" name="address_zip" class="main-input" style="margin-left: 38px;" placeholder="12345">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_address_country %><label class="xrequired"></label></span>
+                            <input type="text" name="address_country" class="main-input" style="margin-left: 38px;" placeholder="United States">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_website %></span>
+                            <input type="url" name="website" class="main-input" style="margin-left: 38px;" placeholder="https://example.com">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_logo %><label class="xrequired"></label></span>
+                            <div class="classroom-logo" style="display: none;"><img id="" src=""></div>
+                            <input type="file" accept="image/*" name="logo" class="main-input" style="margin-left: 38px;">
+                            <span class="main-input-span" style="margin-left: 38px;"><%=lan_create_classroom_create_description %><label class="xrequired"></label></span>
+                            <textarea name="description" class="main-textarea" style="margin-left: 38px;"></textarea>
+                            <button type="button" class="btn" style="margin-left: 38px; display: block; margin-top: 1em; margin-bottom: 1em;"><%=lan_creat_classroom %></button>
+                        </form>
+                        <style>
+                            .classroom-logo {
+                                margin-left: 1.5em;
+                                padding-left: 10px;
+                                padding-right: 10px;
+                            }
+                            .errorMessageCreateClassroom{
+                                display: block;
+                                font-weight: lighter;
+                                padding-left: 3px;
+                                margin-top: 3px;
+                                margin-left: 39px;
+                                width: 67%;
+                                background-color: #ffd2d2;
+                                border-left: 6px solid #f00 !important;
+                                margin-bottom: 0 !important;
+                                text-align: left !important;
+                            }
+                        </style>
+                        <script>
+                            // Function to preview image after validation
+                            document.querySelector('input[name="logo"]').addEventListener('change', function(){
+                                if(this.files.length === 0) {
+                                    document.querySelector('.classroom-logo').style.display = "none";
+                                    return;
+                                }
+                                let file = this.files[0];
+                                let reader = new FileReader();
+                                reader.onloadend = function(){
+                                    document.querySelector('.classroom-logo').style.display = "block";
+                                    document.querySelector('.classroom-logo img').src = reader.result;
+                                }
+                                reader.readAsDataURL(file);
+                            });
+
+                            // Function to mark input fields as invalid and display error messages
+                            function markInvalidInput(inputElement, errorMessage) {
+                                let newNode = document.createElement("span");
+                                newNode.innerHTML += `• ${errorMessage} </br>`;
+                                newNode.className = "errorMessageCreateClassroom";
+                                let parentDiv = inputElement.parentNode;
+                                parentDiv.insertBefore(newNode, inputElement);
+                            }
+                            // Function to reset input fields as invalid and remove error messages
+                            function resetInvalidInput() {
+                                let errorMessage = document.getElementsByClassName("errorMessageCreateClassroom");
+                                for (let i = errorMessage.length - 1; i >= 0; i--) {
+                                    errorMessage[i].remove();
+                                }
+                            }
+
+                            // Function to submit form
+                            function createClassroom(){
+                                resetInvalidInput();
+                                const fileError = JSON.parse(document.querySelector('#createClassroomForm').dataset.fileError);
+                                let name = document.querySelector('input[name="name"]').value;
+                                let name_formal = document.querySelector('input[name="name_formal"]').value;
+                                let email = document.querySelector('input[name="email"]').value;
+                                let phone = document.querySelector('input[name="phone"]').value;
+                                let address = document.querySelector('input[name="address"]').value;
+                                let address_city = document.querySelector('input[name="address_city"]').value;
+                                let address_state = document.querySelector('input[name="address_state"]').value;
+                                let address_zip = document.querySelector('input[name="address_zip"]').value;
+                                let address_country = document.querySelector('input[name="address_country"]').value;
+                                let website = document.querySelector('input[name="website"]').value;
+                                let logo = document.querySelector('input[name="logo"]').files[0];
+                                let description = document.querySelector('textarea[name="description"]').value;
+                                if(logo?.size > 1024 * 1024 * 5){
+                                    markInvalidInput(document.querySelector('input[name="logo"]'), fileError.lan_blog_post_img_too_large);
+                                    return;
+                                }
+                                if (
+                                    logo?.type != "image/png" &&
+                                    logo?.type != "image/jpeg" &&
+                                    logo?.type != "image/jpg"
+                                ) {
+                                    markInvalidInput(document.querySelector('input[name="logo"]'), fileError.lan_blog_post_img_file_type);
+                                    return;
+                                }
+                                if (logo?.width < 0 || logo?.height < 0) {
+                                    markInvalidInput(document.querySelector('input[name="logo"]'), fileError.lan_blog_post_img_file_error);
+                                    return;
+                                }
+                                let formData = new Object();
+                                try {
+                                    const reader = new FileReader();
+                                    reader.readAsDataURL(logo);
+                                    reader.onload = function () {
+                                        formData.logo = reader.result;
+                                        formData.name = name;
+                                        formData.name_formal = name_formal;
+                                        formData.email = email;
+                                        formData.phone = phone;
+                                        formData.address = address;
+                                        formData.address_city = address_city;
+                                        formData.address_state = address_state;
+                                        formData.address_zip = address_zip;
+                                        formData.address_country = address_country;
+                                        formData.website = website;
+                                        formData.description = description;
+                                        fetch('/<%=language_code %>/class/create', {
+                                            method: 'POST',
+                                            headers: {
+                                            "Content-Type": "application/json",
+                                            },
+                                            body: JSON.stringify({...formData}),
+                                        }).then(res => res.json()).then(data => {
+                                            if(data.id){
+                                                pageMessage(true, data.messages[0], 2000);
+                                                setTimeout(() => {
+                                                    window.location = `/<%=language_code %>/class/${data.id}`;
+                                                }, 1000);
+                                            }
+
+                                            let processedErrors = {};
+
+                                            for (let i = 0; i < data.error.length; i++) {
+                                                const errorType = data.error[i];
+                                                const errorMessage = data.messages[i];
+
+                                                if (!processedErrors[errorType]) {
+                                                    processedErrors[errorType] = true;
+
+                                                    switch (errorType) {
+                                                        case "name_invalid":
+                                                        case "name_too_long":
+                                                        case "name_too_short":
+                                                            markInvalidInput(document.querySelector('input[name="name"]'), errorMessage);
+                                                            break;
+                                                        case "name_formal_invalid":
+                                                        case "name_formal_too_long":
+                                                        case "name_formal_too_short":
+                                                        case "name_formal_already_exist":
+                                                            markInvalidInput(document.querySelector('input[name="name_formal"]'), errorMessage);
+                                                            break;
+                                                        case "email_invalid":
+                                                            markInvalidInput(document.querySelector('input[name="email"]'), errorMessage);
+                                                            break;
+                                                        case "phone_too_long":
+                                                        case "phone_too_short":
+                                                            markInvalidInput(document.querySelector('input[name="phone"]'), errorMessage);
+                                                            break;
+                                                        case "address_too_long":
+                                                        case "address_too_short":
+                                                            markInvalidInput(document.querySelector('input[name="address"]'), errorMessage);
+                                                            break;
+                                                        case "city_too_long":
+                                                        case "city_too_short":
+                                                            markInvalidInput(document.querySelector('input[name="address_city"]'), errorMessage);
+                                                            break;
+                                                        case "state_too_long":
+                                                        case "state_too_short":
+                                                            markInvalidInput(document.querySelector('input[name="address_state"]'), errorMessage);
+                                                            break;
+                                                        case "zip_too_long":
+                                                        case "zip_too_short":
+                                                            markInvalidInput(document.querySelector('input[name="address_zip"]'), errorMessage);
+                                                            break;
+                                                        case "country_too_long":
+                                                        case "country_too_short":
+                                                            markInvalidInput(document.querySelector('input[name="address_country"]'), errorMessage);
+                                                            break;
+                                                        case "website_too_long":
+                                                        case "website_too_short":
+                                                            markInvalidInput(document.querySelector('input[name="website"]'), errorMessage);
+                                                            break;
+                                                        case "description_too_long":
+                                                        case "description_too_short":
+                                                            markInvalidInput(document.querySelector('textarea[name="description"]'), errorMessage);
+                                                            break;
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    };
+                                } catch (error) {
+                                        markInvalidInput(document.querySelector('input[name="logo"]'), fileError.lan_blog_post_img_file_error);
+                                }
+                            }
+                            document.querySelector('button[type="button"]').addEventListener('click', createClassroom);
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/mobile-navigation-bar.ejs') %>
+</body>
+
+</html>

@@ -122,7 +122,7 @@
                         <% } %>
                         <div id="userBirthday">
                             <embed src="/assets/svg/icons/birthday.svg">
-                            <input type="date" value="<%=userData.userAge %>"></input>
+                            <input id="userBirthday-input" type="date" value="<%=userData.userAge %>"></input>
                         </div>
                         <div id="userJoinDate">
                             <embed src="/assets/svg/icons/date.svg">
@@ -177,7 +177,7 @@
                 userName: document.getElementById("userName"),
                 userGender: currentGender,
                 userEducated: document.getElementById("userEducatedSelect"),
-                userAge: document.getElementById("userBirthday"),
+                userAge: document.getElementById("userBirthday-input"),
                 userBio: document.getElementById("userBio"),
                 userAvatar: document.getElementById("userAvatarInput"),
             };
