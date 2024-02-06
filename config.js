@@ -24,7 +24,7 @@ const config = {
   path: __dirname,
 
   // Project version
-  version: "2.3.0-dev",
+  version: "2.3.1-dev",
 
   // Hostname configuration (auto to automatically detect)
   hostname: "auto",
@@ -41,10 +41,10 @@ const config = {
   // Certificate
   certificate: {
     // Path to private key
-    key: `${__dirname}/certificate/private-key.pem`,
+    key: `${__dirname}/certificate/mathscichem.com.key`,
 
     // Path to certificate
-    cert: `${__dirname}/certificate/certificate.pem`,
+    cert: `${__dirname}/certificate/mathscichem.com_bundle.pem`,
   },
 
   // Supported languages with their code and display name
@@ -102,8 +102,7 @@ const config = {
   },
 
   // SendGrid API key for email functionality
-  sendgridApiKey:
-    "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", // Add your SendGrid API key here
+  sendgridApiKey: "", // Add your SendGrid API key here
 };
 
 module.exports = config;

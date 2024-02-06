@@ -74,7 +74,7 @@ const config = {
   path: __dirname,
 
   // Project version
-  version: "2.3.0-dev",
+  version: "2.3.1-dev",
 
   // Hostname configuration (auto to automatically detect)
   hostname: "auto",
@@ -91,10 +91,10 @@ const config = {
   // Certificate
   certificate: {
     // Path to private key
-    key: `${__dirname}/certificate/private-key.pem`,
+    key: `${__dirname}/certificate/mathscichem.com.key`,
 
     // Path to certificate
-    cert: `${__dirname}/certificate/certificate.pem`,
+    cert: `${__dirname}/certificate/mathscichem.com_bundle.pem`,
   },
 
   // Supported languages with their code and display name
@@ -169,6 +169,18 @@ The configuration information is located in the `config.js` configuration file.
 - Articles sitemap: `/sitemaps/articles`
 
 ## Versions
+
+### [V2.3.1-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.3.1-dev)
+
+- Add functionality for users to view their liked articles.
+
+- Add functionality for users to view their stars articles.
+
+- Fix the issue where some content of articles was not displaying.
+
+Contributors:
+
+- [Tony Kan](#tony-kan)
 
 ### [V2.3.0-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.3.0-dev)
 

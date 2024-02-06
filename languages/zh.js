@@ -102,6 +102,7 @@ var lan_zh = {
         lan_articles: "文章",
         lan_views: "浏览",
         lan_likes: "点赞",
+        lan_stars: "收藏",
         lan_post_settings: "文章设置",
         lan_post_title: "标题",
         lan_post_tags: "标签 —— 使用空格分隔标签",

@@ -60,7 +60,7 @@
 
                     const article = JSON.parse(document.body.dataset.article);
                     let delta = article.content;
-                    quill.setContents(delta);
+                    window.onload = () => quill.setContents(delta);
                     </script>
                     </div>
                 </div>

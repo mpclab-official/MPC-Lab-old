@@ -45,7 +45,8 @@ hr {
     background-color: var(--button-bg-color);
 }
 
-.btn:hover {
+.btn:hover,
+.btn-hover {
     color: var(--button-bg-color);
     background-color: var(--button-text-color);
 }

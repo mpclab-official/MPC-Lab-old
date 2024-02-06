@@ -102,6 +102,7 @@ var lan_en = {
         lan_articles: "Articles",
         lan_views: "Views",
         lan_likes: "Likes",
+        lan_stars: "Stars",
         lan_post_settings: "Post Settings",
         lan_post_title: "Title",
         lan_post_tags: "Tags —— Use spaces to separate tags",

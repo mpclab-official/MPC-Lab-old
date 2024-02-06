@@ -102,6 +102,7 @@ var lan_es = {
         lan_articles: "Artículos",
         lan_views: "Vistas",
         lan_likes: "Me gusta",
+        lan_stars: "Estrellas",
         lan_post_settings: "Configuración de publicaciones",
         lan_post_title: "Título",
         lan_post_tags: "Etiquetas —— Utilice espacios para separar etiquetas",

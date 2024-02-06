@@ -90,7 +90,113 @@
             </div>
             <div class="left-side-block" id="rightScroll">
                 <div class="block-inner-content">
-                    <!--Todo: User likes and more...-->
+                    <div class="card large-card">
+                        <div>
+                            <button id="likes-articles-btn" class="btn btn-hover" onclick="this.classList.add('btn-hover'); document.getElementById('stars-articles-btn').classList.remove('btn-hover'); document.getElementById('likes-articles').style.display='block'; document.getElementById('stars-articles').style.display='none';"><%=lan_likes %></button>
+                            <button id="stars-articles-btn" class="btn" onclick="this.classList.add('btn-hover'); document.getElementById('likes-articles-btn').classList.remove('btn-hover'); document.getElementById('likes-articles').style.display='none'; document.getElementById('stars-articles').style.display='block';"><%=lan_stars %></button>
+                        </div>
+                        <hr>
+                        <div id="likes-articles">
+                            <% for(let i=0; i<likesArticles.length; i++){ %>
+                                <% if(likesArticles[i].cover == "0"){ %>
+                                    <div class="card article-card" onclick="window.location='/<%=language_code %>/blog/article/<%=likesArticles[i].id %>'">
+                                        <table>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <h1><%=likesArticles[i].title %></h1>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <p><%=likesArticles[i].about %></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <p><span onclick="window.location='/<%=language_code %>/user/<%=likesArticles[i].author_id %>'"><%=likesArticles[i].author_id %></span> | <%=likesArticles[i].views %> <%=lan_views %>   <%=likesArticles[i].likes %> <%=lan_likes %>      <% for (let j = 0; j < likesArticles[i].tags.length; j++) { %> <span class="tag"><%=likesArticles[i].tags[j] %></span><% } %></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                <% }else{ %>
+                                    <div class="card article-card" onclick="window.location='/<%=language_code %>/blog/article/<%=likesArticles[i].id %>'">
+                                        <table>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h1><%=likesArticles[i].title %></h1>
+                                                </td>
+                                                <td rowspan="3" class="image-td">
+                                                    <div class="image-container">
+                                                        <img src="<%=likesArticles[i].cover %>">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <p><%=likesArticles[i].about %></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <p><span onclick="window.location='/<%=language_code %>/user/<%=likesArticles[i].author_id %>'"><%=likesArticles[i].author_id %></span> | <%=likesArticles[i].views %> <%=lan_views %>   <%=likesArticles[i].likes %> <%=lan_likes %>      <% for (let j = 0; j < likesArticles[i].tags.length; j++) { %> <span class="tag"><%=likesArticles[i].tags[j] %></span><% } %></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <div id="stars-articles" style="display: none;">
+                            <% for(let i=0; i<staredArticles.length; i++){ %>
+                                <% if(staredArticles[i].cover == "0"){ %>
+                                    <div class="card article-card" onclick="window.location='/<%=language_code %>/blog/article/<%=staredArticles[i].id %>'">
+                                        <table>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <h1><%=staredArticles[i].title %></h1>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <p><%=staredArticles[i].about %></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <p><span onclick="window.location='/<%=language_code %>/user/<%=staredArticles[i].author_id %>'"><%=staredArticles[i].author_id %></span> | <%=staredArticles[i].views %> <%=lan_views %>   <%=staredArticles[i].likes %> <%=lan_likes %>      <% for (let j = 0; j < staredArticles[i].tags.length; j++) { %> <span class="tag"><%=staredArticles[i].tags[j] %></span><% } %></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                <% }else{ %>
+                                    <div class="card article-card" onclick="window.location='/<%=language_code %>/blog/article/<%=staredArticles[i].id %>'">
+                                        <table>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h1><%=staredArticles[i].title %></h1>
+                                                </td>
+                                                <td rowspan="3" class="image-td">
+                                                    <div class="image-container">
+                                                        <img src="<%=staredArticles[i].cover %>">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <p><%=staredArticles[i].about %></p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <p><span onclick="window.location='/<%=language_code %>/user/<%=staredArticles[i].author_id %>'"><%=staredArticles[i].author_id %></span> | <%=staredArticles[i].views %> <%=lan_views %>   <%=staredArticles[i].likes %> <%=lan_likes %>      <% for (let j = 0; j < staredArticles[i].tags.length; j++) { %> <span class="tag"><%=staredArticles[i].tags[j] %></span><% } %></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
