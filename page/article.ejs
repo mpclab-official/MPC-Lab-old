@@ -71,6 +71,33 @@
                                 <tr>
                                     <td><div class="avatar" onclick="window.location='/<%=language_code %>/user/<%=article.author_id %>'"><img src="/users-avatar/<%=author.avatarUrl %>"></div></td>
                                     <td><h3 class="card-title clickable" onclick="window.location='/<%=language_code %>/user/<%=article.author_id %>'"><%=author.userName %></h3></td>
+                                    <td>
+                                        <button id="user-follow" data-author="<%=article.author_id %>" class="btn" style="margin-left: 7px; font-size: medium; padding-top: 2px; padding-bottom: 2px; border-radius: 4px; border: 1px solid;"><%=lan_user_follow %></button>
+                                        <button id="user-followed" class="btn btn-hover" style="display: none; margin-left: 7px; font-size: medium; padding-top: 2px; padding-bottom: 2px; border-radius: 4px; border: 1px solid;"><%=lan_user_followed %></button>
+                                    </td>
+                                    <script type="text/javascript" src="/assets/js/follow-unfollow.js"></script>
+                                    <script>
+                                        const followButtons = document.getElementById("user-follow");
+                                        const followedButtons = document.getElementById("user-followed");
+
+                                        followButtons.addEventListener("click", () => {
+                                        followUnfollowUser(
+                                            followButtons.dataset.author,
+                                            followButtons,
+                                            followedButtons
+                                        );
+                                        });
+
+                                        followedButtons.addEventListener("click", () => {
+                                        followUnfollowUser(
+                                            followButtons.dataset.author,
+                                            followButtons,
+                                            followedButtons
+                                        );
+                                        });
+
+                                        updateFollowingUI(followButtons.dataset.author, followButtons, followedButtons);
+                                    </script>
                                 </tr>
                             </table>
                         </div>

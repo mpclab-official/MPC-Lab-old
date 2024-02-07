@@ -99,6 +99,8 @@ const checkPageRedirect = (req, res, next) => {
         req.url === `/${req.params.language}/blog/post` ||
         req.url === `/${req.params.language}/my` ||
         req.url === `/${req.params.language}/my/edit` ||
+        req.url === `/${req.params.language}/my/following` ||
+        req.url === `/${req.params.language}/my/followers` ||
         req.url === `/${req.params.language}/dashboard` ||
         req.url === `/${req.params.language}/logout` ||
         req.url === `/${req.params.language}/enterprise/create` ||

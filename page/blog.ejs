@@ -23,7 +23,43 @@
             </div>
             <div class="right-side-block" id="rightScroll">
                 <div class="block-inner-content">
-
+                    <style>
+                        .side-tools-card:hover{
+                            background-color: var(--card-hover-bg-color);
+                        }
+                    </style>
+                    <div class="card large-card" style="padding-bottom: 15px;">
+                        <h3 class="text-left clickable" onclick="window.location='/<%=language_code %>/tools'"><%=lan_hot_tools %></h3>
+                        <% for(let i=0;i<Tools.length;i++){ %>
+                            <% if(Tools[i].hot){ %>
+                                <div class="card side-tools-card" style="display: flex; flex-direction: row; align-items: center; box-shadow: none;" onclick="window.location='/<%=language_code %>/tools/<%=Tools[i].url %>'">
+                                    <div style="flex-shrink: 0;">
+                                        <img src="/assets/img/tools/<%=Tools[i].img %>" style="width: 80px; border-radius: 10px;">
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;">
+                                        <h4 style="margin: 0; margin-left: 5px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;"><%=Tools[i].name[language_code] %></h4>
+                                        <p style="margin: 0; margin-top: 10px; margin-left: 5px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;"><%=Tools[i].description[language_code] %></p>
+                                    </div>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <div class="card large-card" style="padding-bottom: 15px;">
+                        <h3 class="text-left clickable" onclick="window.location='/<%=language_code %>/tools'"><%=lan_new_tools %></h3>
+                        <% for(let i=0;i<Tools.length;i++){ %>
+                            <% if(Tools[i].new){ %>
+                                <div class="card side-tools-card" style="display: flex; flex-direction: row; align-items: center; box-shadow: none;" onclick="window.location='/<%=language_code %>/tools/<%=Tools[i].url %>'">
+                                    <div style="flex-shrink: 0;">
+                                        <img src="/assets/img/tools/<%=Tools[i].img %>" style="width: 80px; border-radius: 10px;">
+                                    </div>
+                                    <div style="display: flex; flex-direction: column;">
+                                        <h4 style="margin: 0; margin-left: 5px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;"><%=Tools[i].name[language_code] %></h4>
+                                        <p style="margin: 0; margin-top: 10px; margin-left: 5px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;"><%=Tools[i].description[language_code] %></p>
+                                    </div>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
                 </div>
             </div>
         </div>

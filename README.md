@@ -74,7 +74,7 @@ const config = {
   path: __dirname,
 
   // Project version
-  version: "2.3.1-dev",
+  version: "2.3.2-dev",
 
   // Hostname configuration (auto to automatically detect)
   hostname: "auto",
@@ -169,6 +169,20 @@ The configuration information is located in the `config.js` configuration file.
 - Articles sitemap: `/sitemaps/articles`
 
 ## Versions
+
+### [V2.3.2-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.3.2-dev)
+
+- Add functionality to follow/unfollow users.
+
+- Display a list of followers and fans on the user profile page.
+
+- Add hot and new tool recommendations to the main page.
+
+- Fixed the bug where the 404 page was not rendering.
+
+Contributors:
+
+- [Tony Kan](#tony-kan)
 
 ### [V2.3.1-dev](https://github.com/mpclab-official/MPC-Lab/releases/tag/v2.3.1-dev)
 

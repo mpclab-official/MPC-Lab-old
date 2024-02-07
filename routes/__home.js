@@ -23,6 +23,7 @@ router.get("/:language", checkPageRedirect, (req, res) => {
     }
     const languages_translate_pack = languages_translate[language_index];
     const navigation_translate_pack = language_navigation[language_index];
+    let Tools = require(`../tools/tools.js`);
     res.render(path.join(config.path, "page", "home"), {
       title: config.name,
       language_code: req.params.language,
@@ -36,6 +37,7 @@ router.get("/:language", checkPageRedirect, (req, res) => {
         colorTheme: userData.colorTheme,
       },
       userData,
+      Tools,
     });
   });
 });

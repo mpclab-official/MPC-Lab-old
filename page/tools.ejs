@@ -41,7 +41,7 @@
                         <% for(let i = 0;i<Tools.length;i++){ %>
                             <% if(Tools[i].hot && Tools[i].new){ %>
                             <% Tools[i].display = true %>
-                            <div class="card tool-card" onclick="window.location='./tools/<%=Tools[i].url %>'">
+                            <div class="card tool-card" onclick="window.location='/<%=language_code %>/tools/<%=Tools[i].url %>'">
                                 <table>
                                     <tr>
                                         <td rowspan="2">

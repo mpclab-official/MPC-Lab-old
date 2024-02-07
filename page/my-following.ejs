@@ -1,0 +1,138 @@
+<% let currentPage = 'my-following' %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partial/head.ejs', { currentPage, pageStyle }) %>
+</head>
+
+<body data-language="<%=language_code %>" data-views="<%=lan_views %>" data-likes="<%=lan_likes %>">
+    <%- include('../partial/page-includes.ejs') %>
+    <%- include('../partial/header.ejs', { language_code, userData }) %>
+    <main>
+        <div class="page-main-content">
+            <div class="left-side-block" id="leftScroll">
+                <div class="block-inner-content">
+                    <div class="card large-card" id="follows" data-uids="<%=JSON.stringify(userData.following) %>">
+                        <script type="text/javascript" src="/assets/js/follow-unfollow.js"></script>
+                        <h2 class="text-left" style="margin-top: 10px; margin-bottom: 5px;"><%=lan_user_following %></h2>
+                        <hr style="width: 90%;">
+                        <% for(let i=0;i<userData.following.length;i++){ %>
+                            <div style="display: flex; align-items: center; flex-direction: row; margin-top: 15px; margin-bottom: 15px;">
+                                <div id="user-avatar" class="avatar"><img src="/users-avatar/<%=userData.following[i].avatarUrl %>"></div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <h2 style="margin: 0;" class="clickable" onclick="window.location='/<%=language_code %>/user/<%=userData.UID %>'"><%=userData.following[i].userName %></h2>
+                                    <p style="margin: 0;"><%=userData.following[i].UID %></p>
+                                </div>
+                                <button id="user-follow-<%=userData.following[i].UID %>" data-uid="<%=userData.following[i].UID %>" class="btn" style="display: none; margin-left: 7px; font-size: medium; padding-top: 2px; padding-bottom: 2px; border-radius: 4px; border: 1px solid;"><%=lan_user_follow %></button>
+                                <button id="user-followed-<%=userData.following[i].UID %>" data-uid="<%=userData.following[i].UID %>" class="btn btn-hover" style="display: block; margin-left: 7px; font-size: medium; padding-top: 2px; padding-bottom: 2px; border-radius: 4px; border: 1px solid;"><%=lan_user_followed %></button>
+                            </div>
+                        <% } %>
+                        <script>
+                            const uids = JSON.parse(document.getElementById("follows").dataset.uids);
+                            for(let i=0;i<uids.length;i++){
+                                const followButtons = document.getElementById("user-follow-"+uids[i].UID);
+                                const followedButtons = document.getElementById("user-followed-"+uids[i].UID);
+                                followButtons.addEventListener("click", () => {
+                                    followUnfollowUser(
+                                        followButtons.dataset.uid,
+                                        followButtons,
+                                        followedButtons
+                                    );
+                                });
+                                followedButtons.addEventListener("click", () => {
+                                    followUnfollowUser(
+                                        followButtons.dataset.uid,
+                                        followButtons,
+                                        followedButtons
+                                    );
+                                });
+                            } 
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side-block" id="rightScroll">
+                <div class="block-inner-content">
+                    <div id="userDiv" class="card">
+                        <div id="userAvatarAndUserName">
+                            <div id="userAvatar" class="avatar"><img src="/users-avatar/<%=userData.avatarUrl %>"></div>
+                            <div id="userNames">
+                                <% if(userData.userGender != "u"){ %>
+                                    <% if(userData.userGender == "m"){ %>
+                                        <h3 id="userName" class="text-left"><%=userData.userName %><sub><embed id="userGender-M" src="/assets/svg/icons/male.svg"></sub></h3>
+                                    <% } else { %>
+                                        <h3 id="userName" class="text-left"><%=userData.userName %><sub><embed id="userGender-F" src="/assets/svg/icons/female.svg"></sub></h3>
+                                    <% } %>
+                                <% } %>
+                                <h4 id="username" class="text-left">@<%=userData.username %></h4>
+                            </div>
+                        </div>
+                        <% if(userData.userBio && userData.userBio!=""){ %>
+                        <p id="userBio"><%=userData.userBio %></p>
+                        <% } %>
+                        <% if(userData.UID == userData.UID){ %>
+                            <button id="editProfile" onclick="window.location='/<%=language_code %>/my/edit'"><%=lan_edit_profile %></button>
+                        <% } %>
+                        <div id="followersAndFollowing">
+                            <span id="userFollowing" class="clickable" onclick="window.location='/<%=language_code %>/my/following'"><b><%=userData.following.length %></b> <%=lan_user_following %></span>
+                            <span> · </span>
+                            <span id="userFollowers" class="clickable" onclick="window.location='/<%=language_code %>/my/followers'"><b><%=userData.followers.length %></b> <%=lan_user_followers %></span>
+                        </div>
+                        <div id="userEmail">
+                            <embed src="/assets/svg/icons/email.svg">
+                            <span><%=userData.email %></span>
+                        </div>
+                        <div id="userCoins">
+                            <embed src="/assets/svg/icons/coin.svg">
+                            <span><%=userData.coins %></span>
+                        </div>
+                        <% if(userData.userEducated == "k"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_k %></span>
+                            </div>
+                        <% }else if(userData.userEducated == "e"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_e %></span>
+                            </div>
+                        <% }else if(userData.userEducated == "j"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_j %></span>
+                            </div>
+                        <% }else if(userData.userEducated == "h"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_h %></span>
+                            </div>
+                        <% }else if(userData.userEducated == "c"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_c %></span>
+                            </div>
+                        <% }else if(userData.userEducated == "m"){ %>
+                            <div id="userEducated">
+                                <embed src="/assets/svg/icons/educate.svg">
+                                <span><%=lan_user_educated_m %></span>
+                            </div>
+                        <% } %>
+                        <div id="userBirthday">
+                            <embed src="/assets/svg/icons/birthday.svg">
+                            <span><%=userData.userAge %></span>
+                        </div>
+                        <div id="userJoinDate">
+                            <embed src="/assets/svg/icons/date.svg">
+                            <span><%=new Date(userData.joinDate).toISOString().split('T')[0]; %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('../partial/footer.ejs') %>
+    <%- include('../partial/mobile-navigation-bar.ejs') %>
+</body>
+
+</html>

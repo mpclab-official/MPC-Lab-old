@@ -26,6 +26,7 @@ router
       }
       const languages_translate_pack = languages_translate[language_index];
       const navigation_translate_pack = language_navigation[language_index];
+      let Tools = require(`../tools/tools.js`);
       res.render(path.join(config.path, "page", "blog"), {
         title: `${config.name} | ${navigation_translate_pack[2].name}`,
         language_code: req.params.language,
@@ -39,6 +40,7 @@ router
           colorTheme: userData.colorTheme,
         },
         userData,
+        Tools,
       });
     });
   })

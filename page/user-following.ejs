@@ -1,4 +1,4 @@
-<% let currentPage = 'user' %>
+<% let currentPage = 'user-following' %>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +11,24 @@
     <%- include('../partial/header.ejs', { language_code, userData }) %>
     <main>
         <div class="page-main-content">
-            <div class="right-side-block" id="leftScroll">
+            <div class="left-side-block" id="leftScroll">
+                <div class="block-inner-content">
+                    <div class="card large-card" id="follows" data-uids="<%=JSON.stringify(targetData.following) %>">
+                        <h2 class="text-left" style="margin-top: 10px; margin-bottom: 5px;"><%=lan_user_following %></h2>
+                        <hr style="width: 90%;">
+                        <% for(let i=0;i<targetData.following.length;i++){ %>
+                            <div style="display: flex; align-items: center; flex-direction: row; margin-top: 15px; margin-bottom: 15px;">
+                                <div id="user-avatar" class="avatar"><img src="/users-avatar/<%=targetData.following[i].avatarUrl %>"></div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <h2 style="margin: 0;" class="clickable" onclick="window.location='/<%=language_code %>/user/<%=targetData.UID %>'"><%=targetData.following[i].userName %></h2>
+                                    <p style="margin: 0;"><%=targetData.following[i].UID %></p>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side-block" id="rightScroll">
                 <div class="block-inner-content">
                     <div id="userDiv" class="card">
                         <div id="userAvatarAndUserName">
@@ -34,9 +51,9 @@
                             <button id="editProfile" onclick="window.location='/<%=language_code %>/my/edit'"><%=lan_edit_profile %></button>
                         <% } %>
                         <div id="followersAndFollowing">
-                            <span id="userFollowing" class="clickable" onclick="window.location='/<%=language_code %>/user/<%=targetData.UID %>/following'"><b><%=targetData.following.length %></b> <%=lan_user_following %></span>
+                            <span id="userFollowing" class="clickable" onclick="window.location='/<%=language_code %>/my/following'"><b><%=targetData.following.length %></b> <%=lan_user_following %></span>
                             <span> · </span>
-                            <span id="userFollowers" class="clickable" onclick="window.location='/<%=language_code %>/user/<%=targetData.UID %>/followers'"><b><%=targetData.followers.length %></b> <%=lan_user_followers %></span>
+                            <span id="userFollowers" class="clickable" onclick="window.location='/<%=language_code %>/my/followers'"><b><%=targetData.followers.length %></b> <%=lan_user_followers %></span>
                         </div>
                         <div id="userEmail">
                             <embed src="/assets/svg/icons/email.svg">
@@ -88,15 +105,7 @@
                     </div>
                 </div>
             </div>
-            <div class="left-side-block" id="rightScroll">
-                <div class="block-inner-content">
-                    <div id="articles" class="block-inner-content" style="background-color: var(--card-bg-color);"></div>
-                </div>
-            </div>
         </div>
-        <script>
-            getArticles(page, true, "<%=targetData.UID %>");
-        </script>
     </main>
     <%- include('../partial/footer.ejs') %>
     <%- include('../partial/mobile-navigation-bar.ejs') %>

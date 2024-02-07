@@ -34,9 +34,9 @@
                             <button id="editProfile" onclick="window.location='/<%=language_code %>/my/edit'"><%=lan_edit_profile %></button>
                         <% } %>
                         <div id="followersAndFollowing">
-                            <span id="userFollowers"><b><%=userData.following.length %></b> <%=lan_user_following %></span>
+                            <span id="userFollowing" class="clickable" onclick="window.location='/<%=language_code %>/my/following'"><b><%=userData.following.length %></b> <%=lan_user_following %></span>
                             <span> · </span>
-                            <span id="userFollowing"><b><%=userData.followers.length %></b> <%=lan_user_followers %></span>
+                            <span id="userFollowers" class="clickable" onclick="window.location='/<%=language_code %>/my/followers'"><b><%=userData.followers.length %></b> <%=lan_user_followers %></span>
                         </div>
                         <div id="userEmail">
                             <embed src="/assets/svg/icons/email.svg">

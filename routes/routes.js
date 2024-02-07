@@ -32,6 +32,7 @@ const routes = [
   "__join_enterprise",
   "__classroom",
   "__enterprise",
+  "__follow_unfollow",
 ];
 
 for (let i = 0; i < routes.length; i++) {

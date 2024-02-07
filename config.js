@@ -24,7 +24,7 @@ const config = {
   path: __dirname,
 
   // Project version
-  version: "2.3.1-dev",
+  version: "2.3.2-dev",
 
   // Hostname configuration (auto to automatically detect)
   hostname: "auto",
